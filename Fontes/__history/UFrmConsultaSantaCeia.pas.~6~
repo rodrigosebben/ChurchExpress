@@ -1,0 +1,255 @@
+unit UFrmConsultaSantaCeia;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin, DB, MemDS, DBAccess, MyAccess,
+  frxClass, frxDBSet;
+
+type
+  TFormConsultaSantaCeia = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    CBxBusca: TComboBox;
+    EdtBusca: TEdit;
+    CbxOrdenacao: TComboBox;
+    Panel4: TPanel;
+    ToolBar1: TToolBar;
+    BtnAdicionar: TBitBtn;
+    BtnEditar: TBitBtn;
+    BtnExcluir: TBitBtn;
+    BtnAtualizar: TBitBtn;
+    ToolButton1: TToolButton;
+    BtnSair: TBitBtn;
+    DBGridConsluta: TDBGrid;
+    CbxOrdem: TComboBox;
+    StatusBar1: TStatusBar;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    frxDBDataset1: TfrxDBDataset;
+    frxReport1: TfrxReport;
+    procedure BtnEditarClick(Sender: TObject);
+    procedure BtnAdicionarClick(Sender: TObject);
+    procedure BtnExcluirClick(Sender: TObject);
+    procedure BtnAtualizarClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CBxBuscaSelect(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure EdtBuscaChange(Sender: TObject);
+    procedure EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+    procedure CbxOrdenacaoSelect(Sender: TObject);
+    procedure CbxOrdemSelect(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormConsultaSantaCeia: TFormConsultaSantaCeia;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal, UFrmCadastroSantaCeia;
+
+procedure TFormConsultaSantaCeia.BtnAdicionarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroSantaCeia.QrySantaCeia.Append;
+    if FormCadastroSantaCeia=nil then
+      Application.CreateForm(TFormCadastroSantaCeia,FormCadastroSantaCeia);
+    FormCadastroSantaCeia.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnAtualizarClick(Sender: TObject);
+begin
+
+  FormCadastroSantaCeia.QrySantaCeia.Close;
+  FormCadastroSantaCeia.QrySantaCeia.Open;
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnEditarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroSantaCeia.QrySantaCeia.Edit;
+    if FormCadastroSantaCeia=nil then
+      Application.CreateForm(TFormCadastroSantaCeia,FormCadastroSantaCeia);
+    FormCadastroSantaCeia.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnExcluirClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    try
+      if Application.MessageBox('Deseja realmente deletar o registro atual?','Confirmação',Mb_YesNo+ Mb_IconInformation + Mb_DefButton1)=mrYes then
+      Begin
+        FormCadastroSantaCeia.QrySantaCeia.Delete;
+        EdtBusca.SetFocus;
+      End;
+    except on E: Exception do
+      ShowMessage('Ocorreu um erro ao deletar este registro! Verifique se ele não está sendo usando em outro cadastro no sistema.');
+    end;
+  End;
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnSairClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormConsultaSantaCeia.CBxBuscaSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaSantaCeia.CbxOrdemSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaSantaCeia.CbxOrdenacaoSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaSantaCeia.EdtBuscaChange(Sender: TObject);
+begin
+
+  if EdtBusca.Text = '' then
+  Begin
+    with FormCadastroSantaCeia do
+    Begin
+      QrySantaCeia.Close;
+      QrySantaCeia.SQL.Clear;
+      QrySantaCeia.SQL.Text := 'SELECT sca.*, F.Sobrenome, m.NomeMembro ' +
+                               'FROM santa_ceia_antigo sca left join Familia F on sca.codfamilia = f.codfamilia ' +
+                               '                           left join Membros M on sca.CodMembro = M.CodMembro ';
+      // Adiciona a ordenação
+      case CbxOrdem.ItemIndex of
+        0:Begin
+            case CbxOrdenacao.ItemIndex of
+              0: QrySantaCeia.SQL.Add(' order by F.Sobrenome, sca.codfamilia, m.NomeMembro');
+              1: QrySantaCeia.SQL.Add(' order by m.NomeMembro');
+              2: QrySantaCeia.SQL.Add(' order by sca.Ano,F.Sobrenome, sca.codfamilia, m.NomeMembro');
+            end;
+          End;
+        1:Begin
+            case CbxOrdenacao.ItemIndex of
+              0: QrySantaCeia.SQL.Add(' order by F.Sobrenome, sca.codfamilia, m.NomeMembro desc');
+              1: QrySantaCeia.SQL.Add(' order by m.NomeMembro desc');
+              2: QrySantaCeia.SQL.Add(' order by sca.Ano,F.Sobrenome, sca.codfamilia, m.NomeMembro desc');
+            end;
+          End;
+      end;
+      QrySantaCeia.Open;
+    End;
+  End
+  Else
+  Begin
+    with FormCadastroSantaCeia do
+    Begin
+      QrySantaCeia.Close;
+      QrySantaCeia.SQL.Clear;
+      QrySantaCeia.SQL.Text := 'SELECT sca.*, F.Sobrenome, m.NomeMembro ' +
+                               'FROM santa_ceia_antigo sca left join Familia F on sca.codfamilia = f.codfamilia ' +
+                               '                           left join Membros M on sca.CodMembro = M.CodMembro ';
+      // Adiciona a consulta de acordo com o campo
+      case CBxBusca.ItemIndex of
+        0: QrySantaCeia.SQL.Add(' Where F.Sobrenome like ' + QuotedStr(EdtBusca.Text + '%'));
+        1: QrySantaCeia.SQL.Add(' Where M.NomeMembro like ' + QuotedStr(EdtBusca.Text + '%'));
+        2: QrySantaCeia.SQL.Add(' Where sca.ano like ' + QuotedStr(EdtBusca.Text + '%'));
+      end;
+      // Adiciona a ordenação
+      case CbxOrdem.ItemIndex of
+        0:Begin
+            case CbxOrdenacao.ItemIndex of
+              0: QrySantaCeia.SQL.Add(' order by F.Sobrenome, sca.codfamilia, m.NomeMembro');
+              1: QrySantaCeia.SQL.Add(' order by m.NomeMembro');
+              2: QrySantaCeia.SQL.Add(' order by sca.Ano,F.Sobrenome, sca.codfamilia, m.NomeMembro');
+            end;
+          End;
+        1:Begin
+            case CbxOrdenacao.ItemIndex of
+              0: QrySantaCeia.SQL.Add(' order by F.Sobrenome, sca.codfamilia, m.NomeMembro desc');
+              1: QrySantaCeia.SQL.Add(' order by m.NomeMembro desc');
+              2: QrySantaCeia.SQL.Add(' order by sca.Ano,F.Sobrenome, sca.codfamilia, m.NomeMembro desc');
+            end;
+          End;
+      end;
+      QrySantaCeia.Open;
+    End;
+  End;
+
+end;
+
+procedure TFormConsultaSantaCeia.EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if key=#13 then
+    BtnEditarClick(self);
+
+end;
+
+procedure TFormConsultaSantaCeia.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+  FormCadastroSantaCeia.QrySantaCeia.Close;
+  FreeAndNil(FormConsultaSantaCeia);
+
+end;
+
+procedure TFormConsultaSantaCeia.FormShow(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'APENAS VISUALIZAÇÃO' then
+  Begin
+    BtnAdicionar.Enabled := False;
+    BtnEditar.Enabled    := False;
+    BtnExcluir.Enabled   := False;
+  End
+  Else
+  Begin
+    if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+    Begin
+      BtnAdicionar.Enabled := True;
+      BtnEditar.Enabled    := True;
+      BtnExcluir.Enabled   := True;
+    End;
+  End;
+
+  FormCadastroSantaCeia.QrySantaCeia.Close;
+  FormCadastroSantaCeia.QrySantaCeia.Open;
+  FormCadastroSantaCeia.QryLkpMembros.Close;
+  FormCadastroSantaCeia.QryLkpMembros.Open;
+  EdtBusca.SetFocus;
+
+end;
+
+end.

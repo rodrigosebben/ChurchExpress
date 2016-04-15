@@ -1,0 +1,206 @@
+object FormConexao: TFormConexao
+  Left = 0
+  Top = 0
+  ClientHeight = 300
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 41
+    Align = alTop
+    Caption = 'CONEX'#195'O'
+    Color = 5755391
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitLeft = -83
+    ExplicitWidth = 718
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 41
+    Width = 635
+    Height = 259
+    Align = alClient
+    TabOrder = 1
+    ExplicitTop = 47
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 633
+      Height = 116
+      Align = alTop
+      TabOrder = 0
+      ExplicitTop = 6
+      object Label1: TLabel
+        Left = 8
+        Top = 51
+        Width = 148
+        Height = 13
+        Caption = 'CAMINHO DO ARQUIVO .MDB:'
+      end
+      object LabelDont: TLabel
+        Left = 28
+        Top = 92
+        Width = 25
+        Height = 13
+        Caption = 'D'#39'ont'
+      end
+      object Panel5: TPanel
+        Left = 1
+        Top = 1
+        Width = 631
+        Height = 41
+        Align = alTop
+        Caption = 'CONEX'#195'O ACESS'
+        Color = 10930928
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 0
+        ExplicitLeft = 2
+        ExplicitTop = 5
+      end
+      object ComboEdit1: TComboEdit
+        Left = 162
+        Top = 48
+        Width = 455
+        Height = 21
+        NumGlyphs = 1
+        TabOrder = 1
+        OnButtonClick = ComboEdit1ButtonClick
+      end
+      object BitBtn1: TBitBtn
+        Left = 276
+        Top = 86
+        Width = 75
+        Height = 25
+        Caption = 'CONECTAR'
+        TabOrder = 2
+        OnClick = BitBtn1Click
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 117
+      Width = 633
+      Height = 141
+      Align = alClient
+      TabOrder = 1
+      ExplicitLeft = 0
+      ExplicitTop = 118
+      object Label2: TLabel
+        Left = 8
+        Top = 48
+        Width = 55
+        Height = 13
+        Caption = 'SERVIDOR:'
+      end
+      object Label3: TLabel
+        Left = 264
+        Top = 48
+        Width = 50
+        Height = 13
+        Caption = 'USUARIO:'
+      end
+      object Label4: TLabel
+        Left = 404
+        Top = 48
+        Width = 37
+        Height = 13
+        Caption = 'SENHA:'
+      end
+      object Label5: TLabel
+        Left = 531
+        Top = 48
+        Width = 38
+        Height = 13
+        Caption = 'PORTA:'
+      end
+      object Panel6: TPanel
+        Left = 1
+        Top = 1
+        Width = 631
+        Height = 41
+        Align = alTop
+        Caption = 'CONEX'#195'O MYSQL'
+        Color = clHighlight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 0
+        ExplicitLeft = 132
+        ExplicitTop = 68
+        ExplicitWidth = 185
+      end
+      object EditServidor: TEdit
+        Left = 8
+        Top = 67
+        Width = 250
+        Height = 21
+        TabOrder = 1
+      end
+      object EditUsuario: TEdit
+        Left = 264
+        Top = 67
+        Width = 134
+        Height = 21
+        TabOrder = 2
+      end
+      object EditSenha: TEdit
+        Left = 404
+        Top = 67
+        Width = 121
+        Height = 21
+        TabOrder = 3
+      end
+      object EditPorta: TEdit
+        Left = 531
+        Top = 67
+        Width = 86
+        Height = 21
+        NumbersOnly = True
+        TabOrder = 4
+        Text = '3306'
+      end
+      object BitBtn2: TBitBtn
+        Left = 276
+        Top = 108
+        Width = 75
+        Height = 25
+        Caption = 'CONECTAR'
+        TabOrder = 5
+        OnClick = BitBtn2Click
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '*.MDB'
+    Left = 452
+    Top = 20
+  end
+end

@@ -1,0 +1,149 @@
+unit UFrmCadastroVisita;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB, MemDS, DBAccess, MyAccess, RxToolEdit, RxDBCtrl, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFormCadastroVisita = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    QryVisita: TMyQuery;
+    DSVisita: TDataSource;
+    QryVisitaCodVisita: TIntegerField;
+    QryVisitaCodFamilia: TIntegerField;
+    QryVisitaDataVisita: TDateField;
+    QryVisitaVisitante: TStringField;
+    QryVisitaAssunto: TStringField;
+    QryVisitaReferencia: TStringField;
+    QryVisitaFamilia: TStringField;
+    LkpFamilia: TMyQuery;
+    DSLkpFamilia: TDataSource;
+    QryVisitaDescricao: TMemoField;
+    Label2: TLabel;
+    DbEdtDataVisita: TDBDateEdit;
+    Label1: TLabel;
+    DBEdtVisitante: TDBEdit;
+    Label3: TLabel;
+    DBEdtAssunto: TDBEdit;
+    Label4: TLabel;
+    DBEdtReferencia: TDBEdit;
+    Label5: TLabel;
+    DBEdtLkpFamilia: TDBLookupComboBox;
+    Label6: TLabel;
+    DBMMDescr: TDBMemo;
+    QryLkpMembros: TMyQuery;
+    DSLkpMembros: TDataSource;
+    LkpFamiliacodfamilia: TLargeintField;
+    LkpFamiliasobrenome: TStringField;
+    LkpFamiliaNomeFamilia: TStringField;
+    DBGridMembrosFamilia: TDBGrid;
+    QryLkpMembrosCodMembro: TLargeintField;
+    QryLkpMembrosCodFamilia: TLargeintField;
+    QryLkpMembrosMembroFamilia: TStringField;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBEdtLkpFamiliaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroVisita: TFormCadastroVisita;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal;
+
+procedure TFormCadastroVisita.BtnSalvarClick(Sender: TObject);
+begin
+
+  if DbEdtDataVisita.Text='' then
+  Begin
+    ShowMessage('O Campo Data da Visita é obrigatório!');
+    DbEdtDataVisita.SetFocus;
+  End
+  Else
+  Begin
+    if DBEdtVisitante.Text='' then
+    Begin
+      ShowMessage('O Campo Visitante é obrigatório!');
+      DBEdtVisitante.SetFocus;
+    End
+    Else
+    Begin
+      if DBEdtAssunto.Text='' then
+      Begin
+        ShowMessage('O Campo Assunto é obrigatório!');
+        DBEdtAssunto.SetFocus;
+      End
+      Else
+      Begin
+        if DBEdtReferencia.Text='' then
+        Begin
+          ShowMessage('O Campo Referencia é obrigatório!');
+          DBEdtReferencia.SetFocus;
+        End
+        Else
+        Begin
+          if DBEdtLkpFamilia.Text='' then
+          Begin
+            ShowMessage('O Campo Família é obrigatório!');
+            DBEdtLkpFamilia.SetFocus;
+          End
+          Else
+          Begin
+            QryVisita.Post;
+            QryVisita.Close;
+            QryVisita.Open;
+            Close;
+          End;
+        End;
+      End;
+    End;
+  End;
+
+end;
+
+procedure TFormCadastroVisita.DBEdtLkpFamiliaClick(Sender: TObject);
+begin
+
+    QryLkpMembros.Close;
+    QryLkpMembros.ParamByName('pcodfamilia').Value := LkpFamiliacodfamilia.Value;
+    QryLkpMembros.Open;
+
+end;
+
+procedure TFormCadastroVisita.FormShow(Sender: TObject);
+begin
+
+  if QryVisita.State<>dsinsert then
+  Begin
+    QryLkpMembros.Close;
+    QryLkpMembros.ParamByName('pcodfamilia').Value := QryVisitaCodFamilia.Value;
+    QryLkpMembros.Open;
+  End;
+
+  DbEdtDataVisita.SetFocus;
+
+end;
+
+procedure TFormCadastroVisita.BtnCancelarClick(Sender: TObject);
+begin
+
+  QryVisita.Cancel;
+  Close;
+
+end;
+
+end.

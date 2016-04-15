@@ -1,0 +1,423 @@
+object DMPrincipal: TDMPrincipal
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 557
+  Width = 1224
+  object Conn: TMyConnection
+    Database = 'churchexpress'
+    Username = 'root'
+    Password = '1904'
+    Server = 'servidorcelc'
+    LoginPrompt = False
+    Left = 32
+    Top = 4
+  end
+  object QryTemp: TMyQuery
+    Connection = Conn
+    Left = 1168
+    Top = 16
+  end
+  object DSTemp: TDataSource
+    DataSet = QryTemp
+    Left = 1168
+    Top = 64
+  end
+  object QryMembro: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO membros'
+      
+        '  (CodMembro, CodFamilia, Email, Celular, Endereco, Compl, Cidad' +
+        'e, Bairro, CEP, UF, Telefone)'
+      'VALUES'
+      
+        '  (:CodMembro, :CodFamilia, :Email, :Celular, :Endereco, :Compl,' +
+        ' :Cidade, :Bairro, :CEP, :UF, :Telefone)')
+    SQLDelete.Strings = (
+      'DELETE FROM membros'
+      'WHERE'
+      '  CodMembro = :Old_CodMembro')
+    SQLUpdate.Strings = (
+      'UPDATE membros'
+      'SET'
+      
+        '  CodMembro = :CodMembro, CodFamilia = :CodFamilia, Email = :Ema' +
+        'il, Celular = :Celular, Endereco = :Endereco, Compl = :Compl, Ci' +
+        'dade = :Cidade, Bairro = :Bairro, CEP = :CEP, UF = :UF, Telefone' +
+        ' = :Telefone'
+      'WHERE'
+      '  CodMembro = :Old_CodMembro')
+    SQLRefresh.Strings = (
+      
+        'SELECT CodMembro, CodFamilia, Email, Celular, Endereco, Compl, C' +
+        'idade, Bairro, CEP, UF, Telefone FROM membros'
+      'WHERE'
+      '  CodMembro = :CodMembro')
+    SQLLock.Strings = (
+      'SELECT * FROM membros'
+      'WHERE'
+      '  CodMembro = :Old_CodMembro'
+      'FOR UPDATE')
+    Connection = Conn
+    SQL.Strings = (
+      
+        'SELECT CodMembro, CodFamilia, endereco, Compl, Bairro, Cidade, U' +
+        'F, CEP, Telefone, Email, celular'
+      'FROM membros')
+    Left = 100
+    Top = 4
+    object QryMembroCodMembro: TLargeintField
+      FieldName = 'CodMembro'
+    end
+    object QryMembroCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QryMembroendereco: TStringField
+      FieldName = 'endereco'
+      Size = 250
+    end
+    object QryMembroCompl: TStringField
+      FieldName = 'Compl'
+      Size = 150
+    end
+    object QryMembroBairro: TStringField
+      FieldName = 'Bairro'
+      Size = 150
+    end
+    object QryMembroCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 150
+    end
+    object QryMembroUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object QryMembroCEP: TStringField
+      FieldName = 'CEP'
+      FixedChar = True
+      Size = 12
+    end
+    object QryMembroTelefone: TStringField
+      FieldName = 'Telefone'
+      FixedChar = True
+    end
+    object QryMembroEmail: TStringField
+      FieldName = 'Email'
+      Size = 255
+    end
+    object QryMembrocelular: TStringField
+      FieldName = 'celular'
+    end
+  end
+  object DSMembro: TDataSource
+    DataSet = QryMembro
+    Left = 100
+    Top = 52
+  end
+  object QryFamilia: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO familia'
+      
+        '  (CodFamilia, Cep, Endereco, Compl, Bairro, Telefone, Email, Ce' +
+        'lular, Cidade, UF)'
+      'VALUES'
+      
+        '  (:CodFamilia, :Cep, :Endereco, :Compl, :Bairro, :Telefone, :Em' +
+        'ail, :Celular, :Cidade, :UF)')
+    SQLDelete.Strings = (
+      'DELETE FROM familia'
+      'WHERE'
+      '  CodFamilia = :Old_CodFamilia')
+    SQLUpdate.Strings = (
+      'UPDATE familia'
+      'SET'
+      
+        '  CodFamilia = :CodFamilia, Cep = :Cep, Endereco = :Endereco, Co' +
+        'mpl = :Compl, Bairro = :Bairro, Telefone = :Telefone, Email = :E' +
+        'mail, Celular = :Celular, Cidade = :Cidade, UF = :UF'
+      'WHERE'
+      '  CodFamilia = :Old_CodFamilia')
+    SQLRefresh.Strings = (
+      
+        'SELECT CodFamilia, Cep, Endereco, Compl, Bairro, Telefone, Email' +
+        ', Celular, Cidade, UF FROM familia'
+      'WHERE'
+      '  CodFamilia = :CodFamilia')
+    SQLLock.Strings = (
+      'SELECT * FROM familia'
+      'WHERE'
+      '  CodFamilia = :Old_CodFamilia'
+      'FOR UPDATE')
+    Connection = Conn
+    SQL.Strings = (
+      
+        'SELECT CodFamilia, Endereco, Compl, Bairro, Cidade, UF, Cep, Tel' +
+        'efone, Email, Celular'
+      'FROM familia'
+      'Where CodFamilia = :pCodFamilia')
+    Left = 100
+    Top = 104
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'pCodFamilia'
+      end>
+    object QryFamiliaCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QryFamiliaEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 255
+    end
+    object QryFamiliaCompl: TStringField
+      FieldName = 'Compl'
+      Size = 255
+    end
+    object QryFamiliaBairro: TStringField
+      FieldName = 'Bairro'
+      Size = 150
+    end
+    object QryFamiliaCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 150
+    end
+    object QryFamiliaUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object QryFamiliaCep: TStringField
+      FieldName = 'Cep'
+      FixedChar = True
+      Size = 8
+    end
+    object QryFamiliaTelefone: TStringField
+      FieldName = 'Telefone'
+      Size = 45
+    end
+    object QryFamiliaEmail: TStringField
+      FieldName = 'Email'
+      Size = 255
+    end
+    object QryFamiliaCelular: TStringField
+      FieldName = 'Celular'
+      FixedChar = True
+      Size = 45
+    end
+  end
+  object DSFamilia: TDataSource
+    DataSet = QryFamilia
+    Left = 100
+    Top = 148
+  end
+  object QryLkpProfissao: TMyQuery
+    Connection = Conn
+    SQL.Strings = (
+      'Select * From Profissao'
+      'Order by Profissao')
+    Left = 188
+    Top = 4
+    object QryLkpProfissaoCodProfissao: TLargeintField
+      FieldName = 'CodProfissao'
+    end
+    object QryLkpProfissaoProfissao: TStringField
+      FieldName = 'Profissao'
+      Size = 255
+    end
+  end
+  object DSLkpProfissional: TDataSource
+    DataSet = QryLkpProfissao
+    Left = 188
+    Top = 52
+  end
+  object QryLkpUsuario: TMyQuery
+    Connection = Conn
+    SQL.Strings = (
+      'Select * from usuario'
+      'order by nomeusuario')
+    Left = 280
+    Top = 4
+    object QryLkpUsuarioCodUsuario: TLargeintField
+      FieldName = 'CodUsuario'
+    end
+    object QryLkpUsuarioNomeUsuario: TStringField
+      FieldName = 'NomeUsuario'
+      Size = 45
+    end
+    object QryLkpUsuarioSenha: TStringField
+      FieldName = 'Senha'
+      Size = 45
+    end
+    object QryLkpUsuarioAtivo: TBooleanField
+      FieldName = 'Ativo'
+    end
+    object QryLkpUsuarioPastor: TBooleanField
+      FieldName = 'Pastor'
+    end
+  end
+  object DSLkpUsuario: TDataSource
+    DataSet = QryLkpUsuario
+    Left = 280
+    Top = 52
+  end
+  object QryLkpModulo: TMyQuery
+    Connection = Conn
+    SQL.Strings = (
+      'Select * from Modulos'
+      'Order by NomeModulo')
+    Left = 372
+    Top = 4
+  end
+  object DSLkModulo: TDataSource
+    DataSet = QryLkpModulo
+    Left = 372
+    Top = 52
+  end
+  object CmdAjustaMembroDataEspec: TMyCommand
+    Connection = Conn
+    SQL.Strings = (
+      'update membroDataEspec MDE'
+      
+        'set mde.CodMembro = (select CodMembro from Membros where codmemb' +
+        'roantigo = MDE.CodmembroAntigo and CodFamilia = MDE.Codfamilia)')
+    Left = 504
+    Top = 36
+  end
+  object CMDAjustaMembroFilhos: TMyCommand
+    Connection = Conn
+    SQL.Strings = (
+      'update Filho F'
+      
+        'set F.CodMembro = (select CodMembro from Membros where codmembro' +
+        'antigo = F.CodMembroAntigo and CodFamilia = F.Codfamilia)')
+    Left = 504
+    Top = 88
+  end
+  object CMDAjustaContribuicoes: TMyCommand
+    Connection = Conn
+    SQL.Strings = (
+      'update contribuicao c'
+      
+        'set c.CodMembro = (select CodMembro from Membros where codmembro' +
+        'antigo = C.CodMembroAntigo and CodFamilia = C.Codfamilia)')
+    Left = 504
+    Top = 140
+  end
+  object CMDAjustaUF: TMyCommand
+    Connection = Conn
+    SQL.Strings = (
+      'update familia f'
+      
+        'set f.uf = (select uf from municipio where cep_municipio = f.cep' +
+        ')')
+    Left = 504
+    Top = 192
+  end
+  object CMDAjustaCidade: TMyCommand
+    Connection = Conn
+    SQL.Strings = (
+      'update familia f'
+      
+        'set f.cidade = (select Desc_Municipio from municipio where cep_m' +
+        'unicipio = f.cep)')
+    Left = 504
+    Top = 244
+  end
+  object QrySantaCeiaAntigoAjuste: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO santa_ceia_antigo'
+      
+        '  (CodSantaCeia, CodMembro, CodMembroAntigo, CodFamilia, Ano, ja' +
+        'neiro, fevereiro, marco, abril, maio, junho, julho, agosto, sete' +
+        'mbro, outubro, novembro, dezembro)'
+      'VALUES'
+      
+        '  (:CodSantaCeia, :CodMembro, :CodMembroAntigo, :CodFamilia, :An' +
+        'o, :janeiro, :fevereiro, :marco, :abril, :maio, :junho, :julho, ' +
+        ':agosto, :setembro, :outubro, :novembro, :dezembro)')
+    SQLDelete.Strings = (
+      'DELETE FROM santa_ceia_antigo'
+      'WHERE'
+      '  CodSantaCeia = :Old_CodSantaCeia')
+    SQLUpdate.Strings = (
+      'UPDATE santa_ceia_antigo'
+      'SET'
+      
+        '  CodSantaCeia = :CodSantaCeia, CodMembro = :CodMembro, CodMembr' +
+        'oAntigo = :CodMembroAntigo, CodFamilia = :CodFamilia, Ano = :Ano' +
+        ', janeiro = :janeiro, fevereiro = :fevereiro, marco = :marco, ab' +
+        'ril = :abril, maio = :maio, junho = :junho, julho = :julho, agos' +
+        'to = :agosto, setembro = :setembro, outubro = :outubro, novembro' +
+        ' = :novembro, dezembro = :dezembro'
+      'WHERE'
+      '  CodSantaCeia = :Old_CodSantaCeia')
+    SQLRefresh.Strings = (
+      
+        'SELECT CodSantaCeia, CodMembro, CodMembroAntigo, CodFamilia, Ano' +
+        ', janeiro, fevereiro, marco, abril, maio, junho, julho, agosto, ' +
+        'setembro, outubro, novembro, dezembro FROM santa_ceia_antigo'
+      'WHERE'
+      '  CodSantaCeia = :CodSantaCeia')
+    SQLLock.Strings = (
+      'SELECT * FROM santa_ceia_antigo'
+      'WHERE'
+      '  CodSantaCeia = :Old_CodSantaCeia'
+      'FOR UPDATE')
+    Connection = Conn
+    SQL.Strings = (
+      'select * from santa_ceia_antigo')
+    Left = 676
+    Top = 56
+    object QrySantaCeiaAntigoAjusteCodSantaCeia: TLargeintField
+      FieldName = 'CodSantaCeia'
+    end
+    object QrySantaCeiaAntigoAjusteCodMembro: TLargeintField
+      FieldName = 'CodMembro'
+    end
+    object QrySantaCeiaAntigoAjusteCodMembroAntigo: TLargeintField
+      FieldName = 'CodMembroAntigo'
+    end
+    object QrySantaCeiaAntigoAjusteCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QrySantaCeiaAntigoAjusteAno: TLargeintField
+      FieldName = 'Ano'
+    end
+    object QrySantaCeiaAntigoAjustejaneiro: TLargeintField
+      FieldName = 'janeiro'
+    end
+    object QrySantaCeiaAntigoAjustefevereiro: TLargeintField
+      FieldName = 'fevereiro'
+    end
+    object QrySantaCeiaAntigoAjustemarco: TLargeintField
+      FieldName = 'marco'
+    end
+    object QrySantaCeiaAntigoAjusteabril: TLargeintField
+      FieldName = 'abril'
+    end
+    object QrySantaCeiaAntigoAjustemaio: TLargeintField
+      FieldName = 'maio'
+    end
+    object QrySantaCeiaAntigoAjustejunho: TLargeintField
+      FieldName = 'junho'
+    end
+    object QrySantaCeiaAntigoAjustejulho: TLargeintField
+      FieldName = 'julho'
+    end
+    object QrySantaCeiaAntigoAjusteagosto: TLargeintField
+      FieldName = 'agosto'
+    end
+    object QrySantaCeiaAntigoAjustesetembro: TLargeintField
+      FieldName = 'setembro'
+    end
+    object QrySantaCeiaAntigoAjusteoutubro: TLargeintField
+      FieldName = 'outubro'
+    end
+    object QrySantaCeiaAntigoAjustenovembro: TLargeintField
+      FieldName = 'novembro'
+    end
+    object QrySantaCeiaAntigoAjustedezembro: TLargeintField
+      FieldName = 'dezembro'
+    end
+  end
+end

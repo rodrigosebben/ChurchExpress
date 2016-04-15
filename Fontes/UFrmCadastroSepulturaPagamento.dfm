@@ -1,0 +1,393 @@
+object FormCadastroSepulturaPagamento: TFormCadastroSepulturaPagamento
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'FALECIDOS - REGISTRO DE PAGAMENTOS'
+  ClientHeight = 209
+  ClientWidth = 538
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 538
+    Height = 49
+    Align = alTop
+    Caption = 'FALECIDOS - REGISTRO DE PAGAMENTOS'
+    Color = clHotLight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitLeft = -122
+    ExplicitWidth = 683
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 160
+    Width = 538
+    Height = 49
+    Align = alBottom
+    Color = clHotLight
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitLeft = -122
+    ExplicitTop = 347
+    ExplicitWidth = 683
+    object BtnSalvar: TBitBtn
+      Left = 372
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Salvar'
+      Default = True
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE94D6
+        DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFD6DBDB6BAE9493CBB76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B2A1EDD986
+        C9B26BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB6BAE9482C8B18AE8D082E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B28CE8D179E5C974E3C778
+        E4C988E7CF82C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94
+        93CBB8A6EDDB8AE8D07DE5CB79E5C979E5C97DE5CB8AE8D082C8B16BAE94D6DB
+        DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE948ACAB4A0ECD97DC7AF6BAE9478
+        C6AD84E7CE82E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF6BAE949ECCBB6BAE94FFFFFF6BAE9496C9B7CCEDE5C9ECE3CCEDE597CA
+        B76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFF
+        FFFF6BAE949BCAB9D8F0EAD5EFE9D9F1EB9DCBBA6BAE94D6DBDBFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE949FCCBCE5F5F1E5F5
+        F1EBF7F4A3CEBE6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF6BAE94A3CEBEF3FAF9A4CEBE6BAE94FFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94A7CF
+        BF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 0
+      OnClick = BtnSalvarClick
+    end
+    object BtnCancelar: TBitBtn
+      Left = 453
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Cancelar'
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDBD6DBDBD6DBDBD6DBDBD6
+        DBDBD6DBDBD6DBDBD6DBDBD6DBDBD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB4646C14646C14646C14646C14646C14646C14646C14646C14646C14646
+        C1D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF4646C17777DB9F9FFF8C8CFF8686FF86
+        86FF8686FF8686FF8C8CFF9F9FFF7777DB4646C1FFFFFFFFFFFFFFFFFFFFFFFF
+        4646C17171DB8888FF7272FF6868FF1212891212896868FF7272FF8888FF7171
+        DB4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C18686FF6868FF5B5BFF58
+        58FF5858FF5B5BFF6868FF8686FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF4646C17C7CDBB6B6FFACACFF121289121289ACACFFB6B6FF7C7CDB4646
+        C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1CCCCFFC0C0FF12
+        1289121289C0C0FFCCCCFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF4646C18585DBD6D6FF121289121289D6D6FF8585DB4646C1FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1E9E9FF12
+        1289121289E9E9FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFF4646C18F8FDBF5F5FFF5F5FF8F8FDB4646C1FFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1FF
+        FFFFFFFFFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF4646C19292DB9292DB4646C1FFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF46
+        46C14646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 1
+      OnClick = BtnCancelarClick
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 49
+    Width = 538
+    Height = 111
+    Align = alClient
+    Color = clInactiveCaption
+    ParentBackground = False
+    TabOrder = 2
+    ExplicitTop = -54
+    ExplicitWidth = 683
+    ExplicitHeight = 450
+    object Label1: TLabel
+      Left = 8
+      Top = 8
+      Width = 49
+      Height = 13
+      Caption = 'Falecido:'
+      FocusControl = DBEdtFalecido
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 314
+      Top = 8
+      Width = 36
+      Height = 13
+      Caption = 'Idade:'
+      FocusControl = DBEdtIdade
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 407
+      Top = 8
+      Width = 119
+      Height = 13
+      Caption = 'Data do Falecimento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 8
+      Top = 52
+      Width = 101
+      Height = 13
+      Caption = 'Certidao de Obito:'
+      FocusControl = DBEdtCertidaoObito
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 119
+      Top = 52
+      Width = 115
+      Height = 13
+      Caption = 'Data de Pagamento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 374
+      Top = 52
+      Width = 105
+      Height = 13
+      Caption = 'Numero do Recibo:'
+      FocusControl = DBEdtNumeroRecibo
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 246
+      Top = 52
+      Width = 117
+      Height = 13
+      Caption = 'Data de Vencimento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBEdtFalecido: TDBEdit
+      Left = 8
+      Top = 27
+      Width = 300
+      Height = 21
+      DataField = 'NomeFalecido'
+      DataSource = DSFalecidos
+      TabOrder = 0
+    end
+    object DBEdtIdade: TDBEdit
+      Left = 314
+      Top = 27
+      Width = 87
+      Height = 21
+      DataField = 'idade'
+      DataSource = DSFalecidos
+      TabOrder = 1
+    end
+    object DBEdtCertidaoObito: TDBEdit
+      Left = 8
+      Top = 71
+      Width = 104
+      Height = 21
+      DataField = 'CertidaoObito'
+      DataSource = DSFalecidos
+      TabOrder = 3
+    end
+    object DBEdtNumeroRecibo: TDBEdit
+      Left = 374
+      Top = 71
+      Width = 154
+      Height = 21
+      DataField = 'NumeroRecibo'
+      DataSource = DSFalecidos
+      TabOrder = 6
+    end
+    object DBDtEdtDataFalecimento: TDBDateEdit
+      Left = 407
+      Top = 27
+      Width = 121
+      Height = 22
+      Margins.Left = 4
+      Margins.Top = 1
+      DataField = 'DataFalecimento'
+      DataSource = DSFalecidos
+      NumGlyphs = 2
+      TabOrder = 2
+    end
+    object DBDtEdtDataPagamento: TDBDateEdit
+      Left = 119
+      Top = 71
+      Width = 121
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 1
+      DataField = 'DataPagamento'
+      DataSource = DSFalecidos
+      NumGlyphs = 2
+      TabOrder = 4
+    end
+    object DBDtEdtDataVencimento: TDBDateEdit
+      Left = 247
+      Top = 71
+      Width = 121
+      Height = 21
+      Margins.Left = 4
+      Margins.Top = 1
+      DataField = 'DataVencimento'
+      DataSource = DSFalecidos
+      NumGlyphs = 2
+      TabOrder = 5
+    end
+  end
+  object QryFalecidos: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO falecidossepultura'
+      
+        '  (CodFalecidoSepultura, NomeFalecido, idade, DataFalecimento, C' +
+        'ertidaoObito, CodSepultura, DataPagamento, NumeroRecibo, DataVen' +
+        'cimento)'
+      'VALUES'
+      
+        '  (:CodFalecidoSepultura, :NomeFalecido, :idade, :DataFaleciment' +
+        'o, :CertidaoObito, :CodSepultura, :DataPagamento, :NumeroRecibo,' +
+        ' :DataVencimento)')
+    SQLDelete.Strings = (
+      'DELETE FROM falecidossepultura'
+      'WHERE'
+      '  CodFalecidoSepultura = :Old_CodFalecidoSepultura')
+    SQLUpdate.Strings = (
+      'UPDATE falecidossepultura'
+      'SET'
+      
+        '  CodFalecidoSepultura = :CodFalecidoSepultura, NomeFalecido = :' +
+        'NomeFalecido, idade = :idade, DataFalecimento = :DataFalecimento' +
+        ', CertidaoObito = :CertidaoObito, CodSepultura = :CodSepultura, ' +
+        'DataPagamento = :DataPagamento, NumeroRecibo = :NumeroRecibo, Da' +
+        'taVencimento = :DataVencimento'
+      'WHERE'
+      '  CodFalecidoSepultura = :Old_CodFalecidoSepultura')
+    SQLRefresh.Strings = (
+      
+        'SELECT CodFalecidoSepultura, NomeFalecido, idade, DataFaleciment' +
+        'o, CertidaoObito, CodSepultura, DataPagamento, NumeroRecibo, Dat' +
+        'aVencimento FROM falecidossepultura'
+      'WHERE'
+      '  CodFalecidoSepultura = :CodFalecidoSepultura')
+    SQLLock.Strings = (
+      'SELECT * FROM falecidossepultura'
+      'WHERE'
+      '  CodFalecidoSepultura = :Old_CodFalecidoSepultura'
+      'FOR UPDATE')
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      'SELECT *'
+      'FROM falecidossepultura f'
+      'where CodSepultura = :pCodSepultura')
+    Left = 424
+    Top = 4
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'pCodSepultura'
+      end>
+    object QryFalecidosCodFalecidoSepultura: TLargeintField
+      FieldName = 'CodFalecidoSepultura'
+    end
+    object QryFalecidosNomeFalecido: TStringField
+      FieldName = 'NomeFalecido'
+      Size = 250
+    end
+    object QryFalecidosidade: TLargeintField
+      FieldName = 'idade'
+    end
+    object QryFalecidosDataFalecimento: TDateTimeField
+      FieldName = 'DataFalecimento'
+    end
+    object QryFalecidosCertidaoObito: TStringField
+      FieldName = 'CertidaoObito'
+      Size = 200
+    end
+    object QryFalecidosCodSepultura: TLargeintField
+      FieldName = 'CodSepultura'
+    end
+    object QryFalecidosDataPagamento: TDateTimeField
+      FieldName = 'DataPagamento'
+    end
+    object QryFalecidosNumeroRecibo: TStringField
+      FieldName = 'NumeroRecibo'
+      Size = 45
+    end
+    object QryFalecidosDataVencimento: TDateTimeField
+      FieldName = 'DataVencimento'
+    end
+  end
+  object DSFalecidos: TDataSource
+    DataSet = QryFalecidos
+    Left = 492
+    Top = 4
+  end
+end

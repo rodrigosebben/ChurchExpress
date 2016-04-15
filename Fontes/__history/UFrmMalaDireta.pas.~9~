@@ -1,0 +1,140 @@
+unit UFrmMalaDireta;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinSeven, dxSkinSevenClassic, dxSkinStardust, dxSkinVS2010, Vcl.Menus, cxCheckListBox,
+  cxDBCheckListBox, Vcl.StdCtrls, Vcl.DBCtrls, cxButtons, Data.DB, MemDS, DBAccess, MyAccess, Vcl.ToolWin, Vcl.ComCtrls, cxTextEdit, cxMemo, cxRichEdit, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, cxDBData, cxCheckBox,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView, cxGrid, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids, IdMessage;
+
+type
+  TFormMalaDireta = class(TForm)
+    Panel2: TPanel;
+    IdSMTP1: TIdSMTP;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    ToolBar1: TToolBar;
+    MyQryMembro: TMyQuery;
+    MyQryMembroNomeMembro: TStringField;
+    MyQryMembroEmail: TStringField;
+    DSMembro: TDataSource;
+    cxButton1: TcxButton;
+    Panel3: TPanel;
+    cxButton2: TcxButton;
+    cxButton3: TcxButton;
+    cxButton4: TcxButton;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    DBGrid1: TDBGrid;
+    CdsMalaDireta: TClientDataSet;
+    DSMalaDireta: TDataSource;
+    CdsMalaDiretaNome: TStringField;
+    CdsMalaDiretaEmail: TStringField;
+    DBGrid2: TDBGrid;
+    cxButton5: TcxButton;
+    IdMessage1: TIdMessage;
+    Panel9: TPanel;
+    Label1: TLabel;
+    EdtAssunto: TEdit;
+    Label2: TLabel;
+    Panel10: TPanel;
+    cxRichEdit1: TcxRichEdit;
+    procedure cxButton4Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
+    procedure cxButton3Click(Sender: TObject);
+    procedure cxButton5Click(Sender: TObject);
+    procedure cxButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormMalaDireta: TFormMalaDireta;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal;
+
+procedure TFormMalaDireta.cxButton1Click(Sender: TObject);
+begin
+
+  IdMessage1.Recipients.EMailAddresses := CdsMalaDiretaEmail.Text;
+  IdMessage1.Subject := EdtAssunto.Text;
+  IdMessage1.Body := cxRichEdit1.Lines;
+
+  try
+    IdSMTP1.Connect;
+    try
+      IdSMTP1.Send(IdMessage1);
+    finally
+      IdSMTP1.Disconnect;
+    end;
+  Except
+  end;
+
+  Application.MessageBox('Email(s) enviado(s) com sucesso!', 'Confirmação', MB_ICONINFORMATION + MB_OK);
+  IdMessage1.MessageParts.Clear;
+
+end;
+
+procedure TFormMalaDireta.cxButton2Click(Sender: TObject);
+begin
+
+  CdsMalaDireta.Insert;
+  CdsMalaDiretaNome.Text := MyQryMembroNomeMembro.Text;
+  CdsMalaDiretaEmail.Text := MyQryMembroEmail.Text;
+  CdsMalaDireta.Post;
+
+end;
+
+procedure TFormMalaDireta.cxButton3Click(Sender: TObject);
+begin
+
+  CdsMalaDireta.Delete;
+
+end;
+
+procedure TFormMalaDireta.cxButton4Click(Sender: TObject);
+begin
+
+  CdsMalaDireta.EmptyDataSet;
+  Close;
+
+end;
+
+procedure TFormMalaDireta.cxButton5Click(Sender: TObject);
+begin
+
+  CdsMalaDireta.EmptyDataSet;
+
+end;
+
+procedure TFormMalaDireta.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+  Action := caFree;
+  FormMalaDireta := nil;
+
+end;
+
+procedure TFormMalaDireta.FormShow(Sender: TObject);
+begin
+
+  MyQryMembro.Close;
+  MyQryMembro.Open;
+
+end;
+
+end.

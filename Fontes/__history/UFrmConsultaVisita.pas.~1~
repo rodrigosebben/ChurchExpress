@@ -1,0 +1,209 @@
+unit UFrmConsultaVisita;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin, DB, MemDS, DBAccess, MyAccess;
+
+type
+  TFormConsultaVisita = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    CBxBusca: TComboBox;
+    EdtBusca: TEdit;
+    CbxOrdenacao: TComboBox;
+    Panel4: TPanel;
+    ToolBar1: TToolBar;
+    BtnAdicionar: TBitBtn;
+    BtnEditar: TBitBtn;
+    BtnExcluir: TBitBtn;
+    BtnAtualizar: TBitBtn;
+    ToolButton1: TToolButton;
+    BtnSair: TBitBtn;
+    DBGridConsluta: TDBGrid;
+    CbxOrdem: TComboBox;
+    StatusBar1: TStatusBar;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure BtnEditarClick(Sender: TObject);
+    procedure BtnAdicionarClick(Sender: TObject);
+    procedure BtnExcluirClick(Sender: TObject);
+    procedure BtnAtualizarClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CBxBuscaSelect(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure EdtBuscaChange(Sender: TObject);
+    procedure EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+    procedure CbxOrdenacaoChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormConsultaVisita: TFormConsultaVisita;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal, UFrmCadastroVisita;
+
+procedure TFormConsultaVisita.BtnAdicionarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroVisita.QryVisita.Append;
+    if FormCadastroVisita=nil then
+      Application.CreateForm(TFormCadastroVisita,FormCadastroVisita);
+    FormCadastroVisita.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaVisita.BtnAtualizarClick(Sender: TObject);
+begin
+
+  FormCadastroVisita.QryVisita.Close;
+  FormCadastroVisita.QryVisita.Open;
+
+end;
+
+procedure TFormConsultaVisita.BtnEditarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroVisita.QryVisita.Edit;
+    if FormCadastroVisita=nil then
+      Application.CreateForm(TFormCadastroVisita,FormCadastroVisita);
+    FormCadastroVisita.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaVisita.BtnExcluirClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    try
+      if Application.MessageBox('Deseja realmente deletar o registro atual?','Confirmação',Mb_YesNo+ Mb_IconInformation + Mb_DefButton1)=mrYes then
+      Begin
+        FormCadastroVisita.QryVisita.Delete;
+        EdtBusca.SetFocus;
+      End;
+    except on E: Exception do
+      ShowMessage('Ocorreu um erro ao deletar este registro! Verifique se ele não está sendo usando em outro cadastro no sistema.');
+    end;
+  End;
+
+end;
+
+procedure TFormConsultaVisita.BtnSairClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormConsultaVisita.CBxBuscaSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaVisita.CbxOrdenacaoChange(Sender: TObject);
+begin
+
+  case CbxOrdenacao.ItemIndex of
+    0:
+    Begin
+      FormCadastroVisita.QryVisita.Close;
+      FormCadastroVisita.QryVisita.SQL.Clear;
+      FormCadastroVisita.QryVisita.SQL.Add('SELECT v.*, F.sobrenome as Familia');
+      FormCadastroVisita.QryVisita.SQL.Add('FROM visita v left join familia f on v.codfamilia = f.codfamilia');
+      case CbxOrdem.ItemIndex of
+        0: FormCadastroVisita.QryVisita.SQL.Add(' Order By DataVisita ASC');
+        1: FormCadastroVisita.QryVisita.SQL.Add(' Order by DataVisita DESC');
+      end;
+      FormCadastroVisita.QryVisita.Open;
+    End;
+    1:
+    Begin
+      FormCadastroVisita.QryVisita.Close;
+      FormCadastroVisita.QryVisita.SQL.Clear;
+      FormCadastroVisita.QryVisita.SQL.Add('SELECT v.*, F.sobrenome as Familia');
+      FormCadastroVisita.QryVisita.SQL.Add('FROM visita v left join familia f on v.codfamilia = f.codfamilia');
+      case CbxOrdem.ItemIndex of
+        0: FormCadastroVisita.QryVisita.SQL.Add(' Order by Visitante ASC');
+        1: FormCadastroVisita.QryVisita.SQL.Add(' Order by Visitante DESC');
+      end;
+      FormCadastroVisita.QryVisita.Open;
+    End;
+  end;
+
+end;
+
+procedure TFormConsultaVisita.EdtBuscaChange(Sender: TObject);
+begin
+
+  case CBxBusca.ItemIndex of
+    0: FormCadastroVisita.QryVisita.Locate('DataVisita',EdtBusca.Text,[lopartialkey,loCaseInsensitive]);
+    1: FormCadastroVisita.QryVisita.Locate('Visitante',EdtBusca.Text,[lopartialkey,loCaseInsensitive]);
+  end;
+
+end;
+
+procedure TFormConsultaVisita.EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if key=#13 then
+    BtnEditarClick(self);
+
+end;
+
+procedure TFormConsultaVisita.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+  FormCadastroVisita.QryVisita.Close;
+  FreeAndNil(FormConsultaVisita);
+
+end;
+
+procedure TFormConsultaVisita.FormShow(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'APENAS VISUALIZAÇÃO' then
+  Begin
+    BtnAdicionar.Enabled := False;
+    BtnEditar.Enabled    := False;
+    BtnExcluir.Enabled   := False;
+  End
+  Else
+  Begin
+    if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+    Begin
+      BtnAdicionar.Enabled := True;
+      BtnEditar.Enabled    := True;
+      BtnExcluir.Enabled   := True;
+    End;
+  End;
+
+  FormCadastroVisita.QryVisita.Close;
+  FormCadastroVisita.QryVisita.Open;
+  FormCadastroVisita.LkpFamilia.Close;
+  FormCadastroVisita.LkpFamilia.Open;
+  EdtBusca.SetFocus;
+
+end;
+
+end.

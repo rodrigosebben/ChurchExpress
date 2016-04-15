@@ -1,0 +1,205 @@
+unit UFrmConsultaSantaCeia;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin, DB, MemDS, DBAccess, MyAccess;
+
+type
+  TFormConsultaSantaCeia = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    CBxBusca: TComboBox;
+    EdtBusca: TEdit;
+    CbxOrdenacao: TComboBox;
+    Panel4: TPanel;
+    ToolBar1: TToolBar;
+    BtnAdicionar: TBitBtn;
+    BtnEditar: TBitBtn;
+    BtnExcluir: TBitBtn;
+    BtnAtualizar: TBitBtn;
+    ToolButton1: TToolButton;
+    BtnSair: TBitBtn;
+    DBGridConsluta: TDBGrid;
+    CbxOrdem: TComboBox;
+    StatusBar1: TStatusBar;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure BtnEditarClick(Sender: TObject);
+    procedure BtnAdicionarClick(Sender: TObject);
+    procedure BtnExcluirClick(Sender: TObject);
+    procedure BtnAtualizarClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CBxBuscaSelect(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure EdtBuscaChange(Sender: TObject);
+    procedure EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+    procedure CbxOrdenacaoChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormConsultaSantaCeia: TFormConsultaSantaCeia;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal, UFrmCadastroSantaCeia;
+
+procedure TFormConsultaSantaCeia.BtnAdicionarClick(Sender: TObject);
+begin
+
+{  if FormPrincipal.AcessoXXX = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroXXX.QryXXX.Append;
+    if FormCadastroXXX=nil then
+      Application.CreateForm(TFormCadastroXXX,FormCadastroXXX);
+    FormCadastroXXX.ShowModal;
+  End;
+}
+end;
+
+procedure TFormConsultaSantaCeia.BtnAtualizarClick(Sender: TObject);
+begin
+
+{  FormCadastroXXX.QryXXX.Close;
+  FormCadastroXXX.QryXXX.Open;}
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnEditarClick(Sender: TObject);
+begin
+
+{  if FormPrincipal.AcessoXXX = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroXXX.QryXXX.Edit;
+    if FormCadastroXXX=nil then
+      Application.CreateForm(TFormCadastroXXX,FormCadastroXXX);
+    FormCadastroXXX.ShowModal;
+  End;}
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnExcluirClick(Sender: TObject);
+begin
+
+{  if FormPrincipal.AcessoXXX = 'ACESSO TOTAL' then
+  Begin
+    try
+      if Application.MessageBox('Deseja realmente deletar o registro atual?','Confirmação',Mb_YesNo+ Mb_IconInformation + Mb_DefButton1)=mrYes then
+      Begin
+        FormCadastroXXX.QryXXX.Delete;
+        EdtBusca.SetFocus;
+      End;
+    except on E: Exception do
+      ShowMessage('Ocorreu um erro ao deletar este registro! Verifique se ele não está sendo usando em outro cadastro no sistema.');
+    end;
+  End;}
+
+end;
+
+procedure TFormConsultaSantaCeia.BtnSairClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormConsultaSantaCeia.CBxBuscaSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaSantaCeia.CbxOrdenacaoChange(Sender: TObject);
+begin
+
+{  case CbxOrdenacao.ItemIndex of
+    0:
+    Begin
+      FormCadastroXXX.QryXXX.Close;
+      FormCadastroXXX.QryXXX.SQL.Clear;
+      FormCadastroXXX.QryXXX.SQL.Add('Select * from xxx ');
+      case CbxOrdem.ItemIndex of
+        0: FormCadastroXXX.QryXXX.SQL.Add(' Order By CodXXX ASC');
+        1: FormCadastroXXX.QryXXX.SQL.Add(' Order by CodXXX DESC');
+      end;
+      FormCadastroXXX.QryXXX.Open;
+    End;
+    1:
+    Begin
+      FormCadastroXXX.QryXXX.Close;
+      FormCadastroXXX.QryXXX.SQL.Clear;
+      FormCadastroXXX.QryXXX.SQL.Add('Select * from XXX ');
+      case CbxOrdem.ItemIndex of
+        0: FormCadastroXXX.QryXXX.SQL.Add(' Order by XXX ASC');
+        1: FormCadastroXXX.QryXXX.SQL.Add(' Order by XXX DESC');
+      end;
+      FormCadastroXXX.QryXXX.Open;
+    End;
+  end;}
+
+end;
+
+procedure TFormConsultaSantaCeia.EdtBuscaChange(Sender: TObject);
+begin
+
+{  case CBxBusca.ItemIndex of
+    0: FormCadastroXXX.QryXXX.Locate('Codigo',EdtBusca.Text,[lopartialkey,loCaseInsensitive]);
+    1: FormCadastroXXX.QryXXX.Locate('Nome',EdtBusca.Text,[lopartialkey,loCaseInsensitive]);
+  end;}
+
+end;
+
+procedure TFormConsultaSantaCeia.EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if key=#13 then
+    BtnEditarClick(self);
+
+end;
+
+procedure TFormConsultaSantaCeia.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+//  FormCadastroXXX.QryXXX.Close;
+//  FreeAndNil(FormConsultaXXX);
+
+end;
+
+procedure TFormConsultaSantaCeia.FormShow(Sender: TObject);
+begin
+
+{  if FormPrincipal.AcessoXXX = 'APENAS VISUALIZAÇÃO' then
+  Begin
+    BtnAdicionar.Enabled := False;
+    BtnEditar.Enabled    := False;
+    BtnExcluir.Enabled   := False;
+  End
+  Else
+  Begin
+    if FormPrincipal.AcessoXXX = 'ACESSO TOTAL' then
+    Begin
+      BtnAdicionar.Enabled := True;
+      BtnEditar.Enabled    := True;
+      BtnExcluir.Enabled   := True;
+    End;
+  End;
+
+  FormCadastroXXX.QryXXX.Close;
+  FormCadastroXXX.QryXXX.Open;
+  EdtBusca.SetFocus;}
+
+end;
+
+end.

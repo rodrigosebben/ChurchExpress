@@ -1,0 +1,35 @@
+unit UFrmBuscaMembro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, MemDS, DBAccess, MyAccess, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TFormBuscaMembro = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    DBGrid1: TDBGrid;
+    QryBuscaMembro: TMyQuery;
+    DataSource1: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormBuscaMembro: TFormBuscaMembro;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal;
+
+end.

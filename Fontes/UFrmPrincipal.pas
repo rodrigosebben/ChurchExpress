@@ -1,0 +1,522 @@
+unit UFrmPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Ribbon, RibbonLunaStyleActnCtrls, ActnList, PlatformDefaultStyleActnCtrls, ActnMan, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.ActnCtrls, Vcl.ImgList, Vcl.Imaging.jpeg, MidasLib,
+  Vcl.StdCtrls;
+
+type
+  TFormPrincipal = class(TForm)
+    Ribbon1: TRibbon;
+    RbbPgAcessoRapido: TRibbonPage;
+    RbPgCadastros: TRibbonPage;
+    ActManagerMenu: TActionManager;
+    ImgListMenu: TImageList;
+    ActCadastroMembros: TAction;
+    RBGrpCadastroCadastros: TRibbonGroup;
+    RbGrpAcessoCadastros: TRibbonGroup;
+    RbGrpAcessoGerenciamentoCongregacao: TRibbonGroup;
+    RbGrpAcessoRelatorios: TRibbonGroup;
+    ActCadastroFamilia: TAction;
+    ActCadastroAssembleia: TAction;
+    ActCadastroContribuicoes: TAction;
+    ActParticipacaoSantaCeia: TAction;
+    ActVisitas: TAction;
+    ActIndicacaoMembroVotante: TAction;
+    ActEtiquetas: TAction;
+    RbPgGerenciamentoCongregacao: TRibbonPage;
+    ActCadastroMensagens: TAction;
+    RbGrpAtividades: TRibbonGroup;
+    RibbonGroup6: TRibbonGroup;
+    ActSair: TAction;
+    ActTrocarUsuario: TAction;
+    ActCadastroUsuarios: TAction;
+    ActControleAcesso: TAction;
+    ActBackupSistema: TAction;
+    ActRestauracaoSistema: TAction;
+    ActMalaDireta: TAction;
+    ActFichaCadastroMembros: TAction;
+    RbPgRelatorio: TRibbonPage;
+    RbGrpRelatorios: TRibbonGroup;
+    RbGrpFormularios: TRibbonGroup;
+    ActPlanilhaSantaCeia: TAction;
+    ActRelatorioAssembleia: TAction;
+    ActRelatorioMembros: TAction;
+    ActRelatorioContribuicoes: TAction;
+    ActRelatorioParticipacaoSantaCeia: TAction;
+    ActCadastroVisitante: TAction;
+    ActRelatorioVisitantes: TAction;
+    ActRelatorioVisitas: TAction;
+    RbPgEstatistica: TRibbonPage;
+    ActEstatisticaContribuicoes: TAction;
+    RbGrpEstatisticaCongregacao: TRibbonGroup;
+    ActRelatorioPastoral: TAction;
+    ActCadastroDatasEspeciais: TAction;
+    ActCadastroDepartamento: TAction;
+    ActCadastroProfissoes: TAction;
+    ActCadastroTiposContribuicao: TAction;
+    RbPgAdministracao: TRibbonPage;
+    RbGrpCadastroAdministracao: TRibbonGroup;
+    RbGrpEstatisticaIELB: TRibbonGroup;
+    RbPgControleCemiterio: TRibbonPage;
+    RbGrpCadastroCemiterio: TRibbonGroup;
+    ActCadastroGrupos: TAction;
+    Action1: TAction;
+    ActResponsavel: TAction;
+    ActControleSepultura: TAction;
+    ActTipoTaxa: TAction;
+    ActTipoSepultura: TAction;
+    ActFalecido: TAction;
+    ActRelCemiterio: TAction;
+    ActPagamentosSepulturas: TAction;
+    RibbonGroup1: TRibbonGroup;
+    RbGrpRelatorioCemiterio: TRibbonGroup;
+    ActCorrigeDataEspecial: TAction;
+    RibbonGroup2: TRibbonGroup;
+    ActCorrigeFilhos: TAction;
+    ActCorrigiContribuicoes: TAction;
+    ActRelAniversariantes: TAction;
+    Action2: TAction;
+    ActRelacaoMembrosVotantes: TAction;
+    Button1: TButton;
+    procedure ActSairExecute(Sender: TObject);
+    procedure ActCadastroProfissoesExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ActCadastroUsuariosExecute(Sender: TObject);
+    procedure ActControleAcessoExecute(Sender: TObject);
+    procedure ActCadastroGruposExecute(Sender: TObject);
+    procedure ActCadastroFamiliaExecute(Sender: TObject);
+    procedure ActCadastroMembrosExecute(Sender: TObject);
+    procedure ActParticipacaoSantaCeiaExecute(Sender: TObject);
+    procedure ActCadastroVisitanteExecute(Sender: TObject);
+    procedure ActCadastroMensagensExecute(Sender: TObject);
+    procedure ActCadastroDatasEspeciaisExecute(Sender: TObject);
+    procedure ActCadastroDepartamentoExecute(Sender: TObject);
+    procedure ActCadastroTiposContribuicaoExecute(Sender: TObject);
+    procedure ActCadastroContribuicoesExecute(Sender: TObject);
+    procedure Action1Execute(Sender: TObject);
+    procedure ActVisitasExecute(Sender: TObject);
+    procedure ActRelatorioMembrosExecute(Sender: TObject);
+    procedure ActMalaDiretaExecute(Sender: TObject);
+    procedure ActTipoTaxaExecute(Sender: TObject);
+    procedure ActResponsavelExecute(Sender: TObject);
+    procedure ActTipoSepulturaExecute(Sender: TObject);
+    procedure ActControleSepulturaExecute(Sender: TObject);
+    procedure ActFalecidoExecute(Sender: TObject);
+    procedure ActRelCemiterioExecute(Sender: TObject);
+    procedure ActCorrigeDataEspecialExecute(Sender: TObject);
+    procedure ActCorrigeFilhosExecute(Sender: TObject);
+    procedure ActRelAniversariantesExecute(Sender: TObject);
+    procedure ActRelatorioContribuicoesExecute(Sender: TObject);
+    procedure ActCorrigiContribuicoesExecute(Sender: TObject);
+    procedure Action2Execute(Sender: TObject);
+    procedure ActPlanilhaSantaCeiaExecute(Sender: TObject);
+    procedure ActRelacaoMembrosVotantesExecute(Sender: TObject);
+    procedure ActEtiquetasExecute(Sender: TObject);
+    procedure ActCadastroAssembleiaExecute(Sender: TObject);
+    procedure ActIndicacaoMembroVotanteExecute(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure ActRelatorioParticipacaoSantaCeiaExecute(Sender: TObject);
+    procedure ActRelatorioPastoralExecute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    AcessoCadastro,
+    AcessoAdministracao,
+    AcessoGerenciamentoCongregacao,
+    AcessoRelatorios,
+    AcessoEstatistica,
+    AcessoControleCemiterio,
+    NomeMembroGlobal,
+    NomeFamiliaGlobal: String;
+    UsuarioLogado,
+    CodMembroGlobal,
+    CodFamiliaGlobal,
+    EnvelopeGlobal: Integer;
+    { Public declarations }
+  end;
+
+var
+  FormPrincipal: TFormPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmConsultaProfissao, UFrmLogon, UfrmConsultaUsuario, UFrmConsultaUsuarioAcesso, UFrmConsultaGrupos, UFrmConsultaFamilia,
+  UFrmConsultaMembro, UFrmSantaCeia, UFrmConsultaVisitante, UFrmConsultaMensagem, UFrmConsultaDataEspecial, UFrmConsultaDepartamento, UFrmConsultaTipoContribuicao, UFrmConsultaContribuicao, UFuncoes,
+  UFrmConsultaVisita, UFrmRelatorioMembros, UFrmMalaDireta, UFrmConsultaTaxasSepultamento, UFrmConsultaResponsavelSepultura, UFrmConsultaTipoSepultura, UFrmConsultaSepultura,
+  UFrmConsultaFalecido, UFrmRelControlePagamentosCemiterio, UFrmRelAniversariantes, UFrmRelContribuicoes,
+  UFrmConsultaSantaCeia, UFrmRelPlanilhaSantaCeia,
+  UFrmRelRelacaoMembrosVotantes, UFrmRelEtiquetas, UFrmConsultaAssembleia, UFrmIndicaMembroVotante, UDMPrincipal, UFrmRelSantaCeia, UFrmRelPastoral;
+
+procedure TFormPrincipal.ActCadastroAssembleiaExecute(Sender: TObject);
+begin
+
+  if FormConsultaAssembleia=nil then
+    Application.CreateForm(TFormConsultaAssembleia,FormConsultaAssembleia);
+  FormConsultaAssembleia.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroContribuicoesExecute(Sender: TObject);
+begin
+
+  if FormConsultaContribuicao=nil then
+    Application.CreateForm(TFormConsultaContribuicao,FormConsultaContribuicao);
+  FormConsultaContribuicao.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroDatasEspeciaisExecute(Sender: TObject);
+begin
+
+  if FormConsultaDataEspecial=nil then
+    Application.CreateForm(TFormConsultaDataEspecial,FormConsultaDataEspecial);
+  FormConsultaDataEspecial.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroDepartamentoExecute(Sender: TObject);
+begin
+
+  if FormConsultaDepartamento=nil then
+    Application.CreateForm(TFormConsultaDepartamento,FormConsultaDepartamento);
+  FormConsultaDepartamento.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroFamiliaExecute(Sender: TObject);
+begin
+
+  if FormConsultaFamilia=nil then
+    Application.CreateForm(TFormConsultaFamilia,FormConsultaFamilia);
+  FormConsultaFamilia.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroGruposExecute(Sender: TObject);
+begin
+
+  if FormConsultaGrupos=nil then
+    Application.CreateForm(TFormConsultaGrupos,FormConsultaGrupos);
+  FormConsultaGrupos.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroMembrosExecute(Sender: TObject);
+begin
+
+  if FormConsultaMembro=nil then
+    Application.CreateForm(TFormConsultaMembro,FormConsultaMembro);
+  FormConsultaMembro.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroMensagensExecute(Sender: TObject);
+begin
+
+  if FormConsultaMensagem=nil then
+    Application.CreateForm(TFormConsultaMensagem,FormConsultaMensagem);
+  FormConsultaMensagem.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroProfissoesExecute(Sender: TObject);
+begin
+
+  if FormConsultaProfissao=nil then
+    Application.CreateForm(TFormConsultaProfissao,FormConsultaProfissao);
+  FormConsultaProfissao.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroTiposContribuicaoExecute(Sender: TObject);
+begin
+
+  if FormConsultaTipoContribuicao=nil then
+    Application.CreateForm(TFormConsultaTipoContribuicao,FormConsultaTipoContribuicao);
+  FormConsultaTipoContribuicao.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroUsuariosExecute(Sender: TObject);
+begin
+
+  if FormConsultaUsuario=nil then
+    Application.CreateForm(TFormConsultaUsuario,FormConsultaUsuario);
+  FormConsultaUsuario.Show;
+
+end;
+
+procedure TFormPrincipal.ActCadastroVisitanteExecute(Sender: TObject);
+begin
+
+  if FormConsultaVisitante=nil then
+    Application.CreateForm(TFormConsultaVisitante,FormConsultaVisitante);
+  FormConsultaVisitante.Show;
+
+end;
+
+procedure TFormPrincipal.ActControleAcessoExecute(Sender: TObject);
+begin
+
+  if FormConsultaUsuarioAcesso=nil then
+    Application.CreateForm(TFormConsultaUsuarioAcesso,FormConsultaUsuarioAcesso);
+  FormConsultaUsuarioAcesso.Show;
+
+end;
+
+procedure TFormPrincipal.ActControleSepulturaExecute(Sender: TObject);
+begin
+
+  if FormConsultaSepultura=nil then
+    Application.CreateForm(TFormConsultaSepultura,FormConsultaSepultura);
+  FormConsultaSepultura.Show;
+
+end;
+
+procedure TFormPrincipal.ActCorrigeDataEspecialExecute(Sender: TObject);
+begin
+
+  CorrigeDatasEspeciais;
+
+end;
+
+procedure TFormPrincipal.ActCorrigeFilhosExecute(Sender: TObject);
+begin
+
+  CorrigeFilhos;
+
+end;
+
+procedure TFormPrincipal.ActCorrigiContribuicoesExecute(Sender: TObject);
+begin
+
+  CorrigeContribuicoes;
+
+end;
+
+procedure TFormPrincipal.ActEtiquetasExecute(Sender: TObject);
+begin
+
+  if FormRelEtiquetas=nil then
+    Application.CreateForm(TFormRelEtiquetas,FormRelEtiquetas);
+  FormRelEtiquetas.Show;
+
+end;
+
+procedure TFormPrincipal.ActFalecidoExecute(Sender: TObject);
+begin
+
+  if FormConsultaFalecidos=nil then
+    Application.CreateForm(TFormConsultaFalecidos,FormConsultaFalecidos);
+  FormConsultaFalecidos.Show;
+
+end;
+
+procedure TFormPrincipal.ActIndicacaoMembroVotanteExecute(Sender: TObject);
+begin
+
+  if FormIndicaMembroVotante=nil then
+    Application.CreateForm(TFormIndicaMembroVotante,FormIndicaMembroVotante);
+  FormIndicaMembroVotante.Show;
+
+end;
+
+procedure TFormPrincipal.Action1Execute(Sender: TObject);
+begin
+
+  CorrigeEnderecoMembroFamilia;
+
+end;
+
+procedure TFormPrincipal.Action2Execute(Sender: TObject);
+begin
+
+  if FormConsultaSantaCeia=nil then
+    Application.CreateForm(TFormConsultaSantaCeia,FormConsultaSantaCeia);
+  FormConsultaSantaCeia.Show;
+
+end;
+
+procedure TFormPrincipal.ActMalaDiretaExecute(Sender: TObject);
+begin
+
+  if FormMalaDireta=nil then
+    Application.CreateForm(TFormMalaDireta,FormMalaDireta);
+  FormMalaDireta.Show;
+
+end;
+
+procedure TFormPrincipal.ActParticipacaoSantaCeiaExecute(Sender: TObject);
+begin
+
+  if FormSantaCeia=nil then
+    Application.CreateForm(TFormSantaCeia,FormSantaCeia);
+  FormSantaCeia.Show;
+
+end;
+
+procedure TFormPrincipal.ActPlanilhaSantaCeiaExecute(Sender: TObject);
+begin
+
+  if FormRelPlanilhaSantaCeia=nil then
+    Application.CreateForm(TFormRelPlanilhaSantaCeia,FormRelPlanilhaSantaCeia);
+  FormRelPlanilhaSantaCeia.Show;
+
+end;
+
+procedure TFormPrincipal.ActRelacaoMembrosVotantesExecute(Sender: TObject);
+begin
+
+  if FormRelRelacaoMembrosVotantes=nil then
+    Application.CreateForm(TFormRelRelacaoMembrosVotantes,FormRelRelacaoMembrosVotantes);
+  FormRelRelacaoMembrosVotantes.Show;
+
+{  with FormRelRelacaoMembrosVotantes do
+  Begin
+    QryRel.Close;
+    QryRel.Open;
+
+    frxRpt.ShowReport;
+  End;
+ }
+end;
+
+procedure TFormPrincipal.ActRelAniversariantesExecute(Sender: TObject);
+begin
+
+  if FormRelAniversariantes=nil then
+    Application.CreateForm(TFormRelAniversariantes,FormRelAniversariantes);
+  FormRelAniversariantes.Show;
+
+end;
+
+procedure TFormPrincipal.ActRelatorioContribuicoesExecute(Sender: TObject);
+begin
+
+  if FormRelContribuicoes=nil then
+    Application.CreateForm(TFormRelContribuicoes,FormRelContribuicoes);
+  FormRelContribuicoes.Show;
+
+end;
+
+procedure TFormPrincipal.ActRelatorioMembrosExecute(Sender: TObject);
+begin
+
+  if FormRelatorioMembros=nil then
+    Application.CreateForm(TFormRelatorioMembros,FormRelatorioMembros);
+  FormRelatorioMembros.Show;
+
+end;
+
+procedure TFormPrincipal.ActRelatorioParticipacaoSantaCeiaExecute(Sender: TObject);
+begin
+
+  FormRelSantaCeia.ShowModal;
+
+end;
+
+procedure TFormPrincipal.ActRelatorioPastoralExecute(Sender: TObject);
+begin
+
+  if FormRelPastoral=nil then
+    Application.CreateForm(TFormRelPastoral,FormRelPastoral);
+  FormRelPastoral.Show;
+
+end;
+
+procedure TFormPrincipal.ActRelCemiterioExecute(Sender: TObject);
+begin
+
+  if FormRelControlePagamentosCemiterio=nil then
+    Application.CreateForm(TFormRelControlePagamentosCemiterio,FormRelControlePagamentosCemiterio);
+  FormRelControlePagamentosCemiterio.Show;
+
+end;
+
+procedure TFormPrincipal.ActResponsavelExecute(Sender: TObject);
+begin
+
+  if FormConsultaResponsavelSepultura=nil then
+    Application.CreateForm(TFormConsultaResponsavelSepultura,FormConsultaResponsavelSepultura);
+  FormConsultaResponsavelSepultura.Show;
+
+end;
+
+procedure TFormPrincipal.ActSairExecute(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormPrincipal.ActTipoSepulturaExecute(Sender: TObject);
+begin
+
+  if FormConsultaTipoSepultura=nil then
+    Application.CreateForm(TFormConsultaTipoSepultura,FormConsultaTipoSepultura);
+  FormConsultaTipoSepultura.Show;
+
+end;
+
+procedure TFormPrincipal.ActTipoTaxaExecute(Sender: TObject);
+begin
+
+  if FormConsultaTaxasSepultamento=nil then
+    Application.CreateForm(TFormConsultaTaxasSepultamento,FormConsultaTaxasSepultamento);
+  FormConsultaTaxasSepultamento.Show;
+
+end;
+
+procedure TFormPrincipal.ActVisitasExecute(Sender: TObject);
+begin
+
+  if FormConsultaVisita=nil then
+    Application.CreateForm(TFormConsultaVisita,FormConsultaVisita);
+  FormConsultaVisita.Show;
+
+end;
+
+procedure TFormPrincipal.Button1Click(Sender: TObject);
+begin
+
+  with DMPrincipal do
+  Begin
+    QrySantaCeiaAntigoAjuste.close;
+    QrySantaCeiaAntigoAjuste.Open;
+    while not QrySantaCeiaAntigoAjuste.Eof do
+    Begin
+
+      QryTemp.Close;
+      QryTemp.SQL.Clear;
+      QryTemp.SQL.Add('Select CodMembro, CodMembroAntigo, Codfamilia from Membros where codmembroantigo = ' + QrySantaCeiaAntigoAjusteCodMembroAntigo.AsString +
+                      ' and codfamilia = ' + QrySantaCeiaAntigoAjusteCodfamilia.AsString);
+      QryTemp.Open;
+
+      if QryTemp.FieldByName('CodMembro').Value<> null then
+      Begin
+        QrySantaCeiaAntigoAjuste.Edit;
+        QrySantaCeiaAntigoAjusteCodMembro.Value := QryTemp.FieldByName('CodMembro').Value;
+        QrySantaCeiaAntigoAjuste.Post;
+      End;
+
+      QrySantaCeiaAntigoAjuste.Next;
+
+    End;
+  End;
+  ShowMessage('Processo finalizado!');
+
+end;
+
+procedure TFormPrincipal.FormShow(Sender: TObject);
+begin
+
+  FormLogon.ShowModal;
+
+end;
+
+end.

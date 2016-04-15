@@ -1,0 +1,366 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{515E5904-2BFF-454F-B886-58789DEE140D}</ProjectGuid>
+			<ProjectVersion>13.4</ProjectVersion>
+			<MainSource>ChurchExpress.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<FrameworkType>VCL</FrameworkType>
+			<Base>True</Base>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>1</TargetedPlatforms>
+			<AppType>Application</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<VerInfo_Locale>1046</VerInfo_Locale>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_DependencyCheckOutputName>ChurchExpress.exe</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_E>false</DCC_E>
+			<DCC_N>false</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<Icon_MainIcon>ChurchExpress_Icon.ico</Icon_MainIcon>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<Icon_MainIcon>ChurchExpress_Icon.ico</Icon_MainIcon>
+			<DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<VerInfo_Build>3</VerInfo_Build>
+			<VerInfo_MajorVer>2</VerInfo_MajorVer>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.0.3;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<Icon_MainIcon>ChurchExpress_Icon1.ico</Icon_MainIcon>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="UFrmPrincipal.pas">
+				<Form>FormPrincipal</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmLogon.pas">
+				<Form>FormLogon</Form>
+			</DCCReference>
+			<DCCReference Include="UDMPrincipal.pas">
+				<Form>DMPrincipal</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaProfissao.pas">
+				<Form>FormConsultaProfissao</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroProfissao.pas">
+				<Form>FormCadastroProfissao</Form>
+			</DCCReference>
+			<DCCReference Include="UfrmConsultaUsuario.pas">
+				<Form>FormConsultaUsuario</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroUsuario.pas">
+				<Form>FormCadastroUsuario</Form>
+			</DCCReference>
+			<DCCReference Include="UFuncoes.pas"/>
+			<DCCReference Include="UFrmConectaBanco.pas">
+				<Form>FormConectaBanco</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaUsuarioAcesso.pas">
+				<Form>FormConsultaUsuarioAcesso</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroUsuarioAcesso.pas">
+				<Form>FormCadastroUsuarioAcesso</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaGrupos.pas">
+				<Form>FormConsultaGrupos</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroGrupos.pas">
+				<Form>FormCadastroGrupos</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaFamilia.pas">
+				<Form>FormConsultaFamilia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroFamilia.pas">
+				<Form>FormCadastroFamilia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaMembro.pas">
+				<Form>FormConsultaMembro</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroMembro.pas">
+				<Form>FormCadastroMembro</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmSantaCeia.pas">
+				<Form>FormSantaCeia</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroVisitante.pas">
+				<Form>FormCadastroVisitante</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaVisitante.pas">
+				<Form>FormConsultaVisitante</Form>
+			</DCCReference>
+			<DCCReference Include="FrameCapture\FrameCapture_.pas">
+				<Form>FormCapturaWebcam</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroMensagem.pas">
+				<Form>FormCadastroMensagem</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaMensagem.pas">
+				<Form>FormConsultaMensagem</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroDataEspecial.pas">
+				<Form>FormCadastroDataEspecial</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaDataEspecial.pas">
+				<Form>FormConsultaDataEspecial</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroDepartamento.pas">
+				<Form>FormCadastroDepartamento</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaDepartamento.pas">
+				<Form>FormConsultaDepartamento</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroTipoContribuicao.pas">
+				<Form>FormCadastroTipoContribuicao</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaTipoContribuicao.pas">
+				<Form>FormConsultaTipoContribuicao</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroContribuicao.pas">
+				<Form>FormCadastroContribuicao</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaContribuicao.pas">
+				<Form>FormConsultaContribuicao</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroVisita.pas">
+				<Form>FormCadastroVisita</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaVisita.pas">
+				<Form>FormConsultaVisita</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelatorioMembros.pas">
+				<Form>FormRelatorioMembros</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmMalaDireta.pas">
+				<Form>FormMalaDireta</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaTaxasSepultamento.pas">
+				<Form>FormConsultaTaxasSepultamento</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroTaxasSepultamento.pas">
+				<Form>FormCadastroTaxasSepultamento</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroResponsavelSepultura.pas">
+				<Form>FormCadastroResponsavelSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaResponsavelSepultura.pas">
+				<Form>FormConsultaResponsavelSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroTipoSepultura.pas">
+				<Form>FormCadastroTipoSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaTipoSepultura.pas">
+				<Form>FormConsultaTipoSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroSepultura.pas">
+				<Form>FormCadastroSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaSepultura.pas">
+				<Form>FormConsultaSepultura</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroFalecido.pas">
+				<Form>FormCadastroFalecido</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaFalecido.pas">
+				<Form>FormConsultaFalecidos</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroSepulturaPagamento.pas">
+				<Form>FormCadastroSepulturaPagamento</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroMembroDataEspec.pas">
+				<Form>FormCadastroMembroDataEspec</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroMembroFilho.pas">
+				<Form>FormCadastroMembroFilho</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelAniversariantes.pas">
+				<Form>FormRelAniversariantes</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelContribuicoes.pas">
+				<Form>FormRelContribuicoes</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaSantaCeia.pas">
+				<Form>FormConsultaSantaCeia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroSantaCeia.pas">
+				<Form>FormCadastroSantaCeia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelPlanilhaSantaCeia.pas">
+				<Form>FormRelPlanilhaSantaCeia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelRelacaoMembrosVotantes.pas">
+				<Form>FormRelRelacaoMembrosVotantes</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelEtiquetas.pas">
+				<Form>FormRelEtiquetas</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaAssembleia.pas">
+				<Form>FormConsultaAssembleia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroAssembleia.pas">
+				<Form>FormCadastroAssembleia</Form>
+			</DCCReference>
+			<DCCReference Include="UDMCadastroAssembleia.pas">
+				<Form>DMCadastroAssembleia</Form>
+				<FormType>dfm</FormType>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UFrmIndicaMembroVotante.pas">
+				<Form>FormIndicaMembroVotante</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmSelecaoEtiqueta.pas">
+				<Form>FormSelecaoEtiqueta</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmBuscaFamilia.pas">
+				<Form>FormBuscaFamilia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmBuscaMembro.pas">
+				<Form>FormBuscaMembro</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelSantaCeia.pas">
+				<Form>FormRelSantaCeia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmParametros.pas">
+				<Form>FormParametros</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="UFrmConsultaSantaCeiaVisitante.pas">
+				<Form>FormConsultaSantaCeiaVisitante</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmCadastroVisitanteSantaCeia.pas">
+				<Form>FormCadastroVisitanteSantaCeia</Form>
+			</DCCReference>
+			<DCCReference Include="UFrmRelPastoral.pas">
+				<Form>FormRelPastoral</Form>
+			</DCCReference>
+			<DCCReference Include="UDMRelPastoral.pas">
+				<Form>DMRelPastoral</Form>
+				<FormType>dfm</FormType>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">ChurchExpress.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages/>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win64">False</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

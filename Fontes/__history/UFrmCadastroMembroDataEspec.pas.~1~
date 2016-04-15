@@ -1,0 +1,72 @@
+unit UFrmCadastroMembroDataEspec;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TFormCadastroMembroDataEspec = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    QryXXX: TMyQuery;
+    DSXXX: TDataSource;
+    Label1: TLabel;
+    DBEdt: TDBEdit;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroMembroDataEspec: TFormCadastroMembroDataEspec;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal;
+
+procedure TFormCadastroMembroDataEspec.BtnSalvarClick(Sender: TObject);
+begin
+
+
+{  if DBEdt.Text='' then
+  Begin
+    ShowMessage('O Campo XXX é obrigatório!');
+    DBEdt.SetFocus;
+  End
+  Else
+  Begin
+    QryXXX.Post;
+    QryXXX.Close;
+    QryXXX.Open;
+    Close;
+  End;
+}
+end;
+
+procedure TFormCadastroMembroDataEspec.FormShow(Sender: TObject);
+begin
+
+//  DBEdt.SetFocus;
+
+end;
+
+procedure TFormCadastroMembroDataEspec.BtnCancelarClick(Sender: TObject);
+begin
+
+//  QryXXX.Cancel;
+//  Close;
+
+end;
+
+end.

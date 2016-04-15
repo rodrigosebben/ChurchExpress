@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/12/13 18:32:02.000.869,=C:\Users\Rodrigo\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/12/15 08:54:02.000.485,C:\Users\Rodrigo\Documents\Projetos\Importa Dados\UfrmPrincipal.dfm=C:\Users\Rodrigo\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2012/12/15 08:54:02.000.485,C:\Users\Rodrigo\Documents\Projetos\Importa Dados\UfrmPrincipal.pas=C:\Users\Rodrigo\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012/12/15 08:54:07.000.957,C:\Users\Rodrigo\Documents\Projetos\Importa Dados\ImportaDados.dproj=C:\Users\Rodrigo\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013/01/16 18:52:46.000.265,=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit1.pas</Transaction>
+    <Transaction>2013/01/16 18:59:41.000.655,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\UDM.pas=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit1.pas</Transaction>
+    <Transaction>2013/01/16 18:59:41.000.655,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\UDM.dfm=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit1.dfm</Transaction>
+    <Transaction>2013/01/16 19:42:22.000.608,=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.pas</Transaction>
+    <Transaction>2013/01/16 19:57:45.000.068,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\URodaQuery.dfm=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.dfm</Transaction>
+    <Transaction>2013/01/16 19:57:45.000.068,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\URodaQuery.pas=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.pas</Transaction>
+    <Transaction>2013/01/18 08:47:14.000.406,=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.pas</Transaction>
+    <Transaction>2013/01/18 09:04:46.000.456,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.pas=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\UFrmConexao.pas</Transaction>
+    <Transaction>2013/01/18 09:04:46.000.456,D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\Unit2.dfm=D:\work\Projetos pessoais\ChurchExpress\Fontes\Importa Dados\UFrmConexao.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

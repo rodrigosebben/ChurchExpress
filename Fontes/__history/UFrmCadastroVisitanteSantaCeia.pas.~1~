@@ -1,0 +1,86 @@
+unit UFrmCadastroVisitanteSantaCeia;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TFormCadastroVisitanteSantaCeia = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    QrySantaCeiaVisitante: TMyQuery;
+    DSSantaCeiaVisitante: TDataSource;
+    Label1: TLabel;
+    DBEdtNomeVisitante: TDBEdit;
+    Label2: TLabel;
+    DBEdtOrigem: TDBEdit;
+    DBChkBxLuterano: TDBCheckBox;
+    DBListBox1: TDBListBox;
+    Label3: TLabel;
+    QuerySantaCeiaVisitantePresenca: TMyQuery;
+    DSSantaCeiaVisitantePresenca: TDataSource;
+    QuerySantaCeiaVisitantePresencaCodSantaCeiaVisitantePresenca: TLargeintField;
+    QuerySantaCeiaVisitantePresencaCodSantaCeiaVisitante: TLargeintField;
+    QuerySantaCeiaVisitantePresencaDataUltimaVisita: TDateTimeField;
+    QrySantaCeiaVisitanteCodSantaCeiaVisitante: TLargeintField;
+    QrySantaCeiaVisitanteNomeVisitante: TStringField;
+    QrySantaCeiaVisitanteLuterano: TBooleanField;
+    QrySantaCeiaVisitanteOrigem: TStringField;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroVisitanteSantaCeia: TFormCadastroVisitanteSantaCeia;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal;
+
+procedure TFormCadastroVisitanteSantaCeia.BtnSalvarClick(Sender: TObject);
+begin
+
+
+{  if DBEdt.Text='' then
+  Begin
+    ShowMessage('O Campo XXX é obrigatório!');
+    DBEdt.SetFocus;
+  End
+  Else
+  Begin
+    QryXXX.Post;
+    QryXXX.Close;
+    QryXXX.Open;
+    Close;
+  End;
+}
+end;
+
+procedure TFormCadastroVisitanteSantaCeia.FormShow(Sender: TObject);
+begin
+
+//  DBEdt.SetFocus;
+
+end;
+
+procedure TFormCadastroVisitanteSantaCeia.BtnCancelarClick(Sender: TObject);
+begin
+
+//  QryXXX.Cancel;
+//  Close;
+
+end;
+
+end.

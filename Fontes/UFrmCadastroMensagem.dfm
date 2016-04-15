@@ -1,0 +1,319 @@
+object FormCadastroMensagem: TFormCadastroMensagem
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'FormCadastroMensagem'
+  ClientHeight = 336
+  ClientWidth = 636
+  Color = clWindow
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  ShowHint = True
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 636
+    Height = 49
+    Align = alTop
+    Caption = 'CADASTRO DE MENSAGENS P/ ETIQUETAS'
+    Color = clHotLight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 287
+    Width = 636
+    Height = 49
+    Align = alBottom
+    Color = clHotLight
+    ParentBackground = False
+    TabOrder = 1
+    object BtnSalvar: TBitBtn
+      Left = 465
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Salvar'
+      Default = True
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE94D6
+        DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFD6DBDB6BAE9493CBB76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B2A1EDD986
+        C9B26BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB6BAE9482C8B18AE8D082E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B28CE8D179E5C974E3C778
+        E4C988E7CF82C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94
+        93CBB8A6EDDB8AE8D07DE5CB79E5C979E5C97DE5CB8AE8D082C8B16BAE94D6DB
+        DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE948ACAB4A0ECD97DC7AF6BAE9478
+        C6AD84E7CE82E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF6BAE949ECCBB6BAE94FFFFFF6BAE9496C9B7CCEDE5C9ECE3CCEDE597CA
+        B76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFF
+        FFFF6BAE949BCAB9D8F0EAD5EFE9D9F1EB9DCBBA6BAE94D6DBDBFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE949FCCBCE5F5F1E5F5
+        F1EBF7F4A3CEBE6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF6BAE94A3CEBEF3FAF9A4CEBE6BAE94FFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94A7CF
+        BF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 0
+      OnClick = BtnSalvarClick
+    end
+    object BtnCancelar: TBitBtn
+      Left = 546
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Cancelar'
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDBD6DBDBD6DBDBD6DBDBD6
+        DBDBD6DBDBD6DBDBD6DBDBD6DBDBD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB4646C14646C14646C14646C14646C14646C14646C14646C14646C14646
+        C1D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF4646C17777DB9F9FFF8C8CFF8686FF86
+        86FF8686FF8686FF8C8CFF9F9FFF7777DB4646C1FFFFFFFFFFFFFFFFFFFFFFFF
+        4646C17171DB8888FF7272FF6868FF1212891212896868FF7272FF8888FF7171
+        DB4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C18686FF6868FF5B5BFF58
+        58FF5858FF5B5BFF6868FF8686FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF4646C17C7CDBB6B6FFACACFF121289121289ACACFFB6B6FF7C7CDB4646
+        C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1CCCCFFC0C0FF12
+        1289121289C0C0FFCCCCFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF4646C18585DBD6D6FF121289121289D6D6FF8585DB4646C1FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1E9E9FF12
+        1289121289E9E9FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFF4646C18F8FDBF5F5FFF5F5FF8F8FDB4646C1FFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1FF
+        FFFFFFFFFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF4646C19292DB9292DB4646C1FFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF46
+        46C14646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 1
+      OnClick = BtnCancelarClick
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 49
+    Width = 636
+    Height = 238
+    Align = alClient
+    Color = clInactiveCaption
+    ParentBackground = False
+    TabOrder = 2
+    object Label2: TLabel
+      Left = 13
+      Top = 6
+      Width = 68
+      Height = 16
+      Caption = 'Descri'#231#227'o:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 13
+      Top = 122
+      Width = 92
+      Height = 16
+      Caption = 'Complemento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 13
+      Top = 174
+      Width = 31
+      Height = 16
+      Caption = 'Mes:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 164
+      Top = 174
+      Width = 31
+      Height = 16
+      Caption = 'Ano:'
+      FocusControl = DBSpinAno
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object DBMmDescMensagem: TDBMemo
+      Left = 13
+      Top = 27
+      Width = 608
+      Height = 89
+      DataField = 'DescMensagem'
+      DataSource = DSMensagem
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object DBEdtComplemento: TDBEdit
+      Left = 13
+      Top = 144
+      Width = 608
+      Height = 24
+      CharCase = ecUpperCase
+      DataField = 'Compl'
+      DataSource = DSMensagem
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object DBSpinAno: TcxDBSpinEdit
+      Left = 164
+      Top = 196
+      DataBinding.DataField = 'Ano'
+      DataBinding.DataSource = DSMensagem
+      ParentFont = False
+      Properties.CanEdit = False
+      Properties.MaxValue = 2100.000000000000000000
+      Properties.MinValue = 2000.000000000000000000
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 3
+      Width = 89
+    end
+    object DBCbxMes: TDBComboBox
+      Left = 13
+      Top = 196
+      Width = 145
+      Height = 24
+      Style = csDropDownList
+      DataField = 'Mes'
+      DataSource = DSMensagem
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Items.Strings = (
+        'JANEIRO'
+        'FEVEREIRO'
+        'MAR'#199'O'
+        'ABRIL'
+        'MAIO'
+        'JUNHO'
+        'JULHO'
+        'AGOSTO'
+        'SETEMBRO'
+        'OUTUBRO'
+        'NOVEMBRO'
+        'DEZEMBRO')
+      ParentFont = False
+      TabOrder = 2
+    end
+  end
+  object QryMensagem: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO mensagem'
+      '  (CodMensagem, DescMensagem, Compl, Mes, Ano)'
+      'VALUES'
+      '  (:CodMensagem, :DescMensagem, :Compl, :Mes, :Ano)')
+    SQLDelete.Strings = (
+      'DELETE FROM mensagem'
+      'WHERE'
+      '  CodMensagem = :Old_CodMensagem')
+    SQLUpdate.Strings = (
+      'UPDATE mensagem'
+      'SET'
+      
+        '  CodMensagem = :CodMensagem, DescMensagem = :DescMensagem, Comp' +
+        'l = :Compl, Mes = :Mes, Ano = :Ano'
+      'WHERE'
+      '  CodMensagem = :Old_CodMensagem')
+    SQLRefresh.Strings = (
+      'SELECT CodMensagem, DescMensagem, Compl, Mes, Ano FROM mensagem'
+      'WHERE'
+      '  CodMensagem = :CodMensagem')
+    SQLLock.Strings = (
+      'SELECT * FROM mensagem'
+      'WHERE'
+      '  CodMensagem = :Old_CodMensagem'
+      'FOR UPDATE')
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      'select * from Mensagem')
+    Left = 556
+    Top = 4
+    object QryMensagemCodMensagem: TLargeintField
+      FieldName = 'CodMensagem'
+    end
+    object QryMensagemDescMensagem: TStringField
+      FieldName = 'DescMensagem'
+      Size = 255
+    end
+    object QryMensagemCompl: TStringField
+      FieldName = 'Compl'
+      Size = 255
+    end
+    object QryMensagemMes: TStringField
+      FieldName = 'Mes'
+      Size = 45
+    end
+    object QryMensagemAno: TLargeintField
+      FieldName = 'Ano'
+    end
+  end
+  object DSMensagem: TDataSource
+    DataSet = QryMensagem
+    Left = 556
+    Top = 48
+  end
+end

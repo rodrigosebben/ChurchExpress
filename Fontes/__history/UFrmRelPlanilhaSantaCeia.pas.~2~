@@ -1,0 +1,111 @@
+unit UFrmRelPlanilhaSantaCeia;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.ComCtrls, dxCore, cxDateUtils, dxSkinsCore, frxClass, frxDBSet, Data.DB,
+  MemDS, DBAccess, MyAccess, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TFormRelPlanilhaSantaCeia = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    CBXMesInicial: TComboBox;
+    CbxMesFinal: TComboBox;
+    QryTemp: TMyQuery;
+    QryRel: TMyQuery;
+    DSRel: TDataSource;
+    frxRpt: TfrxReport;
+    frxDBSantaCeia: TfrxDBDataset;
+    Label1: TLabel;
+    EdtAno: TEdit;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure RdGrpDataClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelPlanilhaSantaCeia: TFormRelPlanilhaSantaCeia;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal;
+
+procedure TFormRelPlanilhaSantaCeia.BtnCancelarClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormRelPlanilhaSantaCeia.BtnSalvarClick(Sender: TObject);
+Var
+  where:boolean;
+begin
+
+  if EdtAno.Text = '' then
+  Begin
+    ShowMessage('O Ano deve ser informado!');
+    EdtAno.SetFocus;
+  End
+  Else
+  Begin
+    QryRel.Close;
+    QryRel.Open;
+
+    frxRpt.Variables.Clear;
+    frxRpt.Variables[' ' + 'Geral'] := Null;
+    frxRpt.Variables.AddVariable('Geral','MesInicio',QuotedStr(CBXMesInicial.Text));
+    frxRpt.Variables.AddVariable('Geral','MesFim',QuotedStr(CbxMesFinal.Text));
+    frxRpt.Variables.AddVariable('Geral','Ano',QuotedStr(EdtAno.Text));
+    frxRpt.ShowReport;
+  End;
+
+end;
+
+procedure TFormRelPlanilhaSantaCeia.FormShow(Sender: TObject);
+Var
+  MesAtual: integer;
+begin
+
+  MesAtual :=
+
+  CbxXXX.Setfocus;}
+
+
+end;
+
+procedure TFormRelPlanilhaSantaCeia.RdGrpDataClick(Sender: TObject);
+begin
+
+  Case RdGrpDataVencimento.ItemIndex of
+    0:Begin
+        Labelde.Visible := False;
+        DtEdtDE.Visible := False;
+        LabelATE.Visible := False;
+        DtEdtATE.Visible := False;
+      End;
+    1:Begin
+        Labelde.Visible := True;
+        DtEdtDE.Visible := True;
+        LabelATE.Visible := True;
+        DtEdtATE.Visible := True;
+      End;
+  end;
+
+end;
+
+end.

@@ -1,0 +1,259 @@
+unit UFrmRelControlePagamentosCemiterio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, Vcl.ComCtrls, dxCore, cxDateUtils, dxSkinsCore, cxTextEdit,
+  cxMaskEdit, cxDropDownEdit, cxCalendar, Data.DB, frxClass, MemDS, DBAccess,
+  MyAccess, frxDBSet;
+
+type
+  TFormRelControlePagamentosCemiterio = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    CbxSepulturas: TComboBox;
+    Label2: TLabel;
+    CbxSituacao: TComboBox;
+    Label3: TLabel;
+    CBXTipoSepultura: TComboBox;
+    Label4: TLabel;
+    CbxTipoTaxa: TComboBox;
+    RdGrpDataVencimento: TRadioGroup;
+    Labelde: TLabel;
+    LabelATE: TLabel;
+    DtEdtDE: TcxDateEdit;
+    DtEdtATE: TcxDateEdit;
+    QryTemp: TMyQuery;
+    QryRelCemiterio: TMyQuery;
+    frxRptCemiterio: TfrxReport;
+    DSRelCemiterio: TDataSource;
+    frxDBDatasetCemiterio: TfrxDBDataset;
+    QryRelCemiterioCodSepultura: TLargeintField;
+    QryRelCemiterioCodResponsavelSepultura: TLargeintField;
+    QryRelCemiterioFila: TStringField;
+    QryRelCemiterioLado: TStringField;
+    QryRelCemiterioNumero: TStringField;
+    QryRelCemiterioCodTipoSepultura: TLargeintField;
+    QryRelCemiterioSepultura: TStringField;
+    QryRelCemiterioCodTipoTaxaSepultura: TLargeintField;
+    QryRelCemiterioDataDesapropriacao: TDateTimeField;
+    QryRelCemiterioNumeroDocumento: TStringField;
+    QryRelCemiterioMotivos: TMemoField;
+    QryRelCemiterioNomeResponsavelSepultura: TStringField;
+    QryRelCemiterioNomeTipoSepultura: TStringField;
+    QryRelCemiterioNomeTipoTaxaSepultura: TStringField;
+    QryRelCemiterioCodFalecidoSepultura: TLargeintField;
+    QryRelCemiterioNomeFalecido: TStringField;
+    QryRelCemiterioidade: TLargeintField;
+    QryRelCemiterioDataFalecimento: TDateTimeField;
+    QryRelCemiterioCertidaoObito: TStringField;
+    QryRelCemiterioDataPagamento: TDateTimeField;
+    QryRelCemiterioNumeroRecibo: TStringField;
+    QryRelCemiterioDataVencimento: TDateTimeField;
+    QryRelCemiterioValor: TFloatField;
+    procedure RdGrpDataVencimentoClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelControlePagamentosCemiterio: TFormRelControlePagamentosCemiterio;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal;
+
+procedure TFormRelControlePagamentosCemiterio.BtnCancelarClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormRelControlePagamentosCemiterio.BtnSalvarClick(Sender: TObject);
+Var
+  where:boolean;
+begin
+
+  QryRelCemiterio.Close;
+  QryRelCemiterio.SQL.Clear;
+  QryRelCemiterio.SQL.Text := 'SELECT S.*, ' +
+                              '       RS.NomeResponsavelSepultura, ' +
+                              '       TS.NomeTipoSepultura, ' +
+                              '       TTS.NomeTipoTaxaSepultura, TTS.Valor, ' +
+                              '       FS.* ' +
+                              'FROM sepulturas S Left Join ResponsavelSepultura RS on S.CodResponsavelSepultura = RS.CodResponsavelSepultura ' +
+                              '                  Left Join TipoSepultura TS on S.CodTipoSepultura = TS.CodTipoSepultura ' +
+                              '                  Left Join TipoTaxaSepultura TTS on S.CodTipoTaxaSepultura = TTS.CodTipoTaxaSepultura ' +
+                              '                  left Join FalecidosSepultura FS on S.CodSepultura = FS.CodSepultura';
+  where := False;
+  if CbxSepulturas.ItemIndex<>0 then
+  Begin
+    QryRelCemiterio.SQL.Add('Where S.Numero=' + QuotedStr(CbxSepulturas.Text));
+    where := True;
+  End;
+
+  case CbxSituacao of
+    1:Begin
+        if where=true then
+        Begin
+          QryRelCemiterio.SQL.Add('and Not IsNull(FS.DataPagamento)');
+        End
+        Else
+        Begin
+          QryRelCemiterio.SQL.Add('Where Not IsNull(FS.DataPagamento)');
+          where := True;
+        End;
+      End;
+    2:Begin
+        if where=true then
+        Begin
+          QryRelCemiterio.SQL.Add('And IsNull(FS.DataPagamento)');
+        End
+        Else
+        Begin
+          QryRelCemiterio.SQL.Add('Where IsNull(FS.DataPagamento)');
+          where := True;
+        End;
+      End;
+  end;
+
+  if CBXTipoSepultura.ItemIndex<>0 then
+  Begin
+    if where=true then
+    Begin
+      QryRelCemiterio.SQL.Add('And TS.NomeTipoSepultura=' + QuotedStr(CBXTipoSepultura.Text));
+    End
+    Else
+    Begin
+      QryRelCemiterio.SQL.Add('Where TS.NomeTipoSepultura=' + QuotedStr(CBXTipoSepultura.Text));
+      where := True;
+    End;
+  End;
+
+  if CbxTipoTaxa.ItemIndex<>0 then
+  Begin
+    if where=true then
+    Begin
+      QryRelCemiterio.SQL.Add('And TTS.NomeTipoTaxaSepultura=' + QuotedStr(CbxTipoTaxa.Text));
+    End
+    Else
+    Begin
+      QryRelCemiterio.SQL.Add('Where TTS.NomeTipoTaxaSepultura=' + QuotedStr(CbxTipoTaxa.Text));
+      where := True;
+    End;
+  End;
+
+  if RdGrpDataVencimento.ItemIndex=1 then
+  Begin
+    if where=true then
+    Begin
+      QryRelCemiterio.SQL.Add('And FS.DataVencimento between ' + QuotedStr(DtEdtDE.Text) + ' and ' + QuotedStr(DtEdtATE.Text));
+    End
+    Else
+    Begin
+      QryRelCemiterio.SQL.Add('Where FS.DataVencimento between ' + QuotedStr(DtEdtDE.Text) + ' and ' + QuotedStr(DtEdtATE.Text));
+      where := True;
+    End;
+  End;
+
+  if DtEdtDE.Date > DtEdtATE.Date then
+  Begin
+    ShowMessage('A Data Inicial não pode ser maior que a data final!');
+    DtEdtDE.SetFocus;
+  End
+  Else
+  Begin
+    QryRelCemiterio.Open;
+    frxRptCemiterio.ShowReport;
+  End;
+
+end;
+
+procedure TFormRelControlePagamentosCemiterio.FormShow(Sender: TObject);
+begin
+
+  // CARREGA COMBO DE SEPULTURAS
+  QryTemp.Close;
+  QryTemp.SQL.Clear;
+  QryTemp.SQL.Add('SELECT Numero FROM sepulturas order by Numero');
+  QryTemp.Open;
+
+  CbxSepulturas.Items.Clear;
+  CbxSepulturas.Items.Add('TODAS');
+  While not QryTemp.Eof do
+  Begin
+    CbxSepulturas.Items.Add(QryTemp.FieldByName('Numero').AsString);
+    QryTemp.Next;
+  End;
+  CbxSepulturas.ItemIndex := 0;
+
+  // CARREGA COMBO DE TIPO DE SEPULTURAS
+  QryTemp.Close;
+  QryTemp.SQL.Clear;
+  QryTemp.SQL.Add('SELECT NomeTipoSepultura FROM tiposepultura order by NomeTipoSepultura');
+  QryTemp.Open;
+
+  CBXTipoSepultura.Items.Clear;
+  CBXTipoSepultura.Items.Add('TODAS');
+  While not QryTemp.Eof do
+  Begin
+    CBXTipoSepultura.Items.Add(QryTemp.FieldByName('NomeTipoSepultura').AsString);
+    QryTemp.Next;
+  End;
+  CBXTipoSepultura.ItemIndex := 0;
+
+  // CARREGA COMBO DE TIPO DE TAXAS DE SEPULTURAS
+  QryTemp.Close;
+  QryTemp.SQL.Clear;
+  QryTemp.SQL.Add('SELECT NomeTipoTaxaSepultura FROM tipotaxasepultura order by NomeTipoTaxaSepultura');
+  QryTemp.Open;
+
+  CbxTipoTaxa.Items.Clear;
+  CbxTipoTaxa.Items.Add('TODAS');
+  While not QryTemp.Eof do
+  Begin
+    CbxTipoTaxa.Items.Add(QryTemp.FieldByName('NomeTipoTaxaSepultura').AsString);
+    QryTemp.Next;
+  End;
+  CbxTipoTaxa.ItemIndex := 0;
+
+  CbxSepulturas.SetFocus;
+
+end;
+
+procedure TFormRelControlePagamentosCemiterio.RdGrpDataVencimentoClick(Sender: TObject);
+begin
+
+  Case RdGrpDataVencimento.ItemIndex of
+    0:Begin
+        Labelde.Visible := False;
+        DtEdtDE.Visible := False;
+        LabelATE.Visible := False;
+        DtEdtATE.Visible := False;
+      End;
+    1:Begin
+        Labelde.Visible := True;
+        DtEdtDE.Visible := True;
+        LabelATE.Visible := True;
+        DtEdtATE.Visible := True;
+      End;
+  end;
+
+end;
+
+end.

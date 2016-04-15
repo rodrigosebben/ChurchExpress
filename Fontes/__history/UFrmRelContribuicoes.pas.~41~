@@ -1,0 +1,475 @@
+unit UFrmRelContribuicoes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.ComCtrls, dxCore, cxDateUtils, dxSkinsCore, frxClass, frxDBSet, Data.DB,
+  MemDS, DBAccess, MyAccess, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, frxExportCSV, frxExportText, frxExportImage, frxExportRTF, frxExportHTML,
+  frxExportPDF;
+
+type
+  TFormRelContribuicoes = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Labelde: TLabel;
+    LabelATE: TLabel;
+    CBXTipoContribuicao: TComboBox;
+    CbxOrdenarPor: TComboBox;
+    RdGrpData: TRadioGroup;
+    DtEdtDE: TcxDateEdit;
+    DtEdtATE: TcxDateEdit;
+    QryTemp: TMyQuery;
+    QryRel: TMyQuery;
+    DSRel: TDataSource;
+    frxRpt: TfrxReport;
+    frxDBDataset: TfrxDBDataset;
+    CbxOrdem: TComboBox;
+    QryRelCodMembroAntigo: TLargeintField;
+    QryRelCodFamilia: TLargeintField;
+    QryRelCodTpContrb: TLargeintField;
+    QryRelValor: TFloatField;
+    QryRelCodContribuicao: TLargeintField;
+    QryRelHora: TTimeField;
+    QryRelCodMembro: TLargeintField;
+    QryRelEnvelope: TLargeintField;
+    QryRelSobrenome: TStringField;
+    QryRelNomeMembro: TStringField;
+    Label5: TLabel;
+    CbxSituacao: TComboBox;
+    QryRelDescTPContrb: TStringField;
+    frxPDFExport1: TfrxPDFExport;
+    frxHTMLExport1: TfrxHTMLExport;
+    frxRTFExport1: TfrxRTFExport;
+    frxJPEGExport1: TfrxJPEGExport;
+    frxSimpleTextExport1: TfrxSimpleTextExport;
+    frxCSVExport1: TfrxCSVExport;
+    Label6: TLabel;
+    CbxAtivo: TComboBox;
+    QryRelInativos: TMyQuery;
+    QryRelInativosCodMembro: TLargeintField;
+    QryRelInativosNomeMembro: TStringField;
+    DSRelInativos: TDataSource;
+    frxRptInativos: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    QryRelInativosEnvelope: TLargeintField;
+    QryRelDataContribuicao: TDateField;
+    QryRelInativosTelefone: TStringField;
+    QryRelInativosCelular: TStringField;
+    QryRelInativosCodFamilia: TLargeintField;
+    QryRelInativosSobrenome: TStringField;
+    QryRelInativosFamiliaCampo: TStringField;
+    QryRelEnvelopeCorreto: TLargeintField;
+    QryTotaisFamilia: TMyQuery;
+    QryTotaisMembros: TMyQuery;
+    EdtNomeFamilia: TEdit;
+    SpdBtnBuscaMembro: TSpeedButton;
+    EdtNomeMembro: TEdit;
+    SpeedButton1: TSpeedButton;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure RdGrpDataClick(Sender: TObject);
+    procedure CbxAtivoClick(Sender: TObject);
+    procedure SpdBtnBuscaMembroClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelContribuicoes: TFormRelContribuicoes;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal, UFuncoes, UFrmBuscaFamilia, UFrmBuscaMembro, UFrmPrincipal;
+
+procedure TFormRelContribuicoes.BtnCancelarClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormRelContribuicoes.BtnSalvarClick(Sender: TObject);
+Var
+  where:boolean;
+  Membros, TotalMembros, TotalFamilias: String;
+begin
+
+  case CbxAtivo.ItemIndex of
+    0: Begin
+         QryRel.Close;
+         QryRel.SQL.Clear;
+         QryRel.SQL.Text := 'SELECT c.*, F.Sobrenome, M.NomeMembro, TC.DescTPContrb, m.Envelope as EnvelopeCorreto ' +
+                            '  FROM contribuicao c left join Familia F on c.CodFamilia=F.CodFamilia ' +
+                            '                      left join TipoContribuicao TC on c.CodTpContrb = TC.CodTpContrb ' +
+                            '                      left join Membros M on c.CodMembro = m.codMembro ';
+         QryTotaisFamilia.Close;
+         QryTotaisFamilia.SQL.Clear;
+         QryTotaisFamilia.SQL.Text := 'SELECT c.codfamilia, count(c.codfamilia) ' +
+                                      '  FROM contribuicao c left join Familia F on c.CodFamilia=F.CodFamilia ' +
+                                      '                      left join TipoContribuicao TC on c.CodTpContrb = TC.CodTpContrb ' +
+                                      '                      left join Membros M on c.CodMembro = m.codMembro ';
+
+         QryTotaisMembros.Close;
+         QryTotaisMembros.SQL.Clear;
+         QryTotaisMembros.SQL.Text := 'SELECT c.CodMembro, count(c.CodMembro) ' +
+                                      '  FROM contribuicao c left join Familia F on c.CodFamilia=F.CodFamilia ' +
+                                      '                      left join TipoContribuicao TC on c.CodTpContrb = TC.CodTpContrb ' +
+                                      '                      left join Membros M on c.CodMembro = m.codMembro ';
+
+         where := False;
+         if EdtNomeFamilia.Tag<>0 then
+         Begin
+           if EdtNomeFamilia.Tag<>0 then
+           Begin
+             QryRel.SQL.Add('Where c.CodFamilia = ' + IntToStr(EdtNomeFamilia.Tag));
+             QryTotaisFamilia.SQL.Add('Where c.CodFamilia = ' + IntToStr(EdtNomeFamilia.Tag));
+             QryTotaisMembros.SQL.Add('Where c.CodFamilia = ' + IntToStr(EdtNomeFamilia.Tag));
+             where := True;
+           End;
+         End;
+
+         if EdtNomeMembro.Tag<>0 then
+         Begin
+           if where=true then
+           Begin
+             QryRel.SQL.Add('and C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+             QryTotaisFamilia.SQL.Add('and C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+             QryTotaisMembros.SQL.Add('and C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+           End
+           Else
+           Begin
+             QryRel.SQL.Add('Where C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+             QryTotaisFamilia.SQL.Add('Where C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+             QryTotaisMembros.SQL.Add('Where C.CodMembro = ' + IntToStr(EdtNomeMembro.Tag));
+             where := True;
+           End;
+         End;
+
+         if CBXTipoContribuicao.ItemIndex<>0 then
+         Begin
+           if where=true then
+           Begin
+             QryRel.SQL.Add('And c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+             QryTotaisFamilia.SQL.Add('And c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+             QryTotaisMembros.SQL.Add('And c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+           End
+           Else
+           Begin
+             QryRel.SQL.Add('Where c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+             QryTotaisFamilia.SQL.Add('Where c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+             QryTotaisMembros.SQL.Add('Where c.CodTpContrb = ' + RetornaValorString(CBXTipoContribuicao.Text,'#'));
+             where := True;
+           End;
+         End;
+
+         if CbxSituacao.ItemIndex<>0 then
+         Begin
+           case CbxSituacao.ItemIndex of
+             1:Begin
+                 if where=true then
+                 Begin
+                   QryRel.SQL.Add('And isnull(m.CodMotivoSaida)');
+                   QryTotaisFamilia.SQL.Add('And isnull(m.CodMotivoSaida)');
+                   QryTotaisMembros.SQL.Add('And isnull(m.CodMotivoSaida)');
+                 End
+                 Else
+                 Begin
+                   QryRel.SQL.Add('Where isnull(m.CodMotivoSaida)');
+                   QryTotaisFamilia.SQL.Add('Where isnull(m.CodMotivoSaida)');
+                   QryTotaisMembros.SQL.Add('Where isnull(m.CodMotivoSaida)');
+                   where := True;
+                 End;
+               End;
+             2:Begin
+                 if where=true then
+                 Begin
+                   QryRel.SQL.Add('And not isnull(m.CodMotivoSaida)');
+                   QryTotaisFamilia.SQL.Add('And not isnull(m.CodMotivoSaida)');
+                   QryTotaisMembros.SQL.Add('And not isnull(m.CodMotivoSaida)');
+                 End
+                 Else
+                 Begin
+                   QryRel.SQL.Add('Where not isnull(m.CodMotivoSaida)');
+                   QryTotaisFamilia.SQL.Add('Where not isnull(m.CodMotivoSaida)');
+                   QryTotaisMembros.SQL.Add('Where not isnull(m.CodMotivoSaida)');
+                   where := True;
+                 End;
+               End;
+            end;
+         End;
+
+         if RdGrpData.ItemIndex=1 then
+         Begin
+           if where=true then
+           Begin
+             QryRel.SQL.Add('And c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+             QryTotaisFamilia.SQL.Add('And c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+             QryTotaisMembros.SQL.Add('And c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+           End
+           Else
+           Begin
+             QryRel.SQL.Add('Where c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+             QryTotaisFamilia.SQL.Add('Where c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+             QryTotaisMembros.SQL.Add('Where c.DataContribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+             where := True;
+           End;
+         End;
+
+         case CbxOrdenarPor.ItemIndex of
+           0: Begin
+                case CbxOrdem.ItemIndex of
+                  0: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, C.DataContribuicao ASC');
+                     End;
+                  1: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, C.DataContribuicao Desc');
+                     End;
+                end;
+              End;
+           1: Begin
+                case CbxOrdem.ItemIndex of
+                  0: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, M.NomeMembro ASC');
+                     End;
+                  1: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, M.NomeMembro Desc');
+                     End;
+                end;
+              End;
+           2: Begin
+                case CbxOrdem.ItemIndex of
+                  0: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, c.valor ASC');
+                     End;
+                  1: Begin
+                       QryRel.SQL.Add(' Order by c.CodFamilia, c.valor Desc');
+                     End;
+                end;
+              End;
+         end;
+
+         if DtEdtDE.Date > DtEdtATE.Date then
+         Begin
+           ShowMessage('A Data Inicial não pode ser maior que a data final!');
+           DtEdtDE.SetFocus;
+         End
+         Else
+         Begin
+           QryRel.Open;
+
+           QryTotaisFamilia.SQL.Add(' Group by c.CodFamilia');
+           QryTotaisFamilia.Open;
+           QryTotaisMembros.SQL.Add(' Group by c.CodMembro');
+           QryTotaisMembros.Open;
+
+           frxRpt.Variables.Clear;
+           frxRpt.Variables[' ' + 'Geral'] := Null;
+           frxRpt.Variables.AddVariable('Geral','TotalFamilias',QuotedStr(IntToStr(QryTotaisFamilia.recordcount)));
+           frxRpt.Variables.AddVariable('Geral','TotalMembros',QuotedStr(IntToStr(QryTotaisMembros.recordcount)));
+           frxRpt.ShowReport;
+         End;
+       End;
+    1: Begin
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Add('SELECT distinct codmembro FROM contribuicao where datacontribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+         QryTemp.Open;
+
+         Membros := '';
+
+         while not QryTemp.Eof Do
+         Begin
+           if Membros = '' then
+             Membros := QryTemp.FieldByName('CodMembro').AsString
+           Else
+             Membros := Membros + ',' + QryTemp.FieldByName('CodMembro').AsString;
+           QryTemp.Next;
+         End;
+
+         QryRelInativos.Close;
+         QryRelInativos.SQL.Clear;
+         QryRelInativos.SQL.Text := 'Select concat(f.Sobrenome,' + QuotedStr(' - ') + ',m.codfamilia) as FamiliaCampo, m.CodFamilia, m.CodMembro, m.NomeMembro, m.Envelope, m.Telefone, m.Celular , f.Sobrenome ' +
+                                    'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                                    'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                                    'and m.CodMembro in(' + membros + ') ' +
+                                    'Order By FamiliaCampo, m.codFamilia, m.codmembroantigo';
+         QryRelInativos.Open;
+
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Text := 'Select Count(m.CodFamilia) as TotalFamilia ' +
+                             'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                             'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                             'and m.CodMembro in('+membros+') ' +
+                             'Group by m.CodFamilia';
+         QryTemp.Open;
+         TotalFamilias := IntToStr(QryTemp.recordcount);
+
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Text := 'Select Count(m.CodMembro) as TotalMembros ' +
+                             'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                             'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                             'and m.CodMembro in('+membros+') ' +
+                             'Group by m.CodMembro';
+         QryTemp.Open;
+         TotalMembros := IntToStr(QryTemp.recordcount);
+
+
+         frxRptInativos.Variables.Clear;
+         frxRptInativos.Variables[' ' + 'Geral'] := Null;
+         frxRptInativos.Variables.AddVariable('Geral','DataInicio',QuotedStr(DtEdtDE.Text));
+         frxRptInativos.Variables.AddVariable('Geral','DataFim',QuotedStr(DtEdtATE.Text));
+         frxRptInativos.Variables.AddVariable('Geral','TotalFamilias',QuotedStr(TotalFamilias));
+         frxRptInativos.Variables.AddVariable('Geral','TotalMembros',QuotedStr(TotalMembros));
+         frxRptInativos.ShowReport;
+       End;
+    2: Begin
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Add('SELECT distinct codmembro FROM contribuicao where datacontribuicao between ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtDE.Date)) + ' and ' + QuotedStr(FormatDateTime('yyyy-mm-dd',DtEdtATE.Date)));
+         QryTemp.Open;
+
+         Membros := '';
+
+         while not QryTemp.Eof Do
+         Begin
+           if Membros = '' then
+             Membros := QryTemp.FieldByName('CodMembro').AsString
+           Else
+             Membros := Membros + ',' + QryTemp.FieldByName('CodMembro').AsString;
+           QryTemp.Next;
+         End;
+
+         QryRelInativos.Close;
+         QryRelInativos.SQL.Clear;
+         QryRelInativos.SQL.Text := 'Select concat(f.Sobrenome,' + QuotedStr(' - ') + ',m.codfamilia) as FamiliaCampo, m.CodFamilia, m.CodMembro, m.NomeMembro, m.Envelope, m.Telefone, m.Celular , f.Sobrenome ' +
+                                    'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                                    'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                                    'and m.CodMembro not in('+membros+') ' +
+                                    'Order By FamiliaCampo, m.codFamilia, m.codmembroantigo';
+         QryRelInativos.Open;
+
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Text := 'Select Count(m.CodFamilia) as TotalFamilia ' +
+                             'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                             'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                             'and m.CodMembro not in('+membros+') ' +
+                             'Group by m.CodFamilia';
+         QryTemp.Open;
+         TotalFamilias := IntToStr(QryTemp.recordcount);
+
+         QryTemp.Close;
+         QryTemp.SQL.Clear;
+         QryTemp.SQL.Text := 'Select Count(m.CodMembro) as TotalMembro ' +
+                             'from Membros m left join Familia F on m.codfamilia = f.codfamilia ' +
+                             'Where isnull(m.CodMotivoSaida) and not isnull(m.envelope) ' +
+                             'and m.CodMembro not in('+membros+') ' +
+                             'Group by m.CodMembro';
+         QryTemp.Open;
+         TotalMembros := IntToStr(QryTemp.recordcount);
+
+         frxRptInativos.Variables.Clear;
+         frxRptInativos.Variables[' ' + 'Geral'] := Null;
+         frxRptInativos.Variables.AddVariable('Geral','DataInicio',QuotedStr(DtEdtDE.Text));
+         frxRptInativos.Variables.AddVariable('Geral','DataFim',QuotedStr(DtEdtATE.Text));
+         frxRptInativos.Variables.AddVariable('Geral','TotalFamilias',QuotedStr(TotalFamilias));
+         frxRptInativos.Variables.AddVariable('Geral','TotalMembros',QuotedStr(TotalMembros));
+         frxRptInativos.ShowReport;
+       End;
+  end;
+
+end;
+
+procedure TFormRelContribuicoes.CbxAtivoClick(Sender: TObject);
+begin
+
+  RdGrpData.ItemIndex := 1;
+  RdGrpDataClick(self);
+
+end;
+
+procedure TFormRelContribuicoes.FormShow(Sender: TObject);
+begin
+
+  // CARREGA COMBO FAMILIA
+  EdtNomeFamilia.Tag := 0;
+  EdtNomeFamilia.Clear;
+
+  // CARREGA COMBO MEMBROS
+  EdtNomeMembro.Tag := 0;
+  EdtNomeMembro.Clear;
+
+  // CARREGA COMBO TIPO DE CONTRIBUICAO
+  QryTemp.Close;
+  QryTemp.SQL.Clear;
+  QryTemp.SQL.Add('SELECT CONCAT(DESCTPCONTRB, ' + QuotedStr(' # ') +  ', CODTPCONTRB) AS CONTRIBUICAO FROM tipocontribuicao ORDER BY DESCTPCONTRB');
+  QryTemp.Open;
+
+  CBXTipoContribuicao.Items.Clear;
+  CBXTipoContribuicao.Items.Add('TODAS');
+  While not QryTemp.Eof do
+  Begin
+    CBXTipoContribuicao.Items.Add(QryTemp.FieldByName('CONTRIBUICAO').AsString);
+    QryTemp.Next;
+  End;
+  CBXTipoContribuicao.ItemIndex := 0;
+
+
+end;
+
+procedure TFormRelContribuicoes.RdGrpDataClick(Sender: TObject);
+begin
+
+  Case RdGrpData.ItemIndex of
+    0:Begin
+        Labelde.Visible := False;
+        DtEdtDE.Visible := False;
+        LabelATE.Visible := False;
+        DtEdtATE.Visible := False;
+      End;
+    1:Begin
+        Labelde.Visible := True;
+        DtEdtDE.Visible := True;
+        LabelATE.Visible := True;
+        DtEdtATE.Visible := True;
+        DtEdtDE.SetFocus;
+      End;
+  end;
+
+end;
+
+procedure TFormRelContribuicoes.SpdBtnBuscaMembroClick(Sender: TObject);
+begin
+
+  FormBuscaFamilia.ShowModal;
+  EdtNomeFamilia.Tag := FormPrincipal.CodFamiliaGlobal;
+  EdtNomeFamilia.Text := FormPrincipal.NomeFamiliaGlobal + ' - ' + inttostr(FormPrincipal.CodFamiliaGlobal);
+
+end;
+
+procedure TFormRelContribuicoes.SpeedButton1Click(Sender: TObject);
+begin
+
+  FormBuscaFamilia.ShowModal;
+  EdtNomeMembro.Tag := FormPrincipal.CodFamiliaGlobal;
+  EdtNomeMembro.Text := FormPrincipal.NomeFamiliaGlobal + ' - ' + inttostr(FormPrincipal.CodFamiliaGlobal);
+
+end;
+
+end.

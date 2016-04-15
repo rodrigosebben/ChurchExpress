@@ -1,0 +1,278 @@
+unit UFrmCadastroFamilia;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB, MemDS, DBAccess, MyAccess, RxToolEdit, RxDBCtrl, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinSeven, dxSkinSevenClassic, dxSkinStardust, dxSkinVS2010, cxDBEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFormCadastroFamilia = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    LkpGrupo: TMyQuery;
+    DSLkpGrupo: TDataSource;
+    QryFamilia: TMyQuery;
+    DSFamilia: TDataSource;
+    Label1: TLabel;
+    DBEdtFamilia: TDBEdit;
+    Label3: TLabel;
+    DBEdtArea: TDBEdit;
+    Label2: TLabel;
+    Label6: TLabel;
+    DBEdtEndereco: TDBEdit;
+    Label4: TLabel;
+    DBEdtCompl: TDBEdit;
+    Label7: TLabel;
+    DBEdtBairro: TDBEdit;
+    Label8: TLabel;
+    DBEdtCidade: TDBEdit;
+    Label9: TLabel;
+    DBEdtUF: TDBEdit;
+    Label5: TLabel;
+    DBEdtCEP: TcxDBMaskEdit;
+    Label10: TLabel;
+    DBEdtTelefone: TcxDBMaskEdit;
+    Label12: TLabel;
+    DBEdtCelular: TcxDBMaskEdit;
+    Label13: TLabel;
+    DBEdtFax: TcxDBMaskEdit;
+    Label11: TLabel;
+    DBEdtEmail: TDBEdit;
+    Label14: TLabel;
+    DBEdtUltimaVisita: TcxDBDateEdit;
+    Label15: TLabel;
+    DBEdtVisitante: TDBEdit;
+    DBGrid1: TDBGrid;
+    Label16: TLabel;
+    QryLkpMembros: TMyQuery;
+    QryLkpMembrosCodMembro: TLargeintField;
+    QryLkpMembrosCodFamilia: TLargeintField;
+    QryLkpMembrosCodTipoMembro: TLargeintField;
+    QryLkpMembrosNomeMembro: TStringField;
+    QryLkpMembrosNomeSolteiro: TStringField;
+    QryLkpMembrosSexo: TStringField;
+    QryLkpMembrosEmail: TStringField;
+    QryLkpMembrosTipoSangue: TStringField;
+    QryLkpMembrosCelular: TStringField;
+    QryLkpMembrosCodEscolaridade: TLargeintField;
+    QryLkpMembrosPai: TStringField;
+    QryLkpMembrosPaiCELC: TStringField;
+    QryLkpMembrosMae: TStringField;
+    QryLkpMembrosMaeCELC: TStringField;
+    QryLkpMembrosDataNasc: TDateField;
+    QryLkpMembrosNaturalidade: TStringField;
+    QryLkpMembrosCodEstadoCivil: TLargeintField;
+    QryLkpMembrosNomeConjuge: TStringField;
+    QryLkpMembrosDataNascConj: TDateField;
+    QryLkpMembrosConjugeFiliado: TStringField;
+    QryLkpMembrosReligiaoConjuge: TStringField;
+    QryLkpMembrosCodProfissao: TLargeintField;
+    QryLkpMembrosEmpresa: TStringField;
+    QryLkpMembrosCEPEmpresa: TStringField;
+    QryLkpMembrosUFEmpresa: TStringField;
+    QryLkpMembrosDDDEmpresa: TStringField;
+    QryLkpMembrosFoneEmpresa: TStringField;
+    QryLkpMembrosEmailEmpresa: TStringField;
+    QryLkpMembrosCargo: TStringField;
+    QryLkpMembrosRenda: TFloatField;
+    QryLkpMembrosDataAdmisComunidade: TDateTimeField;
+    QryLkpMembrosCodFormaAdmissao: TLargeintField;
+    QryLkpMembrosProcedenciaAdmissao: TStringField;
+    QryLkpMembrosEnvelope: TLargeintField;
+    QryLkpMembrosDataSaida: TDateField;
+    QryLkpMembrosCodMotivoSaida: TLargeintField;
+    QryLkpMembrosDestinoSaida: TStringField;
+    QryLkpMembrosFotoCaminho: TStringField;
+    QryLkpMembrosRG: TStringField;
+    QryLkpMembrosCPF: TStringField;
+    QryLkpMembrosCodUsuario: TLargeintField;
+    QryLkpMembrosDataCadastro: TDateTimeField;
+    QryLkpMembrosDataConfirmacao: TDateField;
+    QryLkpMembrosDataBatismo: TDateField;
+    QryLkpMembrosFiliado: TStringField;
+    QryLkpMembrosDataAtivo: TDateTimeField;
+    QryLkpMembrosNumVezes: TLargeintField;
+    QryLkpMembrosVotante: TDateTimeField;
+    QryLkpMembrosCidadeEmpresa: TStringField;
+    QryLkpMembrosEnderecoEmpresa: TStringField;
+    QryLkpMembrosComplEmpresa: TStringField;
+    QryLkpMembrosEndereco: TStringField;
+    QryLkpMembrosCompl: TStringField;
+    QryLkpMembrosCidade: TStringField;
+    QryLkpMembrosBairro: TStringField;
+    QryLkpMembrosCEP: TStringField;
+    QryLkpMembrosUF: TStringField;
+    QryLkpMembrosTelefone: TStringField;
+    QryLkpMembrosEnderecoDesatualizado: TBooleanField;
+    QryLkpMembrosTelefoneDesatualizado: TBooleanField;
+    QryLkpMembrosCelularDesatualizado: TBooleanField;
+    QryLkpMembrosEmailDesatualizado: TBooleanField;
+    QryLkpMembrosCodMembroAntigo: TLargeintField;
+    DSLkpMembros: TDataSource;
+    DBEdtGrupo: TDBEdit;
+    QryFamiliaCodFamilia: TLargeintField;
+    QryFamiliaSobrenome: TStringField;
+    QryFamiliaArea: TStringField;
+    QryFamiliaCep: TStringField;
+    QryFamiliaEndereco: TStringField;
+    QryFamiliaCompl: TStringField;
+    QryFamiliaBairro: TStringField;
+    QryFamiliaTelefone: TStringField;
+    QryFamiliaEmail: TStringField;
+    QryFamiliaCelular: TStringField;
+    QryFamiliaFax: TStringField;
+    QryFamiliaDataUltVisita: TDateTimeField;
+    QryFamiliaVisitante: TStringField;
+    QryFamiliaCidade: TStringField;
+    QryFamiliaUF: TStringField;
+    QryFamiliaGrupo: TLargeintField;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBlkpGrupoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure DBGrid1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroFamilia: TFormCadastroFamilia;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UFrmConsultaFamilia, UDMPrincipal, UFrmConsultaMembro, UFrmCadastroGrupos, UFrmConsultaGrupos,
+  UFrmCadastroMembro;
+
+procedure TFormCadastroFamilia.BtnSalvarClick(Sender: TObject);
+begin
+
+
+  if DBEdtFamilia.Text='' then
+  Begin
+    ShowMessage('O Campo Sobrenome é obrigatório!');
+    DBEdtFamilia.SetFocus;
+  End
+  Else
+  Begin
+    QryFamilia.Post;
+    QryFamilia.Close;
+    QryFamilia.Open;
+    Close;
+  End;
+
+end;
+
+procedure TFormCadastroFamilia.DBGrid1DblClick(Sender: TObject);
+begin
+
+  With FormCadastroMembro do
+  Begin
+    QryLkpEscolaridade.Close;
+    QryLkpEscolaridade.Open;
+
+    QryLkpEstadoCivil.Close;
+    QryLkpEstadoCivil.Open;
+
+    QryLkpProfissao.Close;
+    QryLkpProfissao.Open;
+
+    QryLkpFamilia.Close;
+    QryLkpFamilia.Open;
+
+    // QryMembros.Close;
+    // QryMembros.Open;
+
+    QryLkpEscolaridade.Close;
+    QryLkpEscolaridade.Open;
+
+    QryLkpMotivoSaida.Close;
+    QryLkpMotivoSaida.Open;
+
+    QryLkpEstadoCivil.Close;
+    QryLkpEstadoCivil.Open;
+
+    QryLkpProfissao.Close;
+    QryLkpProfissao.Open;
+
+    QryLkpFormaAdmissao.Close;
+    QryLkpFormaAdmissao.Open;
+
+    QryLkpMotivoSaida.Close;
+    QryLkpMotivoSaida.Open;
+  End;
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroMembro.QryMembros.Close;
+    FormCadastroMembro.QryMembros.SQL.Clear;
+    FormCadastroMembro.QryMembros.SQL.Text := 'Select M.*, ' +
+                             'P.NomeProfissao as Profissao, ' +
+                             'F.Sobrenome as Familia, ' +
+                             'U.NomeUsuario as Usuario, ' +
+                             'E.NomeEscolaridade as Escolaridade, ' +
+                             'EC.NomeEstadoCivil as EstadoCivil, ' +
+                             'FA.NomeFormaAdmissao as FormaAdmissao, ' +
+                             'MS.NomeMotivoSaida as MotivoSaida ' +
+                             'from Membros M LEFT JOIN Profissao P ON M.CodProfissao = P.CodProfissao ' +
+                             '               LEFT JOIN Familia F ON M.CodFamilia = F.CodFamilia ' +
+                             '               LEFT JOIN Usuario U ON M.CodUsuario = U.CodUsuario ' +
+                             '               LEFT JOIN Escolaridade E ON M.codescolaridade = E.CodEscolaridade ' +
+                             '               LEFT JOIN EstadoCivil EC ON M.codestadocivil = EC.codestadocivil ' +
+                             '               LEFT JOIN FormaAdmissao FA ON M.CodFormaAdmissao = FA.CodFormaAdmissao ' +
+                             '               LEFT JOIN MotivoSaida MS ON M.CodMotivoSaida = MS.CodMotivoSaida' +
+                             ' where m.codmembro = ' + QryLkpMembrosCodMembro.Text;
+    FormCadastroMembro.QryMembros.Open;
+    FormCadastroMembro.QryMembros.Edit;
+    if FormCadastroMembro=nil then
+      Application.CreateForm(TFormCadastroMembro,FormCadastroMembro);
+    FormCadastroMembro.ShowModal;
+    QryLkpMembros.Refresh;
+
+  End;
+
+end;
+
+procedure TFormCadastroFamilia.DBlkpGrupoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+
+  if key=VK_F2 then
+  Begin
+    FormCadastroGrupos.QryGrupos.Close;
+    FormCadastroGrupos.QryGrupos.Open;
+    FormCadastroGrupos.QryGrupos.Append;
+    FormCadastroGrupos.ShowModal;
+    LkpGrupo.Refresh;
+  End;
+
+end;
+
+procedure TFormCadastroFamilia.FormShow(Sender: TObject);
+begin
+
+  QryLkpMembros.Close;
+  QryLkpMembros.ParamByName('pCodFamilia').Value := QryFamiliaCodFamilia.Value;
+  QryLkpMembros.Open;
+  DBEdtFamilia.SetFocus;
+
+end;
+
+procedure TFormCadastroFamilia.BtnCancelarClick(Sender: TObject);
+begin
+
+  QryFamilia.Cancel;
+  Close;
+
+end;
+
+end.

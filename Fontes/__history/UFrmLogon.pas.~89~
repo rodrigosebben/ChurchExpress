@@ -1,0 +1,223 @@
+unit UFrmLogon;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, IdBaseComponent, IdComponent, IdRawBase, IdRawClient, IdIcmpClient;
+
+type
+  TFormLogon = class(TForm)
+    Panel2: TPanel;
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    EdtUsuario: TEdit;
+    EdtSenha: TEdit;
+    BitBtn1: TBitBtn;
+    BtnSair: TBitBtn;
+    BitBtn2: TBitBtn;
+    CbxLocalBanco: TComboBox;
+    Label3: TLabel;
+    lblConectado: TLabel;
+    IdIcmpClient1: TIdIcmpClient;
+    procedure BtnSairClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure CbxLocalBancoChange(Sender: TObject);
+    procedure EdtUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function pingIp(host: String): Boolean;
+  private
+    { Private declarations }
+  public
+    TipoLogon:integer;
+    { Public declarations }
+  end;
+
+var
+  FormLogon: TFormLogon;
+
+implementation
+
+uses UDMPrincipal, UFuncoes, UFrmPrincipal, UFrmConectaBanco;
+
+{$R *.dfm}
+
+procedure TFormLogon.BitBtn1Click(Sender: TObject);
+Var
+  Usuario:integer;
+begin
+
+  if not ValidaUsuario(EdtUsuario.Text,EdtSenha.Text) then
+  Begin
+
+    HabilitaCampos(True);
+
+    FormLogon.Close;
+
+    Usuario := DMPrincipal.QryTemp.FieldByName('codusuario').AsInteger;
+    // VERIFICA OS MODULOS QUE PODEM SER ACESSADOS
+    ControleAcesso(Usuario);
+
+    // APLICA A RESTRIÇÃO DE ACESSO
+    ControleAcessoTelas('Cadastros',FormPrincipal.AcessoCadastro);
+    ControleAcessoTelas('Administração',FormPrincipal.AcessoAdministracao);
+    ControleAcessoTelas('Controle de Cemitério',FormPrincipal.AcessoAdministracao);
+//    ControleAcessoTelas('XXX',FormPrincipal.AcessoFinanceiro);
+
+    FormPrincipal.UsuarioLogado := Usuario;
+
+  End
+  Else
+  Begin
+    ShowMessage('Usuário ou Senha Invalido! Digite novamente.');
+    EdtUsuario.Clear;
+    EdtSenha.Clear;
+    EdtUsuario.SetFocus;
+  End;
+
+end;
+
+procedure TFormLogon.BitBtn2Click(Sender: TObject);
+begin
+
+  if VerificaForms then
+    BtnSairClick(self)
+  Else
+  Begin
+    HabilitaCampos(True);
+    Close;
+  End;
+
+end;
+
+procedure TFormLogon.BtnSairClick(Sender: TObject);
+begin
+
+  Close;
+  FormPrincipal.Close;
+
+end;
+
+procedure TFormLogon.CbxLocalBancoChange(Sender: TObject);
+begin
+
+  // testa de onde o client está acessando
+  if pingIp('servidor-vm') then
+    CbxLocalBanco.ItemIndex := 2
+  Else
+  Begin
+    if pingIp('servidorcelc') then
+      CbxLocalBanco.ItemIndex := 0
+    Else
+      CbxLocalBanco.ItemIndex := 1;
+  End;
+
+  try
+    case CbxLocalBanco.ItemIndex of
+      0:Begin
+          try
+            lblConectado.Visible := True;
+            UFuncoes.ConectaBanco('servidorcelc','root','1904','3306'); // REDE LOCAL CELC
+            EdtUsuario.SetFocus;
+            lblConectado.Caption := 'Conectado em Servidor Local';
+            lblConectado.Visible := True;
+          Except
+            ShowMessage('Conexão inválida! A conexão ao servidor do Banco de dados local não funcionou.');
+          end;
+        End;
+      1:Begin
+          try
+            lblConectado.Visible := True;
+            UFuncoes.ConectaBanco('celcpoa.no-ip.info','root','1904','2020'); // INTERNET CELC
+            EdtUsuario.SetFocus;
+            lblConectado.Caption := 'Conectado em Servidor CELC - INTERNET';
+            lblConectado.Visible := True;
+          Except
+            ShowMessage('Conexão inválida! O acesso via internet do Banco de dados não é aceito nesse computador.');
+          end;
+        End;
+      2:Begin
+          try
+            lblConectado.Visible := True;
+            UFuncoes.ConectaBanco('servidor-vm','root','1904','3306'); // REDE LOCAL IELB
+            EdtUsuario.SetFocus;
+            lblConectado.Caption := 'Conectado no servidor de testes';
+            lblConectado.Visible := True;
+          Except
+            ShowMessage('Conexão inválida! O Servidor de teste do Banco de dados não é aceito nesse computador.');
+          end;
+        end;
+      3:Begin
+          FormConectaBanco.ShowModal;
+        end;
+    end;
+  Except
+    try
+      lblConectado.Visible := True;
+      UFuncoes.ConectaBanco('celcpoa.no-ip.info','root','1904','2020'); // REDE LOCAL IELB
+      EdtUsuario.SetFocus;
+      lblConectado.Caption := 'Conectado local ielb';
+      lblConectado.Visible := True;
+    Except
+      ShowMessage('Conexão inválida! O local do Banco de dados não é aceito nesse computador.');
+    end;
+  end;
+  lblConectado.Visible := False;
+
+end;
+
+procedure TFormLogon.EdtUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+
+  if Key = VK_F2 then
+  Begin
+    FormConectaBanco.ShowModal;
+  End;
+
+end;
+
+procedure TFormLogon.FormShow(Sender: TObject);
+begin
+
+  DMPrincipal.Conn.Connected := False;
+
+  case TipoLogon of
+    0:Begin
+        CbxLocalBancoChange(Self);
+        EdtUsuario.Clear;
+        EdtSenha.Clear;
+        EdtUsuario.SetFocus;
+      End;
+    1:Begin
+        EdtUsuario.Clear;
+        EdtSenha.Clear;
+        EdtUsuario.SetFocus;
+      End;
+  end;
+
+end;
+
+function TFormLogon.pingIp(host: String): Boolean;
+var
+  IdICMPClient: TIdICMPClient;
+begin
+
+  try
+
+    IdICMPClient := TIdICMPClient.Create( nil );
+
+    IdIcmpClient.Host := host;
+    IdICMPClient.ReceiveTimeout := 500;
+    IdICMPClient.Ping;
+
+    result := ( IdICMPClient.ReplyStatus.BytesReceived > 0 );
+
+  finally
+    IdICMPClient.Free;
+  end
+
+end;
+
+end.

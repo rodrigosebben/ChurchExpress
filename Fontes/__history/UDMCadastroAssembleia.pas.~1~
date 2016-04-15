@@ -1,0 +1,36 @@
+unit UDMCadastroAssembleia;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TDMCadastroAssembleia = class(TDataModule)
+    QryAssembleia: TMyQuery;
+    DSAssembleia: TDataSource;
+    QryAssembleiaMembros: TMyQuery;
+    DSAssembleiaMembros: TDataSource;
+    QryAssembleiaMembrosCodAssembleiaMembro: TLargeintField;
+    QryAssembleiaMembrosCodAssembleia: TLargeintField;
+    QryAssembleiaMembrosCodMembro: TLargeintField;
+    QryAssembleiaMembrosPresente: TBooleanField;
+    QryAssembleiaMembrosNomeMembro: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DMCadastroAssembleia: TDMCadastroAssembleia;
+
+implementation
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
+uses UDMPrincipal;
+
+{$R *.dfm}
+
+end.

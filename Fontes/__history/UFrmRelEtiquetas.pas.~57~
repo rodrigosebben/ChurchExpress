@@ -1,0 +1,514 @@
+unit UFrmRelEtiquetas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.ComCtrls, dxCore, cxDateUtils, dxSkinsCore, frxClass, frxDBSet, Data.DB,
+  MemDS, DBAccess, MyAccess, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, Vcl.Mask, RxSpin, frxPreview, dxSkinBlack, dxSkinBlue, dxSkinBlueprint,
+  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLiquidSky,
+  dxSkinLondonLiquidSky, dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinSeven, dxSkinSevenClassic, dxSkinStardust, dxSkinVS2010;
+
+type
+  TFormRelEtiquetas = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    Label1: TLabel;
+    CbxTipoEtiqueta: TComboBox;
+    QryTemp: TMyQuery;
+    QryRelExternas: TMyQuery;
+    DSRelExternas: TDataSource;
+    frxDBDtsEtiquetaExterna: TfrxDBDataset;
+    frxRPTEtiquetaExterna: TfrxReport;
+    QryRelExternasEnvelope: TLargeintField;
+    QryRelExternasFamiliaMembro: TStringField;
+    QryRelExternasAniversário: TStringField;
+    QryRelExternasNomeMembro: TStringField;
+    QryRelExternasEnderecoCompleto: TStringField;
+    QryRelExternasBairro: TStringField;
+    QryRelExternasCep: TStringField;
+    QryRelExternasCidade: TStringField;
+    QryRelExternasUF: TStringField;
+    CMDDeletaEtiquetasTEMP: TMyCommand;
+    Label3: TLabel;
+    CbxFamilia: TComboBox;
+    Label4: TLabel;
+    CbxMembro: TComboBox;
+    QryRelExternasIdade: TFloatField;
+    CbxConfirmado: TComboBox;
+    Label6: TLabel;
+    GrpBxTipoMembro: TGroupBox;
+    CbxTipoMembro: TComboBox;
+    Labelde: TLabel;
+    DtEdtDeTipoMembro: TcxDateEdit;
+    LabelATE: TLabel;
+    DtEdtATETipoMembro: TcxDateEdit;
+    GrpBxIdade: TGroupBox;
+    CbxFaixaIdade: TComboBox;
+    LblDeIdade: TLabel;
+    SpinEdtDE: TRxSpinEdit;
+    LblAteIdade: TLabel;
+    SpinEdtATE: TRxSpinEdit;
+    GrpBxAniversario: TGroupBox;
+    CbxAniversariante: TComboBox;
+    DtEdtDeAniver: TcxDateEdit;
+    lblDeAniver: TLabel;
+    DtEdtAteAniver: TcxDateEdit;
+    lblAteAniver: TLabel;
+    frxRptEtiquetaInterna: TfrxReport;
+    frxDBDtsEtiquetaInterna: TfrxDBDataset;
+    QryRelInternas: TMyQuery;
+    DSRelInternas: TDataSource;
+    QryRelInternasCodEtiqueta: TLargeintField;
+    QryRelInternasCodMembro: TLargeintField;
+    QryRelInternasCodMembroAntigo: TLargeintField;
+    QryRelInternasCodFamilia: TLargeintField;
+    QryRelInternasNomeMembro: TStringField;
+    QryRelInternasDataNasc: TDateTimeField;
+    QryRelInternasMesMensagem: TStringField;
+    QryRelInternasAnoMensagem: TLargeintField;
+    GrpBxCompetencia: TGroupBox;
+    CbxMesInicial: TComboBox;
+    EdtAnoInicial: TEdit;
+    Label2: TLabel;
+    Label5: TLabel;
+    Label7: TLabel;
+    CbxMesFinal: TComboBox;
+    QryRelExternascodMembro: TLargeintField;
+    QryRelExternascodmembroantigo: TLargeintField;
+    QryRelExternascodfamilia: TLargeintField;
+    QryRelExternasDataNasc: TDateField;
+    QryRelInternasEnvelope: TLargeintField;
+    QryRelInternasMensagem: TStringField;
+    QryRelInternasMes: TLargeintField;
+    ChkbxChefeFamilia: TCheckBox;
+    QryRelExternasChefeFamilia: TBooleanField;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure CbxTipoMembroChange(Sender: TObject);
+    procedure CbxFaixaIdadeChange(Sender: TObject);
+    procedure CbxAniversarianteChange(Sender: TObject);
+    procedure CbxFamiliaChange(Sender: TObject);
+    procedure CbxTipoEtiquetaChange(Sender: TObject);
+    procedure CbxMesInicialChange(Sender: TObject);
+    procedure CbxMesFinalChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    procedure PreencheCombos(Combo,CodMembro:integer);
+    Function RetornaMes(Mes:integer):String;
+    var MesInicioCompet, MesfimCompet: Integer;
+    { Public declarations }
+  end;
+
+var
+  FormRelEtiquetas: TFormRelEtiquetas;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMPrincipal, UFuncoes;
+
+procedure TFormRelEtiquetas.BtnCancelarClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormRelEtiquetas.BtnSalvarClick(Sender: TObject);
+Var
+  I: Integer;
+begin
+
+  case CbxTipoEtiqueta.ItemIndex of
+    0:Begin
+        QryRelExternas.Close;
+        QryRelExternas.SQL.Clear;
+        QryRelExternas.SQL.Text := ' Select m.ChefeFamilia, m.Envelope, m.codMembro, m.codmembroantigo, m.codfamilia, m.DataNasc, ' +
+                                   '       concat(m.CodFamilia,' + QuotedStr('-') + ',m.CodMembroAntigo) as FamiliaMembro, ' +
+                                   '       DATE_FORMAT(m.DataNasc,' + quotedstr('%d/%m')+ ') as Aniversário, ' +
+                                   '       m.NomeMembro, ' +
+                                   '       concat(m.Endereco,' + QuotedStr(',') + ',m.Compl) as EnderecoCompleto, ' +
+                                   '       m.Bairro, ' +
+                                   '       m.Cep, ' +
+                                   '       m.Cidade, ' +
+                                   '       m.UF, ' +
+                                   '       DATE_FORMAT(NOW( ),' + quotedstr('%Y') + ') - DATE_FORMAT(m.datanasc,' + quotedstr('%Y') + ') - (DATE_FORMAT(NOW( ),' + quotedstr('00-%m-%d') + ') < DATE_FORMAT(m.datanasc,' + quotedstr('00-%m-%d') + ')) AS Idade ' +
+                                   '  from Membros m left join familia F on m.codfamilia = f.codfamilia ' +
+                                   ' where isnull(m.CodMotivoSaida) ';
+
+        if CbxFamilia.ItemIndex <>0 then
+          QryRelExternas.SQL.Add(' and m.CodFamilia = ' +  RetornaValorString(CbxFamilia.Text,'-'));
+
+        if CbxMembro.ItemIndex <>0 then
+          QryRelExternas.SQL.Add(' and m.CodMembro = ' +  RetornaValorString(CbxMembro.Text,'-'));
+
+        if ChkbxChefeFamilia.Checked = true then
+          QryRelExternas.SQL.Add(' and m.ChefeFamilia = True');
+
+        case CbxTipoMembro.ItemIndex of
+          1: QryRelExternas.SQL.Add(' and m.codMembro in(' + RetornaMembrosAtivosInativos(DtEdtDeTipoMembro.Date,DtEdtATETipoMembro.Date) +')');
+          2: QryRelExternas.SQL.Add(' and m.codMembro NOT in(' + RetornaMembrosAtivosInativos(DtEdtDeTipoMembro.Date,DtEdtATETipoMembro.Date) +')');
+        end;
+
+        case CbxConfirmado.ItemIndex of
+          1: QryRelExternas.SQL.Add(' and not isnull(m.dataConfirmacao)');
+          2: QryRelExternas.SQL.Add(' and isnull(m.dataConfirmacao)');
+        end;
+
+        if CbxFaixaIdade.ItemIndex<>0 then
+          QryRelExternas.SQL.Add(' and DATE_FORMAT(NOW( ),' + quotedstr('%Y') + ') - DATE_FORMAT(m.datanasc,' + quotedstr('%Y') + ') - (DATE_FORMAT(NOW( ),' + quotedstr('00-%m-%d') + ') < DATE_FORMAT(m.datanasc,' + quotedstr('00-%m-%d') + ')) between ' + SpinEdtDE.Text + ' and ' + SpinEdtATE.Text);
+
+        if CbxAniversariante.ItemIndex<>0 then
+          QryRelExternas.SQL.Add(' and RIGHT(m.DataNasc,5) between ' + QuotedStr(FormatDateTime('mm-dd',DtEdtDeAniver.Date)) + ' and ' + QuotedStr(FormatDateTime('mm-dd',DtEdtAteAniver.Date)));
+
+        QryRelExternas.SQL.Add(' Order by m.CodFamilia, f.sobrenome, m.codmembroantigo');
+        QryRelExternas.Open;
+        frxRPTEtiquetaExterna.ShowReport;
+      End;
+    1:Begin
+        QryRelExternas.Close;
+        QryRelExternas.SQL.Clear;
+        QryRelExternas.SQL.Text := ' Select m.ChefeFamilia, m.Envelope, m.codMembro, m.codmembroantigo, m.codfamilia, m.DataNasc, ' +
+                                   '       concat(m.CodFamilia,' + QuotedStr('-') + ',m.CodMembroAntigo) as FamiliaMembro, ' +
+                                   '       DATE_FORMAT(m.DataNasc,' + quotedstr('%d/%m')+ ') as Aniversário, ' +
+                                   '       m.NomeMembro, ' +
+                                   '       concat(m.Endereco,' + QuotedStr(',') + ',m.Compl) as EnderecoCompleto, ' +
+                                   '       m.Bairro, ' +
+                                   '       m.Cep, ' +
+                                   '       m.Cidade, ' +
+                                   '       m.UF, ' +
+                                   '       DATE_FORMAT(NOW( ),' + quotedstr('%Y') + ') - DATE_FORMAT(m.datanasc,' + quotedstr('%Y') + ') - (DATE_FORMAT(NOW( ),' + quotedstr('00-%m-%d') + ') < DATE_FORMAT(m.datanasc,' + quotedstr('00-%m-%d') + ')) AS Idade ' +
+                                   '  from Membros m left join familia F on m.codfamilia = f.codfamilia ' +
+                                   ' where isnull(m.CodMotivoSaida) ';
+
+        if CbxFamilia.ItemIndex <>0 then
+          QryRelExternas.SQL.Add(' and m.CodFamilia = ' +  RetornaValorString(CbxFamilia.Text,'-'));
+
+        if CbxMembro.ItemIndex <>0 then
+          QryRelExternas.SQL.Add(' and m.CodMembro = ' +  RetornaValorString(CbxMembro.Text,'-'));
+
+        case CbxTipoMembro.ItemIndex of
+          1: QryRelExternas.SQL.Add(' and m.codMembro in(' + RetornaMembrosAtivosInativos(DtEdtDeTipoMembro.Date,DtEdtATETipoMembro.Date) +')');
+          2: QryRelExternas.SQL.Add(' and m.codMembro NOT in(' + RetornaMembrosAtivosInativos(DtEdtDeTipoMembro.Date,DtEdtATETipoMembro.Date) +')');
+        end;
+
+        case CbxConfirmado.ItemIndex of
+          1: QryRelExternas.SQL.Add(' and not isnull(m.dataConfirmacao)');
+          2: QryRelExternas.SQL.Add(' and isnull(m.dataConfirmacao)');
+        end;
+
+        if CbxFaixaIdade.ItemIndex<>0 then
+          QryRelExternas.SQL.Add(' and DATE_FORMAT(NOW( ),' + quotedstr('%Y') + ') - DATE_FORMAT(m.datanasc,' + quotedstr('%Y') + ') - (DATE_FORMAT(NOW( ),' + quotedstr('00-%m-%d') + ') < DATE_FORMAT(m.datanasc,' + quotedstr('00-%m-%d') + ')) between ' + SpinEdtDE.Text + ' and ' + SpinEdtATE.Text);
+
+        if CbxAniversariante.ItemIndex<>0 then
+          QryRelExternas.SQL.Add(' and RIGHT(m.DataNasc,5) between ' + QuotedStr(FormatDateTime('mm-dd',DtEdtDeAniver.Date)) + ' and ' + QuotedStr(FormatDateTime('mm-dd',DtEdtAteAniver.Date)));
+
+        QryRelExternas.SQL.Add(' Order By m.CodFamilia, F.sobrenome, m.codmembroantigo');
+        QryRelExternas.Open;
+
+        CMDDeletaEtiquetasTEMP.Execute;
+        QryRelInternas.Close;
+        QryRelInternas.Open;
+
+        // Apartir da consulta externa lista os membros que deve ser mostrados na lista interna
+        while not QryRelExternas.Eof do
+        Begin
+          // com base na competencia, inclui os membros repetidas vezes, mantendo a ordem da consulta externa
+          for I := MesInicioCompet to MesfimCompet do
+          Begin
+            QryRelInternas.Append;
+            QryRelInternasCodMembro.Value := QryRelExternascodMembro.Value;
+            QryRelInternasCodMembroAntigo.Value := QryRelExternascodmembroantigo.Value;
+            QryRelInternasCodFamilia.Value := QryRelExternascodfamilia.Value;
+            QryRelInternasNomeMembro.Value := QryRelExternasNomeMembro.Value;
+            QryRelInternasDataNasc.Value := QryRelExternasDataNasc.Value;
+            QryRelInternasAnoMensagem.Value := StrToInt(EdtAnoInicial.Text);
+            QryRelInternasMesMensagem.Value := RetornaMes(i);
+            QryRelInternasMes.Value := i;
+            QryRelInternasEnvelope.Value := QryRelExternasEnvelope.Value;
+
+            QryTemp.Close;
+            QryTemp.SQL.Clear;
+            QryTemp.SQL.Add('SELECT DescMensagem FROM mensagem WHERE Mes = ' + QuotedStr(RetornaMes(i)) + ' AND Ano = ' + EdtAnoInicial.Text);
+            QryTemp.Open;
+
+            QryRelInternasMensagem.Value := QryTemp.FieldByName('DescMensagem').Text;
+            QryRelInternas.Post;
+          End;
+          QryRelExternas.Next;
+        End;
+
+        QryRelInternas.Close;
+        QryRelInternas.Open;
+
+        frxRptEtiquetaInterna.ShowReport();
+
+      End;
+  end;
+
+end;
+
+
+procedure TFormRelEtiquetas.CbxAniversarianteChange(Sender: TObject);
+begin
+
+  if CbxAniversariante.ItemIndex <> 0 then
+  Begin
+    DtEdtDeAniver.Visible := True;
+    DtEdtAteAniver.Visible :=True;
+    lblDeAniver.Visible := True;
+    lblAteAniver.Visible := True;
+    DtEdtDeAniver.SetFocus;
+  End
+  Else
+  Begin
+    DtEdtDeAniver.Visible := False;
+    DtEdtAteAniver.Visible := False;
+    lblDeAniver.Visible := False;
+    lblAteAniver.Visible := False;
+  End;
+
+end;
+
+procedure TFormRelEtiquetas.CbxFaixaIdadeChange(Sender: TObject);
+begin
+
+  if CbxFaixaIdade.ItemIndex <> 0 then
+  Begin
+    SpinEdtDE.Visible := True;
+    SpinEdtATE.Visible :=True;
+    LblDeIdade.Visible := True;
+    LblAteIdade.Visible := True;
+    SpinEdtDE.SetFocus;
+  End
+  Else
+  Begin
+    SpinEdtDE.Visible := False;
+    SpinEdtATE.Visible := False;
+    LblDeIdade.Visible := False;
+    LblAteIdade.Visible := False;
+  End;
+
+end;
+
+procedure TFormRelEtiquetas.CbxFamiliaChange(Sender: TObject);
+begin
+
+  if CbxFamilia.ItemIndex<>0 then
+  Begin
+    PreencheCombos(3,strtoint(RetornaValorString(CbxFamilia.Text,'-')));
+  End;
+
+end;
+
+procedure TFormRelEtiquetas.CbxMesFinalChange(Sender: TObject);
+begin
+
+  case CbxMesFinal.ItemIndex of
+    0: MesfimCompet := 1;
+    1: MesfimCompet := 2;
+    2: MesfimCompet := 3;
+    3: MesfimCompet := 4;
+    4: MesfimCompet := 5;
+    5: MesfimCompet := 6;
+    6: MesfimCompet := 7;
+    7: MesfimCompet := 8;
+    8: MesfimCompet := 9;
+    9: MesfimCompet := 10;
+    10: MesfimCompet := 11;
+    11: MesfimCompet := 12;
+  end;
+
+end;
+
+procedure TFormRelEtiquetas.CbxMesInicialChange(Sender: TObject);
+begin
+
+  case CbxMesInicial.ItemIndex of
+    0: MesInicioCompet := 1;
+    1: MesInicioCompet := 2;
+    2: MesInicioCompet := 3;
+    3: MesInicioCompet := 4;
+    4: MesInicioCompet := 5;
+    5: MesInicioCompet := 6;
+    6: MesInicioCompet := 7;
+    7: MesInicioCompet := 8;
+    8: MesInicioCompet := 9;
+    9: MesInicioCompet := 10;
+    10: MesInicioCompet := 11;
+    11: MesInicioCompet := 12;
+  end;
+
+end;
+
+procedure TFormRelEtiquetas.CbxTipoEtiquetaChange(Sender: TObject);
+begin
+
+  Case CbxTipoEtiqueta.ItemIndex of
+    0: GrpBxCompetencia.Visible := False;
+    1: GrpBxCompetencia.Visible := True;
+  End;
+
+end;
+
+procedure TFormRelEtiquetas.CbxTipoMembroChange(Sender: TObject);
+begin
+
+  if CbxTipoMembro.ItemIndex<>0 then
+  Begin
+    DtEdtDeTipoMembro.Visible := True;
+    DtEdtATETipoMembro.Visible := True;
+    Labelde.Visible := True;
+    LabelATE.Visible := True;
+    DtEdtDeTipoMembro.SetFocus;
+  End
+  Else
+  Begin
+    DtEdtDeTipoMembro.Visible := False;
+    DtEdtATETipoMembro.Visible := False;
+    Labelde.Visible := False;
+    LabelATE.Visible := False;
+  End;
+
+end;
+
+procedure TFormRelEtiquetas.FormShow(Sender: TObject);
+begin
+
+  PreencheCombos(0,0);
+
+  CbxTipoEtiqueta.ItemIndex := 0;
+  CbxTipoMembro.ItemIndex := 0;
+  CbxTipoMembroChange(SELF);
+  CbxFamilia.ItemIndex := 0;
+  CbxMembro.ItemIndex := 0;
+  CbxFaixaIdade.ItemIndex := 0;
+  CbxFaixaIdadeChange(SELF);
+  CbxMesInicial.ItemIndex := 0;
+  CbxMesInicialChange(self);
+  CbxMesFinal.ItemIndex := 5;
+  CbxMesFinalChange(self);
+  EdtAnoInicial.Text := FormatDateTime('yyyy',now);
+
+  DtEdtDeTipoMembro.Visible := False;
+  DtEdtATETipoMembro.Visible :=False;
+  Labelde.Visible := False;
+  LabelATE.Visible := False;
+  SpinEdtDE.Visible := False;
+  SpinEdtATE.Visible :=False;
+  LblDeIdade.Visible := False;
+  LblAteIdade.Visible := False;
+
+  CbxTipoEtiqueta.Setfocus;
+
+end;
+
+procedure TFormRelEtiquetas.PreencheCombos(Combo,CodMembro: integer);
+begin
+
+  QryTemp.Close;
+  QryTemp.SQL.Clear;
+  case Combo of
+    0:Begin
+        // Preenche Combo de Familia
+        QryTemp.SQL.Add('Select Concat(Sobrenome,'+ QuotedStr('-') +',CodFamilia) as FamiliaCodigo From Familia order by FamiliaCodigo');
+        QryTemp.Open;
+
+        CbxFamilia.Items.Clear;
+        CbxFamilia.Items.Add('TODAS');
+        while not QryTemp.Eof do
+        Begin
+          CbxFamilia.Items.Add(UpperCase(Qrytemp.FieldByName('FamiliaCodigo').AsString));
+          QryTemp.Next;
+        End;
+        CbxFamilia.ItemIndex := 0;
+
+        // Preenche Combo de membros
+        QryTemp.Close;
+        QryTemp.SQL.Clear;
+        QryTemp.SQL.Add('Select Concat(NomeMembro,'+ QuotedStr('-') +',CodMembro) as MembroCodigo From Membros order by MembroCodigo');
+        QryTemp.Open;
+
+        CbxMembro.Items.Clear;
+        CbxMembro.Items.Add('TODOS');
+        while not QryTemp.Eof do
+        Begin
+          CbxMembro.Items.Add(UpperCase(Qrytemp.FieldByName('MembroCodigo').AsString));
+          QryTemp.Next;
+        End;
+        CbxMembro.ItemIndex := 0;
+      End;
+    1:Begin
+        // Preenche somente o Combo de Familia completo
+        QryTemp.SQL.Add('Select Concat(Sobrenome,'+ QuotedStr('-') +',CodFamilia) as FamiliaCodigo From Familia order by FamiliaCodigo');
+        QryTemp.Open;
+
+        CbxFamilia.Items.Clear;
+        CbxFamilia.Items.Add('TODAS');
+        while not QryTemp.Eof do
+        Begin
+          CbxFamilia.Items.Add(UpperCase(Qrytemp.FieldByName('FamiliaCodigo').AsString));
+          QryTemp.Next;
+        End;
+        CbxFamilia.ItemIndex := 0;
+      End;
+    2:Begin
+        // Preenche somente o Combo de membros completo
+        QryTemp.SQL.Add('Select Concat(NomeMembro,'+ QuotedStr('-') +',CodMembro) as MembroCodigo From Membros order by MembroCodigo');
+        QryTemp.Open;
+
+        CbxMembro.Items.Clear;
+        CbxMembro.Items.Add('TODOS');
+        while not QryTemp.Eof do
+        Begin
+          CbxMembro.Items.Add(UpperCase(Qrytemp.FieldByName('MembroCodigo').AsString));
+          QryTemp.Next;
+        End;
+        CbxMembro.ItemIndex := 0;
+      End;
+    3:Begin
+        // Preenche Combo de membros de acordo com a familia selecionada
+        QryTemp.SQL.Add('Select Concat(NomeMembro,'+ QuotedStr('-') +',CodMembro) as MembroCodigo From Membros  where codfamilia = '+ QuotedStr(inttoStr(CodMembro))+' order by MembroCodigo');
+        QryTemp.Open;
+
+        CbxMembro.Items.Clear;
+        CbxMembro.Items.Add('TODOS');
+        while not QryTemp.Eof do
+        Begin
+          CbxMembro.Items.Add(UpperCase(Qrytemp.FieldByName('MembroCodigo').AsString));
+          QryTemp.Next;
+        End;
+        CbxMembro.ItemIndex := 0;
+      End;
+  end;
+
+end;
+
+function TFormRelEtiquetas.RetornaMes(Mes: integer): String;
+begin
+
+  case Mes of
+    1: Result := 'JANEIRO';
+    2: Result := 'FEVEREIRO';
+    3: Result := 'MARÇO';
+    4: Result := 'ABRIL';
+    5: Result := 'MAIO';
+    6: Result := 'JUNHO';
+    7: Result := 'JULHO';
+    8: Result := 'AGOSTO';
+    9: Result := 'SETEMBRO';
+    10: Result := 'OUTUBRO';
+    11: Result := 'NOVEMBRO';
+    12: Result := 'DEZEMBRO';
+  end;
+
+end;
+
+end.

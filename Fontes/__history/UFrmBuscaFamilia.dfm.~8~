@@ -1,0 +1,387 @@
+object FormBuscaFamilia: TFormBuscaFamilia
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'BUSCAR MEMBRO'
+  ClientHeight = 431
+  ClientWidth = 836
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 836
+    Height = 37
+    Align = alTop
+    Caption = 'BUSCAR FAM'#205'LIA'
+    Color = clHotLight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindow
+    Font.Height = -21
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 382
+    Width = 836
+    Height = 49
+    Align = alBottom
+    Color = clHotLight
+    ParentBackground = False
+    TabOrder = 1
+    object BtnSalvar: TBitBtn
+      Left = 294
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Selecionar'
+      Default = True
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE94D6
+        DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFD6DBDB6BAE9493CBB76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B2A1EDD986
+        C9B26BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB6BAE9482C8B18AE8D082E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDB6BAE9486C9B28CE8D179E5C974E3C778
+        E4C988E7CF82C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94
+        93CBB8A6EDDB8AE8D07DE5CB79E5C979E5C97DE5CB8AE8D082C8B16BAE94D6DB
+        DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE948ACAB4A0ECD97DC7AF6BAE9478
+        C6AD84E7CE82E6CD8AE8D082C8B16BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF6BAE949ECCBB6BAE94FFFFFF6BAE9496C9B7CCEDE5C9ECE3CCEDE597CA
+        B76BAE94D6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFF
+        FFFF6BAE949BCAB9D8F0EAD5EFE9D9F1EB9DCBBA6BAE94D6DBDBFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE949FCCBCE5F5F1E5F5
+        F1EBF7F4A3CEBE6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFF6BAE94A3CEBEF3FAF9A4CEBE6BAE94FFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94A7CF
+        BF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF6BAE94FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 0
+      OnClick = BtnSalvarClick
+    end
+    object BtnCancelar: TBitBtn
+      Left = 375
+      Top = 6
+      Width = 75
+      Height = 41
+      Caption = '&Cancelar'
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6DBDBD6DBDBD6DBDBD6DBDBD6
+        DBDBD6DBDBD6DBDBD6DBDBD6DBDBD6DBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6DBDB4646C14646C14646C14646C14646C14646C14646C14646C14646C14646
+        C1D6DBDBFFFFFFFFFFFFFFFFFFFFFFFF4646C17777DB9F9FFF8C8CFF8686FF86
+        86FF8686FF8686FF8C8CFF9F9FFF7777DB4646C1FFFFFFFFFFFFFFFFFFFFFFFF
+        4646C17171DB8888FF7272FF6868FF1212891212896868FF7272FF8888FF7171
+        DB4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C18686FF6868FF5B5BFF58
+        58FF5858FF5B5BFF6868FF8686FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF4646C17C7CDBB6B6FFACACFF121289121289ACACFFB6B6FF7C7CDB4646
+        C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1CCCCFFC0C0FF12
+        1289121289C0C0FFCCCCFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF4646C18585DBD6D6FF121289121289D6D6FF8585DB4646C1FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1E9E9FF12
+        1289121289E9E9FF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFF4646C18F8FDBF5F5FFF5F5FF8F8FDB4646C1FFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4646C1FF
+        FFFFFFFFFF4646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF4646C19292DB9292DB4646C1FFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF46
+        46C14646C1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      TabOrder = 1
+      OnClick = BtnCancelarClick
+    end
+    object BtnIncluiFamilia: TBitBtn
+      Left = 456
+      Top = 6
+      Width = 117
+      Height = 41
+      Caption = 'Incluir nova fam'#237'lia'
+      Default = True
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        20000000000000040000120B0000120B00000000000000000000FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF0041924E233D8F497D3A8C44DB368940F332873CF32F84
+        37DB2C81337D287F3023FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF0049995853459653E6419950FF7DC28FFF96D0A6FF96CFA6FF78BE
+        89FF368D42FF2C8134E6297F3053FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00519F61534D9C5DF464B478FFA8DBB5FF87CC98FF66BC7DFF64BA7CFF86CB
+        98FFA5D9B4FF58AA6BFF2C8134F4297F3053FFFFFF00FFFFFF00FFFFFF0059A6
+        6B2256A366E56AB97DFFA8DBB2FF60BC77FF5CBA73FF59B870FF59B56FFF58B5
+        6FFF5BB774FFA5D9B3FF5AAA6CFF2C8234E5297F3022FFFFFF00FFFFFF005DA9
+        707E53AB68FFAADDB4FF64C179FF5FBE71FF60BC77FFFFFFFFFFFFFFFFFF59B8
+        70FF58B56EFF5CB774FFA6DAB4FF388F43FF2C82347EFFFFFF00FFFFFF0061AC
+        75DB8ACC98FF89D396FF6BC67AFF63C170FF55AB65FFFFFFFFFFFFFFFFFF59B8
+        70FF59B870FF5BB972FF85CC97FF7BBE8DFF308539DBFFFFFF00FFFFFF0065AF
+        7AF6A9DDB3FF7DCF8AFF75CC81FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF59B870FF67BE7DFF9CD4ABFF34883DF6FFFFFF00FFFFFF0069B2
+        7EF6B6E2BEFF8BD597FF7AC986FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF59B870FF69C17EFF9DD4AAFF388B42F6FFFFFF00FFFFFF006DB5
+        83DBACDDB6FFA6DFAFFF81CB8CFF7CC986FF6EBD79FFFFFFFFFFFFFFFFFF5BAC
+        6AFF60BC77FF5CBA73FF8BD199FF80C592FF3C8E47DBFFFFFF00FFFFFF0070B8
+        877E85C797FFD2EED7FF95D9A0FF8AD394FF7FC889FFFFFFFFFFFFFFFFFF79CD
+        85FF6BC37CFF6FC77EFFACDFB5FF459E57FF40914C7EFFFFFF00FFFFFF0073BA
+        8A2270B887E5AADAB7FFD8F1DCFF92D89DFF88CD93FF84CC8EFF8BD496FF8AD4
+        95FF83D28EFFAFE0B7FF6BB97DFF489856E544945122FFFFFF00FFFFFF00FFFF
+        FF0073BB8B5370B887F4AFDCBBFFDCF2E0FFB6E4BDFF9BDBA5FF96D9A0FFA5DF
+        AFFFC0E8C5FF79C28AFF509E5FF44C9B5B53FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF0073BB8B5371B887E694CEA4FFC3E6CBFFCFEBD4FFC9E9CEFFAFDD
+        B8FF6DB97FFF58A569E654A16553FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF0074BB8B2371B9887D6EB684DB6AB380F367B17CF363AE
+        77DB60AB737D5CA86E23FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+      Layout = blGlyphTop
+      TabOrder = 2
+      OnClick = BtnIncluiFamiliaClick
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 37
+    Width = 836
+    Height = 345
+    Align = alClient
+    Color = clGradientActiveCaption
+    ParentBackground = False
+    TabOrder = 2
+    object Panel4: TPanel
+      Left = 1
+      Top = 1
+      Width = 834
+      Height = 88
+      Align = alTop
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 12
+        Top = 7
+        Width = 63
+        Height = 13
+        Caption = 'Buscar por:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 171
+        Top = 7
+        Width = 71
+        Height = 13
+        Caption = 'Ordenar por:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 323
+        Top = 7
+        Width = 80
+        Height = 13
+        Caption = 'Tipo de Busca:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 543
+        Top = 7
+        Width = 95
+        Height = 13
+        Caption = 'Tipo de membro:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object CbxBuscarPor: TComboBox
+        Left = 12
+        Top = 26
+        Width = 153
+        Height = 21
+        Style = csDropDownList
+        ItemIndex = 3
+        TabOrder = 1
+        Text = 'Familia'
+        OnSelect = CbxBuscarPorSelect
+        Items.Strings = (
+          'C'#243'digo do membro'
+          'Nome do membro'
+          'Codigo da Fam'#237'lia'
+          'Familia'
+          'Envelope')
+      end
+      object CbxOrdenarPor: TComboBox
+        Left = 171
+        Top = 26
+        Width = 146
+        Height = 21
+        Style = csDropDownList
+        ItemIndex = 3
+        TabOrder = 2
+        Text = 'Familia'
+        OnSelect = CbxOrdenarPorSelect
+        Items.Strings = (
+          'C'#243'digo do membro'
+          'Nome do membro'
+          'Codigo da Fam'#237'lia'
+          'Familia'
+          'Envelope')
+      end
+      object EdtBusca: TEdit
+        Left = 12
+        Top = 53
+        Width = 809
+        Height = 24
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnChange = EdtBuscaChange
+      end
+      object CbxTipoBusca: TComboBox
+        Left = 323
+        Top = 26
+        Width = 214
+        Height = 21
+        Style = csDropDownList
+        ItemIndex = 0
+        TabOrder = 3
+        Text = 'Que contenha o texto'
+        OnSelect = CbxTipoBuscaSelect
+        Items.Strings = (
+          'Que contenha o texto'
+          'Que inicie com o texto')
+      end
+      object CbxTipoMembro: TComboBox
+        Left = 543
+        Top = 26
+        Width = 278
+        Height = 21
+        Style = csDropDownList
+        ItemIndex = 0
+        TabOrder = 4
+        Text = 'Somente membros ativos(sem motivo de sa'#237'da)'
+        OnSelect = CbxTipoMembroSelect
+        Items.Strings = (
+          'Somente membros ativos(sem motivo de sa'#237'da)'
+          'Todos os Membros')
+      end
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 89
+      Width = 834
+      Height = 255
+      Align = alClient
+      DataSource = DSBuscaMembro
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = BtnSalvarClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'CodFamilia'
+          Title.Caption = 'Codigo'
+          Width = 59
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Sobrenome'
+          Title.Caption = 'Familia'
+          Width = 233
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NomeMembro'
+          Title.Caption = 'Membro'
+          Width = 386
+          Visible = True
+        end>
+    end
+  end
+  object QryBuscaMembro: TMyQuery
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      
+        'Select m.CodMembro, m.NomeMembro, F.CodFamilia, f.Sobrenome, M.E' +
+        'nvelope'
+      
+        'From Membros M right join Familia F on m.codfamilia = f.codfamil' +
+        'ia')
+    Left = 588
+    Top = 4
+    object QryBuscaMembroCodMembro: TLargeintField
+      FieldName = 'CodMembro'
+    end
+    object QryBuscaMembroNomeMembro: TStringField
+      FieldName = 'NomeMembro'
+      Size = 255
+    end
+    object QryBuscaMembroCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QryBuscaMembroSobrenome: TStringField
+      FieldName = 'Sobrenome'
+      Size = 255
+    end
+    object QryBuscaMembroEnvelope: TLargeintField
+      FieldName = 'Envelope'
+    end
+  end
+  object DSBuscaMembro: TDataSource
+    DataSet = QryBuscaMembro
+    Left = 684
+    Top = 4
+  end
+end

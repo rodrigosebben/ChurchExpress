@@ -1,0 +1,898 @@
+﻿object DMRelPastoral: TDMRelPastoral
+  OldCreateOrder = False
+  Height = 505
+  Width = 666
+  object CDSRelPastoral: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CodFamilia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMembroAntigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMembro'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Familia'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Membro'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'NomeTipoMembro'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'DataNasc'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'Envelope'
+        DataType = ftInteger
+      end
+      item
+        Name = 'TelefoneMembro'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'CodMotivoSaida'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Ano'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Endereco'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Bairro'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Cidade'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Area'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Grupo'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'UF'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'CEP'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'telefone'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Email'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'DataUltVisita'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'JaneiroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'JaneiroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'FevereiroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'FevereiroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'MarcoContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'MarcoCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrilContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrilCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'MaioContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'MaioCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'JunhoContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'JunhoCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'JulhoContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'JulhoCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AgostoContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AgostoCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SetembroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SetembroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'OutubroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'OutubroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NovembroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NovembroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DezembroContrib'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DezembroCeia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'FamiliaCodigo'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Visitante'
+        DataType = ftString
+        Size = 250
+      end>
+    IndexDefs = <
+      item
+        Name = 'IDX_Familia'
+        Fields = 'Familia'
+      end>
+    IndexFieldNames = 'Ano;Familia;CodFamilia;CodMembroAntigo'
+    Params = <>
+    StoreDefs = True
+    Left = 44
+    Top = 12
+    Data = {
+      5D0400009619E0BD01000000180000002F0000000000030000005D040A436F64
+      46616D696C696104000100000000000F436F644D656D62726F416E7469676F04
+      0001000000000009436F644D656D62726F04000100000000000746616D696C69
+      61020049000000010005574944544802000200FF00064D656D62726F02004900
+      0000010005574944544802000200FF000E4E6F6D655469706F4D656D62726F02
+      0049000000010005574944544802000200FF0008446174614E61736308000800
+      0000000008456E76656C6F706504000100000000000E54656C65666F6E654D65
+      6D62726F01004900000001000557494454480200020014000E436F644D6F7469
+      766F5361696461040001000000000003416E6F01004900000001000557494454
+      4802000200140008456E64657265636F02004900000001000557494454480200
+      0200FF000642616972726F020049000000010005574944544802000200FF0006
+      436964616465020049000000010005574944544802000200FF00044172656102
+      0049000000010005574944544802000200FF0005477275706F02004900000001
+      0005574944544802000200FF0002554602004900000001000557494454480200
+      0200FF0003434550020049000000010005574944544802000200FF000874656C
+      65666F6E65020049000000010005574944544802000200FF0005456D61696C02
+      0049000000010005574944544802000200FF000D44617461556C745669736974
+      6108000800000000000E4A616E6569726F436F6E747269620400010000000000
+      0B4A616E6569726F4365696104000100000000001046657665726569726F436F
+      6E7472696204000100000000000D46657665726569726F436569610400010000
+      0000000C4D6172636F436F6E747269620400010000000000094D6172636F4365
+      696104000100000000000C416272696C436F6E74726962040001000000000009
+      416272696C4365696104000100000000000B4D61696F436F6E74726962040001
+      0000000000084D61696F4365696104000100000000000C4A756E686F436F6E74
+      7269620400010000000000094A756E686F4365696104000100000000000C4A75
+      6C686F436F6E747269620400010000000000094A756C686F4365696104000100
+      000000000D41676F73746F436F6E7472696204000100000000000A41676F7374
+      6F4365696104000100000000000F536574656D62726F436F6E74726962040001
+      00000000000C536574656D62726F4365696104000100000000000E4F75747562
+      726F436F6E7472696204000100000000000B4F75747562726F43656961040001
+      00000000000F4E6F76656D62726F436F6E7472696204000100000000000C4E6F
+      76656D62726F4365696104000100000000000F44657A656D62726F436F6E7472
+      696204000100000000000C44657A656D62726F4365696104000100000000000D
+      46616D696C6961436F6469676F020049000000010005574944544802000200FF
+      00095669736974616E7465010049000000010005574944544802000200FA0000
+      00}
+    object CDSRelPastoralCodFamilia: TIntegerField
+      FieldName = 'CodFamilia'
+    end
+    object CDSRelPastoralCodMembroAntigo: TIntegerField
+      FieldName = 'CodMembroAntigo'
+    end
+    object CDSRelPastoralCodMembro: TIntegerField
+      FieldName = 'CodMembro'
+    end
+    object CDSRelPastoralFamilia: TStringField
+      FieldName = 'Familia'
+      Size = 255
+    end
+    object CDSRelPastoralMembro: TStringField
+      FieldName = 'Membro'
+      Size = 255
+    end
+    object CDSRelPastoralCodMotivoSaida: TIntegerField
+      FieldName = 'CodMotivoSaida'
+    end
+    object CDSRelPastoralEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 255
+    end
+    object CDSRelPastoralBairro: TStringField
+      FieldName = 'Bairro'
+      Size = 255
+    end
+    object CDSRelPastoralCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 255
+    end
+    object CDSRelPastoralArea: TStringField
+      FieldName = 'Area'
+      Size = 255
+    end
+    object CDSRelPastoralGrupo: TStringField
+      FieldName = 'Grupo'
+      Size = 255
+    end
+    object CDSRelPastoralUF: TStringField
+      FieldName = 'UF'
+      Size = 255
+    end
+    object CDSRelPastoralCEP: TStringField
+      FieldName = 'CEP'
+      Size = 255
+    end
+    object CDSRelPastoraltelefone: TStringField
+      FieldName = 'telefone'
+      Size = 255
+    end
+    object CDSRelPastoralEmail: TStringField
+      FieldName = 'Email'
+      Size = 255
+    end
+    object CDSRelPastoralDataUltVisita: TDateTimeField
+      FieldName = 'DataUltVisita'
+    end
+    object CDSRelPastoralJaneiroContrib: TIntegerField
+      FieldName = 'JaneiroContrib'
+    end
+    object CDSRelPastoralJaneiroCeia: TIntegerField
+      FieldName = 'JaneiroCeia'
+    end
+    object CDSRelPastoralFevereiroContrib: TIntegerField
+      FieldName = 'FevereiroContrib'
+    end
+    object CDSRelPastoralFevereiroCeia: TIntegerField
+      FieldName = 'FevereiroCeia'
+    end
+    object CDSRelPastoralMarcoContrib: TIntegerField
+      FieldName = 'MarcoContrib'
+    end
+    object CDSRelPastoralMarcoCeia: TIntegerField
+      FieldName = 'MarcoCeia'
+    end
+    object CDSRelPastoralAbrilContrib: TIntegerField
+      FieldName = 'AbrilContrib'
+    end
+    object CDSRelPastoralAbrilCeia: TIntegerField
+      FieldName = 'AbrilCeia'
+    end
+    object CDSRelPastoralMaioContrib: TIntegerField
+      FieldName = 'MaioContrib'
+    end
+    object CDSRelPastoralMaioCeia: TIntegerField
+      FieldName = 'MaioCeia'
+    end
+    object CDSRelPastoralJunhoContrib: TIntegerField
+      FieldName = 'JunhoContrib'
+    end
+    object CDSRelPastoralJunhoCeia: TIntegerField
+      FieldName = 'JunhoCeia'
+    end
+    object CDSRelPastoralJulhoContrib: TIntegerField
+      FieldName = 'JulhoContrib'
+    end
+    object CDSRelPastoralJulhoCeia: TIntegerField
+      FieldName = 'JulhoCeia'
+    end
+    object CDSRelPastoralAgostoContrib: TIntegerField
+      FieldName = 'AgostoContrib'
+    end
+    object CDSRelPastoralAgostoCeia: TIntegerField
+      FieldName = 'AgostoCeia'
+    end
+    object CDSRelPastoralSetembroContrib: TIntegerField
+      FieldName = 'SetembroContrib'
+    end
+    object CDSRelPastoralSetembroCeia: TIntegerField
+      FieldName = 'SetembroCeia'
+    end
+    object CDSRelPastoralOutubroContrib: TIntegerField
+      FieldName = 'OutubroContrib'
+    end
+    object CDSRelPastoralOutubroCeia: TIntegerField
+      FieldName = 'OutubroCeia'
+    end
+    object CDSRelPastoralNovembroContrib: TIntegerField
+      FieldName = 'NovembroContrib'
+    end
+    object CDSRelPastoralNovembroCeia: TIntegerField
+      FieldName = 'NovembroCeia'
+    end
+    object CDSRelPastoralDezembroContrib: TIntegerField
+      FieldName = 'DezembroContrib'
+    end
+    object CDSRelPastoralDezembroCeia: TIntegerField
+      FieldName = 'DezembroCeia'
+    end
+    object CDSRelPastoralNomeTipoMembro: TStringField
+      FieldName = 'NomeTipoMembro'
+      Size = 255
+    end
+    object CDSRelPastoralDataNasc: TDateTimeField
+      FieldName = 'DataNasc'
+    end
+    object CDSRelPastoralEnvelope: TIntegerField
+      FieldName = 'Envelope'
+    end
+    object CDSRelPastoralTelefoneMembro: TStringField
+      FieldName = 'TelefoneMembro'
+    end
+    object CDSRelPastoralAno: TStringField
+      FieldName = 'Ano'
+    end
+    object CDSRelPastoralFamiliaCodigo: TStringField
+      FieldName = 'FamiliaCodigo'
+      Size = 255
+    end
+    object CDSRelPastoralVisitante: TStringField
+      FieldName = 'Visitante'
+      Size = 250
+    end
+  end
+  object DSRelPastoral: TDataSource
+    DataSet = CDSRelPastoral
+    Left = 44
+    Top = 60
+  end
+  object QueryContribuicoes: TMyQuery
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      
+        'SELECT concat(F.sobrenome, '#39'-'#39', c.CodFamilia) as FamiliaCodigo, ' +
+        'c.CodFamilia,c.CodMembroAntigo, c.codmembro, F.sobrenome As Fami' +
+        'lia, M.NomeMembro as Membro,t.nometipomembro,M.DataNasc, M.envel' +
+        'ope, M.Telefone as TelefoneMembro, M.Codmotivosaida, cast(year(c' +
+        '.DataContribuicao) as char) ano,F.endereco, f.bairro, f.cidade, ' +
+        'f.area, f.grupo, f.uf, f.cep, f.telefone, f.email,'
+      
+        '      (SELECT DataVisita FROM visita v where v.codfamilia = c.co' +
+        'dfamilia group by codfamilia having MAX(DATAVISITA)) DataUltimaV' +
+        'isita,'
+      
+        '      (SELECT Visitante FROM visita v where v.codfamilia = c.cod' +
+        'familia group by codfamilia having MAX(DATAVISITA)) UltimoVisita' +
+        'nte,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 1 then Valor ' +
+        'else null end) as Janeiro,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 2 then Valor ' +
+        'else null end) as Fevereiro,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 3 then Valor ' +
+        'else null end) as Mar'#231'o,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 4 then Valor ' +
+        'else null end) as Abril,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 5 then Valor ' +
+        'else null end) as Maio,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 6 then Valor ' +
+        'else null end) as Junho,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 7 then Valor ' +
+        'else null end) as Julho,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 8 then Valor ' +
+        'else null end) as Agosto,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 9 then Valor ' +
+        'else null end) as Setembro,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 10 then Valor' +
+        ' else null end) as Outubro,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 11 then Valor' +
+        ' else null end) as Novembro,'
+      
+        '       Count(Case when month(c.DataContribuicao) = 12 then Valor' +
+        ' else null end) as Dezembro'
+      
+        'FROM contribuicao c left join membros m on c.codmembro = m.codme' +
+        'mbro'
+      
+        '                    left join familia f on c.codfamilia = f.codf' +
+        'amilia'
+      
+        '                    left join TipoMembro t on m.codtipomembro = ' +
+        't.codtipomembro'
+      'Group by c.codmembro'
+      
+        'order by year(c.DataContribuicao), F.Sobrenome, c.CodFamilia, c.' +
+        'Codmembroantigo')
+    Left = 184
+    Top = 12
+    object QueryContribuicoesFamiliaCodigo: TStringField
+      FieldName = 'FamiliaCodigo'
+      Size = 267
+    end
+    object QueryContribuicoesCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QueryContribuicoesCodMembroAntigo: TLargeintField
+      FieldName = 'CodMembroAntigo'
+    end
+    object QueryContribuicoescodmembro: TLargeintField
+      FieldName = 'codmembro'
+    end
+    object QueryContribuicoesFamilia: TStringField
+      FieldName = 'Familia'
+      Size = 255
+    end
+    object QueryContribuicoesMembro: TStringField
+      FieldName = 'Membro'
+      Size = 255
+    end
+    object QueryContribuicoesnometipomembro: TStringField
+      FieldName = 'nometipomembro'
+      Size = 150
+    end
+    object QueryContribuicoesDataNasc: TDateField
+      FieldName = 'DataNasc'
+    end
+    object QueryContribuicoesenvelope: TLargeintField
+      FieldName = 'envelope'
+    end
+    object QueryContribuicoesTelefoneMembro: TStringField
+      FieldName = 'TelefoneMembro'
+      FixedChar = True
+    end
+    object QueryContribuicoesCodmotivosaida: TLargeintField
+      FieldName = 'Codmotivosaida'
+    end
+    object QueryContribuicoesano: TStringField
+      FieldName = 'ano'
+      Size = 4
+    end
+    object QueryContribuicoesendereco: TStringField
+      FieldName = 'endereco'
+      Size = 255
+    end
+    object QueryContribuicoesbairro: TStringField
+      FieldName = 'bairro'
+      Size = 150
+    end
+    object QueryContribuicoescidade: TStringField
+      FieldName = 'cidade'
+      Size = 150
+    end
+    object QueryContribuicoesarea: TStringField
+      FieldName = 'area'
+      Size = 255
+    end
+    object QueryContribuicoesgrupo: TLargeintField
+      FieldName = 'grupo'
+    end
+    object QueryContribuicoesuf: TStringField
+      FieldName = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object QueryContribuicoescep: TStringField
+      FieldName = 'cep'
+      FixedChar = True
+      Size = 9
+    end
+    object QueryContribuicoestelefone: TStringField
+      FieldName = 'telefone'
+      Size = 45
+    end
+    object QueryContribuicoesemail: TStringField
+      FieldName = 'email'
+      Size = 255
+    end
+    object QueryContribuicoesDataUltimaVisita: TDateField
+      FieldName = 'DataUltimaVisita'
+    end
+    object QueryContribuicoesUltimoVisitante: TStringField
+      FieldName = 'UltimoVisitante'
+      Size = 200
+    end
+    object QueryContribuicoesJaneiro: TLargeintField
+      FieldName = 'Janeiro'
+    end
+    object QueryContribuicoesFevereiro: TLargeintField
+      FieldName = 'Fevereiro'
+    end
+    object QueryContribuicoesMarço: TLargeintField
+      FieldName = 'Mar'#231'o'
+    end
+    object QueryContribuicoesAbril: TLargeintField
+      FieldName = 'Abril'
+    end
+    object QueryContribuicoesMaio: TLargeintField
+      FieldName = 'Maio'
+    end
+    object QueryContribuicoesJunho: TLargeintField
+      FieldName = 'Junho'
+    end
+    object QueryContribuicoesJulho: TLargeintField
+      FieldName = 'Julho'
+    end
+    object QueryContribuicoesAgosto: TLargeintField
+      FieldName = 'Agosto'
+    end
+    object QueryContribuicoesSetembro: TLargeintField
+      FieldName = 'Setembro'
+    end
+    object QueryContribuicoesOutubro: TLargeintField
+      FieldName = 'Outubro'
+    end
+    object QueryContribuicoesNovembro: TLargeintField
+      FieldName = 'Novembro'
+    end
+    object QueryContribuicoesDezembro: TLargeintField
+      FieldName = 'Dezembro'
+    end
+  end
+  object QuerySantaCeia: TMyQuery
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      
+        'SELECT concat(F.sobrenome, '#39'-'#39', s.CodFamilia) as FamiliaCodigo,s' +
+        '.CodFamilia, s.codmembroantigo,s.Codmembro, F.Sobrenome as Famil' +
+        'ia, m.NomeMembro as Membro,t.nometipomembro,M.DataNasc, M.envelo' +
+        'pe, M.Telefone as TelefoneMembro, M.Codmotivosaida, s.ano, F.end' +
+        'ereco, f.bairro, f.cidade, f.area, f.grupo, f.uf, f.cep, f.telef' +
+        'one, f.email,'
+      
+        '      (SELECT DataVisita FROM visita v where v.codfamilia = s.co' +
+        'dfamilia group by codfamilia having MAX(DATAVISITA)) DataUltimaV' +
+        'isita,'
+      
+        '      (SELECT Visitante FROM visita v where v.codfamilia = s.cod' +
+        'familia group by codfamilia having MAX(DATAVISITA)) UltimoVisita' +
+        'nte,'
+      '       janeiro,'
+      '       fevereiro,'
+      '       marco,'
+      '       abril,'
+      '       maio,'
+      '       junho,'
+      '       julho,'
+      '       agosto,'
+      '       setembro,'
+      '       outubro,'
+      '       novembro,'
+      '       dezembro'
+      
+        'FROM santa_ceia_antigo s left join Familia F on s.codfamilia = f' +
+        '.codfamilia'
+      
+        '                         left join Membros M on s.codmembro = m.' +
+        'codmembro'
+      
+        '                         left join TipoMembro t on m.codtipomemb' +
+        'ro = t.codtipomembro'
+      
+        'Order by f.Sobrenome, s.codfamilia,s.codmembroantigo, Membro, an' +
+        'o')
+    Left = 284
+    Top = 12
+    object QuerySantaCeiaFamiliaCodigo: TStringField
+      FieldName = 'FamiliaCodigo'
+      Size = 267
+    end
+    object QuerySantaCeiaCodFamilia: TLargeintField
+      FieldName = 'CodFamilia'
+    end
+    object QuerySantaCeiacodmembroantigo: TLargeintField
+      FieldName = 'codmembroantigo'
+    end
+    object QuerySantaCeiaCodmembro: TLargeintField
+      FieldName = 'Codmembro'
+    end
+    object QuerySantaCeiaFamilia: TStringField
+      FieldName = 'Familia'
+      Size = 255
+    end
+    object QuerySantaCeiaMembro: TStringField
+      FieldName = 'Membro'
+      Size = 255
+    end
+    object QuerySantaCeianometipomembro: TStringField
+      FieldName = 'nometipomembro'
+      Size = 150
+    end
+    object QuerySantaCeiaDataNasc: TDateField
+      FieldName = 'DataNasc'
+    end
+    object QuerySantaCeiaenvelope: TLargeintField
+      FieldName = 'envelope'
+    end
+    object QuerySantaCeiaTelefoneMembro: TStringField
+      FieldName = 'TelefoneMembro'
+      FixedChar = True
+    end
+    object QuerySantaCeiaCodmotivosaida: TLargeintField
+      FieldName = 'Codmotivosaida'
+    end
+    object QuerySantaCeiaano: TLargeintField
+      FieldName = 'ano'
+    end
+    object QuerySantaCeiaendereco: TStringField
+      FieldName = 'endereco'
+      Size = 255
+    end
+    object QuerySantaCeiabairro: TStringField
+      FieldName = 'bairro'
+      Size = 150
+    end
+    object QuerySantaCeiacidade: TStringField
+      FieldName = 'cidade'
+      Size = 150
+    end
+    object QuerySantaCeiaarea: TStringField
+      FieldName = 'area'
+      Size = 255
+    end
+    object QuerySantaCeiagrupo: TLargeintField
+      FieldName = 'grupo'
+    end
+    object QuerySantaCeiauf: TStringField
+      FieldName = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object QuerySantaCeiacep: TStringField
+      FieldName = 'cep'
+      FixedChar = True
+      Size = 9
+    end
+    object QuerySantaCeiatelefone: TStringField
+      FieldName = 'telefone'
+      Size = 45
+    end
+    object QuerySantaCeiaemail: TStringField
+      FieldName = 'email'
+      Size = 255
+    end
+    object QuerySantaCeiaDataUltimaVisita: TDateField
+      FieldName = 'DataUltimaVisita'
+    end
+    object QuerySantaCeiaUltimoVisitante: TStringField
+      FieldName = 'UltimoVisitante'
+      Size = 200
+    end
+    object QuerySantaCeiajaneiro: TLargeintField
+      FieldName = 'janeiro'
+    end
+    object QuerySantaCeiafevereiro: TLargeintField
+      FieldName = 'fevereiro'
+    end
+    object QuerySantaCeiamarco: TLargeintField
+      FieldName = 'marco'
+    end
+    object QuerySantaCeiaabril: TLargeintField
+      FieldName = 'abril'
+    end
+    object QuerySantaCeiamaio: TLargeintField
+      FieldName = 'maio'
+    end
+    object QuerySantaCeiajunho: TLargeintField
+      FieldName = 'junho'
+    end
+    object QuerySantaCeiajulho: TLargeintField
+      FieldName = 'julho'
+    end
+    object QuerySantaCeiaagosto: TLargeintField
+      FieldName = 'agosto'
+    end
+    object QuerySantaCeiasetembro: TLargeintField
+      FieldName = 'setembro'
+    end
+    object QuerySantaCeiaoutubro: TLargeintField
+      FieldName = 'outubro'
+    end
+    object QuerySantaCeianovembro: TLargeintField
+      FieldName = 'novembro'
+    end
+    object QuerySantaCeiadezembro: TLargeintField
+      FieldName = 'dezembro'
+    end
+  end
+  object QueryTemp: TMyQuery
+    Connection = DMPrincipal.Conn
+    Left = 372
+    Top = 12
+  end
+  object QueryMembrosAdicionais: TMyQuery
+    Connection = DMPrincipal.Conn
+    SQL.Strings = (
+      'SELECT m.codmembro,'
+      '       m.codfamilia,'
+      '       m.codtipomembro,'
+      '       m.codmembroantigo,'
+      '       tp.NomeTipoMembro,'
+      '       m.nomemembro,'
+      '       m.datanasc,'
+      '       f.sobrenome,'
+      '       f.telefone,'
+      '       f.endereco,'
+      '       f.bairro,'
+      '       f.Cidade,'
+      '       f.Area,'
+      '       f.grupo,'
+      '       f.UF,'
+      '       f.CEP,'
+      '       f.email,'
+      
+        '      (SELECT DataVisita FROM visita v where v.codfamilia = m.co' +
+        'dfamilia group by codfamilia having MAX(DATAVISITA)) DataUltimaV' +
+        'isita,'
+      
+        '      (SELECT Visitante FROM visita v where v.codfamilia = m.cod' +
+        'familia group by codfamilia having MAX(DATAVISITA)) UltimoVisita' +
+        'nte,'
+      '       m.Celular'
+      
+        'FROM membros m left join Familia F on m.codfamilia = f.codfamili' +
+        'a'
+      
+        '               left join Tipomembro tp on m.codtipomembro = tp.c' +
+        'odtipomembro'
+      'where isnull(codmotivosaida)'
+      ' order by m.CodFamilia, m.codtipomembro;')
+    Left = 184
+    Top = 60
+    object QueryMembrosAdicionaiscodmembro: TLargeintField
+      FieldName = 'codmembro'
+    end
+    object QueryMembrosAdicionaiscodfamilia: TLargeintField
+      FieldName = 'codfamilia'
+    end
+    object QueryMembrosAdicionaiscodtipomembro: TLargeintField
+      FieldName = 'codtipomembro'
+    end
+    object QueryMembrosAdicionaiscodmembroantigo: TLargeintField
+      FieldName = 'codmembroantigo'
+    end
+    object QueryMembrosAdicionaisNomeTipoMembro: TStringField
+      FieldName = 'NomeTipoMembro'
+      Size = 150
+    end
+    object QueryMembrosAdicionaisnomemembro: TStringField
+      FieldName = 'nomemembro'
+      Size = 255
+    end
+    object QueryMembrosAdicionaisdatanasc: TDateField
+      FieldName = 'datanasc'
+    end
+    object QueryMembrosAdicionaissobrenome: TStringField
+      FieldName = 'sobrenome'
+      Size = 255
+    end
+    object QueryMembrosAdicionaistelefone: TStringField
+      FieldName = 'telefone'
+      Size = 45
+    end
+    object QueryMembrosAdicionaisendereco: TStringField
+      FieldName = 'endereco'
+      Size = 255
+    end
+    object QueryMembrosAdicionaisbairro: TStringField
+      FieldName = 'bairro'
+      Size = 150
+    end
+    object QueryMembrosAdicionaisCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 150
+    end
+    object QueryMembrosAdicionaisArea: TStringField
+      FieldName = 'Area'
+      Size = 255
+    end
+    object QueryMembrosAdicionaisgrupo: TLargeintField
+      FieldName = 'grupo'
+    end
+    object QueryMembrosAdicionaisUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object QueryMembrosAdicionaisCEP: TStringField
+      FieldName = 'CEP'
+      FixedChar = True
+      Size = 9
+    end
+    object QueryMembrosAdicionaisemail: TStringField
+      FieldName = 'email'
+      Size = 255
+    end
+    object QueryMembrosAdicionaisDataUltimaVisita: TDateField
+      FieldName = 'DataUltimaVisita'
+    end
+    object QueryMembrosAdicionaisUltimoVisitante: TStringField
+      FieldName = 'UltimoVisitante'
+      Size = 200
+    end
+    object QueryMembrosAdicionaisCelular: TStringField
+      FieldName = 'Celular'
+    end
+  end
+end

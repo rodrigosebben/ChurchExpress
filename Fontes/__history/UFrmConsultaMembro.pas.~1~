@@ -1,0 +1,454 @@
+unit UFrmConsultaMembro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin, DB, MemDS, DBAccess, MyAccess;
+
+type
+  TFormConsultaMembro = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    CBxBusca: TComboBox;
+    EdtBusca: TEdit;
+    CbxOrdenacao: TComboBox;
+    Panel4: TPanel;
+    ToolBar1: TToolBar;
+    BtnAdicionar: TBitBtn;
+    BtnEditar: TBitBtn;
+    BtnExcluir: TBitBtn;
+    BtnAtualizar: TBitBtn;
+    ToolButton1: TToolButton;
+    BtnSair: TBitBtn;
+    DBGridConsluta: TDBGrid;
+    CbxOrdem: TComboBox;
+    StatusBar1: TStatusBar;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    CbxFalecido: TComboBox;
+    Label4: TLabel;
+    procedure BtnEditarClick(Sender: TObject);
+    procedure BtnAdicionarClick(Sender: TObject);
+    procedure BtnExcluirClick(Sender: TObject);
+    procedure BtnAtualizarClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CBxBuscaSelect(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure EdtBuscaChange(Sender: TObject);
+    procedure EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    Procedure OrdenaQuery;
+    { Public declarations }
+  end;
+
+var
+  FormConsultaMembro: TFormConsultaMembro;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal, UFrmCadastroMembro;
+
+procedure TFormConsultaMembro.BtnAdicionarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroMembro.QryMembros.Append;
+    if FormCadastroMembro=nil then
+      Application.CreateForm(TFormCadastroMembro,FormCadastroMembro);
+    FormCadastroMembro.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaMembro.BtnAtualizarClick(Sender: TObject);
+begin
+
+  FormCadastroMembro.QryMembros.Close;
+  FormCadastroMembro.QryMembros.Open;
+
+end;
+
+procedure TFormConsultaMembro.BtnEditarClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    FormCadastroMembro.QryMembros.Edit;
+    if FormCadastroMembro=nil then
+      Application.CreateForm(TFormCadastroMembro,FormCadastroMembro);
+    FormCadastroMembro.ShowModal;
+  End;
+
+end;
+
+procedure TFormConsultaMembro.BtnExcluirClick(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+  Begin
+    try
+      if Application.MessageBox('Deseja realmente deletar o registro atual?','Confirmação',Mb_YesNo+ Mb_IconInformation + Mb_DefButton1)=mrYes then
+      Begin
+        FormCadastroMembro.QryMembros.Delete;
+        EdtBusca.SetFocus;
+      End;
+    except on E: Exception do
+      ShowMessage('Ocorreu um erro ao deletar este registro! Verifique se ele não está sendo usando em outro cadastro no sistema.');
+    end;
+  End;
+
+end;
+
+procedure TFormConsultaMembro.BtnSairClick(Sender: TObject);
+begin
+
+  Close;
+
+end;
+
+procedure TFormConsultaMembro.CBxBuscaSelect(Sender: TObject);
+begin
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaMembro.EdtBuscaChange(Sender: TObject);
+begin
+
+  With FormCadastroMembro do
+  Begin
+    if EdtBusca.Text='' then
+    Begin
+      QryMembros.Close;
+      QryMembros.SQL.Clear;
+      QryMembros.SQL.Text := 'Select M.*, ' +
+                             'P.NomeProfissao as Profissao, ' +
+                             'F.Sobrenome as Familia, ' +
+                             'U.NomeUsuario as Usuario, ' +
+                             'E.NomeEscolaridade as Escolaridade, ' +
+                             'EC.NomeEstadoCivil as EstadoCivil, ' +
+                             'FA.NomeFormaAdmissao as FormaAdmissao, ' +
+                             'MS.NomeMotivoSaida as MotivoSaida ' +
+                             'from Membros M LEFT JOIN Profissao P ON M.CodProfissao = P.CodProfissao ' +
+                             '               LEFT JOIN Familia F ON M.CodFamilia = F.CodFamilia ' +
+                             '               LEFT JOIN Usuario U ON M.CodUsuario = U.CodUsuario ' +
+                             '               LEFT JOIN Escolaridade E ON M.codescolaridade = E.CodEscolaridade ' +
+                             '               LEFT JOIN EstadoCivil EC ON M.codestadocivil = EC.codestadocivil ' +
+                             '               LEFT JOIN FormaAdmissao FA ON M.CodFormaAdmissao = FA.CodFormaAdmissao ' +
+                             '               LEFT JOIN MotivoSaida MS ON M.CodMotivoSaida = MS.CodMotivoSaida';
+
+      if CbxFalecido.ItemIndex=0 then
+        QryMembros.SQL.Add('where isnull(M.CodMotivoSaida)');
+      OrdenaQuery;
+      QryMembros.Open;
+    End
+    Else
+    Begin
+      QryMembros.Close;
+      QryMembros.SQL.Clear;
+      QryMembros.SQL.Text := 'Select M.*, ' +
+                             'P.NomeProfissao as Profissao, ' +
+                             'F.Sobrenome as Familia, ' +
+                             'U.NomeUsuario as Usuario, ' +
+                             'E.NomeEscolaridade as Escolaridade, ' +
+                             'EC.NomeEstadoCivil as EstadoCivil, ' +
+                             'FA.NomeFormaAdmissao as FormaAdmissao, ' +
+                             'MS.NomeMotivoSaida as MotivoSaida ' +
+                             'from Membros M LEFT JOIN Profissao P ON M.CodProfissao = P.CodProfissao ' +
+                             '               LEFT JOIN Familia F ON M.CodFamilia = F.CodFamilia ' +
+                             '               LEFT JOIN Usuario U ON M.CodUsuario = U.CodUsuario ' +
+                             '               LEFT JOIN Escolaridade E ON M.codescolaridade = E.CodEscolaridade ' +
+                             '               LEFT JOIN EstadoCivil EC ON M.codestadocivil = EC.codestadocivil ' +
+                             '               LEFT JOIN FormaAdmissao FA ON M.CodFormaAdmissao = FA.CodFormaAdmissao ' +
+                             '               LEFT JOIN MotivoSaida MS ON M.CodMotivoSaida = MS.CodMotivoSaida';
+
+      case CBxBusca.ItemIndex of
+        0: QryMembros.SQL.add('where M.CodMembro Like ' + QuotedStr(EdtBusca.Text + '%'));
+        1: QryMembros.SQL.add('where F.Sobrenome Like ' + QuotedStr(EdtBusca.Text + '%'));
+        2: QryMembros.SQL.add('where M.NomeMembro Like ' + QuotedStr(EdtBusca.Text + '%'));
+        3: QryMembros.SQL.add('where M.NomeSolteiro Like ' + QuotedStr(EdtBusca.Text + '%'));
+        4: QryMembros.SQL.add('where M.Email Like ' + QuotedStr(EdtBusca.Text + '%'));
+        5: QryMembros.SQL.add('where M.Pai Like ' + QuotedStr(EdtBusca.Text + '%'));
+        6: QryMembros.SQL.add('where M.Mae Like ' + QuotedStr(EdtBusca.Text + '%'));
+        7: QryMembros.SQL.add('where M.NomeConjugue Like ' + QuotedStr(EdtBusca.Text + '%'));
+        8: QryMembros.SQL.add('where P.NomeProfissao Like ' + QuotedStr(EdtBusca.Text + '%'));
+        9: QryMembros.SQL.add('where M.empresa Like ' + QuotedStr(EdtBusca.Text + '%'));
+        10: QryMembros.SQL.add('where M.Envelope Like ' + QuotedStr(EdtBusca.Text + '%'));
+        11: QryMembros.SQL.add('where M.SEXO Like ' + QuotedStr(EdtBusca.Text + '%'));
+        12: QryMembros.SQL.add('where M.TIPOSANGUE Like ' + QuotedStr(EdtBusca.Text + '%'));
+        13: QryMembros.SQL.add('where E.NomeEscolaridade Like ' + QuotedStr(EdtBusca.Text + '%'));
+        14: QryMembros.SQL.add('where M.NATURALIDADE Like ' + QuotedStr(EdtBusca.Text + '%'));
+        15: QryMembros.SQL.add('where EC.NomeEstadoCivil Like ' + QuotedStr(EdtBusca.Text + '%'));
+        16: QryMembros.SQL.add('where FA.NomeFormaAdmissao Like ' + QuotedStr(EdtBusca.Text + '%'));
+        17: QryMembros.SQL.add('where M.PROCEDENCIAADMISSAO Like ' + QuotedStr(EdtBusca.Text + '%'));
+        18: QryMembros.SQL.add('where MS.NomeMotivoSaida Like ' + QuotedStr(EdtBusca.Text + '%'));
+        19: QryMembros.SQL.add('where M.DESTINOSAIDA Like ' + QuotedStr(EdtBusca.Text + '%'));
+        20: QryMembros.SQL.add('where M.RG Like ' + QuotedStr(EdtBusca.Text + '%'));
+        21: QryMembros.SQL.add('where M.CPF Like ' + QuotedStr(EdtBusca.Text + '%'));
+      end;
+
+      if CbxFalecido.ItemIndex=0 then
+        QryMembros.SQL.Add('and isnull(M.CodMotivoSaida)');
+
+      OrdenaQuery;
+
+      QryMembros.Open;
+    End;
+    StatusBar1.Panels[0].Text := 'TOTAL DE REGISTROS: ' + IntToStr(QryMembros.RecordCount);
+  End;
+
+end;
+
+procedure TFormConsultaMembro.EdtBuscaKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if key=#13 then
+    BtnEditarClick(self);
+
+end;
+
+procedure TFormConsultaMembro.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+  FormCadastroMembro.QryMembros.Close;
+  FreeAndNil(FormConsultaMembro);
+
+end;
+
+procedure TFormConsultaMembro.FormShow(Sender: TObject);
+begin
+
+  if FormPrincipal.AcessoCadastro = 'APENAS VISUALIZAÇÃO' then
+  Begin
+    BtnAdicionar.Enabled := False;
+    BtnEditar.Enabled    := False;
+    BtnExcluir.Enabled   := False;
+  End
+  Else
+  Begin
+    if FormPrincipal.AcessoCadastro = 'ACESSO TOTAL' then
+    Begin
+      BtnAdicionar.Enabled := True;
+      BtnEditar.Enabled    := True;
+      BtnExcluir.Enabled   := True;
+    End;
+  End;
+
+  With FormCadastroMembro do
+  Begin
+    QryLkpEscolaridade.Close;
+    QryLkpEscolaridade.Open;
+
+    QryLkpEstadoCivil.Close;
+    QryLkpEstadoCivil.Open;
+
+    QryLkpProfissao.Close;
+    QryLkpProfissao.Open;
+
+    QryLkpFamilia.Close;
+    QryLkpFamilia.Open;
+
+    QryMembros.Close;
+    QryMembros.Open;
+    StatusBar1.Panels[0].Text := 'TOTAL DE REGISTROS: ' + IntToStr(QryMembros.RecordCount);
+
+    QryLkpEscolaridade.Close;
+    QryLkpEscolaridade.Open;
+
+    QryLkpMotivoSaida.Close;
+    QryLkpMotivoSaida.Open;
+
+    QryLkpEstadoCivil.Close;
+    QryLkpEstadoCivil.Open;
+
+    QryLkpProfissao.Close;
+    QryLkpProfissao.Open;
+
+    QryLkpFormaAdmissao.Close;
+    QryLkpFormaAdmissao.Open;
+
+    QryLkpMotivoSaida.Close;
+    QryLkpMotivoSaida.Open;
+
+  End;
+
+  EdtBusca.SetFocus;
+
+end;
+
+procedure TFormConsultaMembro.OrdenaQuery;
+begin
+  with FormCadastroMembro do
+  Begin
+    case CbxOrdenacao.ItemIndex of
+      0:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order By CodMembro ASC');
+          1: QryMembros.SQL.Add(' Order by CodMembro DESC');
+        end;
+      End;
+      1:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order By Familia ASC');
+          1: QryMembros.SQL.Add(' Order by Familia DESC');
+        end;
+      End;
+      2:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.NomeMembro ASC');
+          1: QryMembros.SQL.Add(' Order by M.NomeMembro DESC');
+        end;
+      End;
+      3:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.NomeSolteiro ASC');
+          1: QryMembros.SQL.Add(' Order by M.NomeSolteiro DESC');
+        end;
+      End;
+      4:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.Email ASC');
+          1: QryMembros.SQL.Add(' Order by M.Email DESC');
+        end;
+      End;
+      5:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.Pai ASC');
+          1: QryMembros.SQL.Add(' Order by M.Pai DESC');
+        end;
+      End;
+      6:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.Mae ASC');
+          1: QryMembros.SQL.Add(' Order by M.Mae DESC');
+        end;
+      End;
+      7:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.NomeConjuge ASC');
+          1: QryMembros.SQL.Add(' Order by M.NomeConjuge DESC');
+        end;
+      End;
+      8:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by P.NomeProfissao ASC');
+          1: QryMembros.SQL.Add(' Order by P.NomeProfissao DESC');
+        end;
+      End;
+      9:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.Empresa ASC');
+          1: QryMembros.SQL.Add(' Order by M.Empresa DESC');
+        end;
+      End;
+      10:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.Envelope ASC');
+          1: QryMembros.SQL.Add(' Order by M.Envelope DESC');
+        end;
+      End;
+      11:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.SEXO ASC');
+          1: QryMembros.SQL.Add(' Order by M.SEXO DESC');
+        end;
+      End;
+      12:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.TIPOSANGUE ASC');
+          1: QryMembros.SQL.Add(' Order by M.TIPOSANGUE DESC');
+        end;
+      End;
+      13:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by E.NomeEscolaridade ASC');
+          1: QryMembros.SQL.Add(' Order by E.NomeEscolaridade DESC');
+        end;
+      End;
+      14:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.NATURALIDADE ASC');
+          1: QryMembros.SQL.Add(' Order by M.NATURALIDADE DESC');
+        end;
+      End;
+      15:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by EC.NomeEstadoCivil ASC');
+          1: QryMembros.SQL.Add(' Order by EC.NomeEstadoCivil DESC');
+        end;
+      End;
+      16:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by FA.NomeFormaAdmissao ASC');
+          1: QryMembros.SQL.Add(' Order by FA.NomeFormaAdmissao DESC');
+        end;
+      End;
+      17:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.PROCEDENCIAADMISSAO ASC');
+          1: QryMembros.SQL.Add(' Order by M.PROCEDENCIAADMISSAO DESC');
+        end;
+      End;
+      18:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by MS.NomeMotivoSaida ASC');
+          1: QryMembros.SQL.Add(' Order by MS.NomeMotivoSaida DESC');
+        end;
+      End;
+      19:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.DESTINOSAIDA ASC');
+          1: QryMembros.SQL.Add(' Order by M.DESTINOSAIDA DESC');
+        end;
+      End;
+      20:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.RG ASC');
+          1: QryMembros.SQL.Add(' Order by M.RG DESC');
+        end;
+      End;
+      21:
+      Begin
+        case CbxOrdem.ItemIndex of
+          0: QryMembros.SQL.Add(' Order by M.CPF ASC');
+          1: QryMembros.SQL.Add(' Order by M.CPF DESC');
+        end;
+      End;
+    end;
+  end;
+
+end;
+
+end.

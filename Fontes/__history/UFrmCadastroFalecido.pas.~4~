@@ -1,0 +1,168 @@
+unit UFrmCadastroFalecido;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls, Data.DB, MemDS, DBAccess, MyAccess, RxToolEdit, RxDBCtrl,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxSkinsCore, cxTextEdit, cxDBEdit;
+
+type
+  TFormCadastroFalecido = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BtnSalvar: TBitBtn;
+    BtnCancelar: TBitBtn;
+    Panel1: TPanel;
+    QryFalecidos: TMyQuery;
+    DSFalecidos: TDataSource;
+    DSLkpSepultura: TDataSource;
+    QryLkpSepultura: TMyQuery;
+    QryFalecidosCodFalecidoSepultura: TLargeintField;
+    QryFalecidosNomeFalecido: TStringField;
+    QryFalecidosidade: TLargeintField;
+    QryFalecidosDataFalecimento: TDateTimeField;
+    QryFalecidosCertidaoObito: TStringField;
+    QryFalecidosCodSepultura: TLargeintField;
+    QryFalecidosDataPagamento: TDateTimeField;
+    QryFalecidosNumeroRecibo: TStringField;
+    QryFalecidosDataVencimento: TDateTimeField;
+    QryFalecidosCodResponsavelSepultura: TLargeintField;
+    QryFalecidosNomeResponsavelSepultura: TStringField;
+    Label1: TLabel;
+    DBEdtFalecido: TDBEdit;
+    Label2: TLabel;
+    DBEdtIdade: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEdtCertidaoObito: TDBEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBEdtNumeroRecibo: TDBEdit;
+    Label8: TLabel;
+    DBDtEdtDataFalecimento: TDBDateEdit;
+    DBLkpCbxSepultura: TDBLookupComboBox;
+    DBDtEdtDataPagamento: TDBDateEdit;
+    DBDtEdtDataVencimento: TDBDateEdit;
+    GroupBox1: TGroupBox;
+    QryLkpSepulturaFila: TStringField;
+    QryLkpSepulturaLado: TStringField;
+    QryLkpSepulturaNumero: TStringField;
+    QryLkpSepulturaSepultura: TStringField;
+    QryLkpSepulturaDataDesapropriacao: TDateTimeField;
+    QryLkpSepulturanumerodocumento: TStringField;
+    QryLkpSepulturaMotivos: TMemoField;
+    QryLkpSepulturaNomeTipoSepultura: TStringField;
+    QryLkpSepulturaNomeTipoTaxaSepultura: TStringField;
+    QryLkpSepulturaCodResponsavelSepultura: TLargeintField;
+    QryLkpSepulturaNomeResponsavelSepultura: TStringField;
+    QryLkpSepulturaEndereco: TStringField;
+    QryLkpSepulturaCompl: TStringField;
+    QryLkpSepulturaBairro: TStringField;
+    QryLkpSepulturaCidade: TStringField;
+    QryLkpSepulturaTelefone: TStringField;
+    QryLkpSepulturaCelular: TStringField;
+    QryLkpSepulturaEmail: TStringField;
+    QryLkpSepulturaCodMembro: TLargeintField;
+    QryLkpSepulturacep: TStringField;
+    Label9: TLabel;
+    DBEdtFila: TDBEdit;
+    Label10: TLabel;
+    DBEdtLado: TDBEdit;
+    Label11: TLabel;
+    DBEdtNumero: TDBEdit;
+    Label12: TLabel;
+    DBEdtTipoSepultura: TDBEdit;
+    Label13: TLabel;
+    DBEdtSepultura: TDBEdit;
+    Label14: TLabel;
+    DBEdtTipoTaxaSepultura: TDBEdit;
+    Label15: TLabel;
+    DBEdtDesapropriadoem: TDBEdit;
+    Label16: TLabel;
+    DBEdtDocumentoNumero: TDBEdit;
+    Label17: TLabel;
+    DBMMMotivos: TDBMemo;
+    GroupBox2: TGroupBox;
+    Label18: TLabel;
+    DBEdtResponsavel: TcxDBTextEdit;
+    Label19: TLabel;
+    DBEdtEndereco: TcxDBTextEdit;
+    Label20: TLabel;
+    DBEdtComplemento: TcxDBTextEdit;
+    Label21: TLabel;
+    DBEdtBairro: TcxDBTextEdit;
+    Label22: TLabel;
+    DBEdtCidade: TcxDBTextEdit;
+    Label23: TLabel;
+    DBEdtCEP: TcxDBTextEdit;
+    Label24: TLabel;
+    DBEdtTelefone: TcxDBTextEdit;
+    Label25: TLabel;
+    DBEdtCelular: TcxDBTextEdit;
+    Label26: TLabel;
+    DBEdtEmail: TcxDBTextEdit;
+    QryLkpSepulturaCodSepultura: TLargeintField;
+    procedure BtnSalvarClick(Sender: TObject);
+    procedure BtnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroFalecido: TFormCadastroFalecido;
+
+implementation
+
+{$R *.dfm}
+
+uses UFrmPrincipal, UDMPrincipal;
+
+procedure TFormCadastroFalecido.BtnSalvarClick(Sender: TObject);
+begin
+
+
+  if DBEdtFalecido.Text='' then
+  Begin
+    ShowMessage('O Campo do nome do falecido é obrigatório!');
+    DBEdtFalecido.SetFocus;
+  End
+  Else
+  Begin
+    if DBLkpCbxSepultura.Text='' then
+    Begin
+      ShowMessage('O Campo sepultura é obrigatório!');
+      DBLkpCbxSepultura.SetFocus;
+    End
+    Else
+    Begin
+      QryFalecidos.Post;
+      QryFalecidos.Close;
+      QryFalecidos.Open;
+      Close;
+    End;
+  End;
+
+end;
+
+procedure TFormCadastroFalecido.FormShow(Sender: TObject);
+begin
+
+  DBEdtFalecido.SetFocus;
+
+end;
+
+procedure TFormCadastroFalecido.BtnCancelarClick(Sender: TObject);
+begin
+
+  QryFalecidos.Cancel;
+  Close;
+
+end;
+
+end.

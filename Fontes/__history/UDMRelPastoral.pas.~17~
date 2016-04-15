@@ -1,0 +1,168 @@
+unit UDMRelPastoral;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, MemDS, DBAccess, MyAccess, Data.DB, Datasnap.DBClient;
+
+type
+  TDMRelPastoral = class(TDataModule)
+    CDSRelPastoral: TClientDataSet;
+    DSRelPastoral: TDataSource;
+    QueryContribuicoes: TMyQuery;
+    QuerySantaCeia: TMyQuery;
+    QueryTemp: TMyQuery;
+    CDSRelPastoralCodFamilia: TIntegerField;
+    CDSRelPastoralCodMembroAntigo: TIntegerField;
+    CDSRelPastoralCodMembro: TIntegerField;
+    CDSRelPastoralFamilia: TStringField;
+    CDSRelPastoralMembro: TStringField;
+    CDSRelPastoralCodMotivoSaida: TIntegerField;
+    CDSRelPastoralEndereco: TStringField;
+    CDSRelPastoralBairro: TStringField;
+    CDSRelPastoralCidade: TStringField;
+    CDSRelPastoralArea: TStringField;
+    CDSRelPastoralGrupo: TStringField;
+    CDSRelPastoralUF: TStringField;
+    CDSRelPastoralCEP: TStringField;
+    CDSRelPastoraltelefone: TStringField;
+    CDSRelPastoralEmail: TStringField;
+    CDSRelPastoralDataUltVisita: TDateTimeField;
+    CDSRelPastoralJaneiroContrib: TIntegerField;
+    CDSRelPastoralJaneiroCeia: TIntegerField;
+    CDSRelPastoralFevereiroContrib: TIntegerField;
+    CDSRelPastoralFevereiroCeia: TIntegerField;
+    CDSRelPastoralMarcoContrib: TIntegerField;
+    CDSRelPastoralMarcoCeia: TIntegerField;
+    CDSRelPastoralAbrilContrib: TIntegerField;
+    CDSRelPastoralAbrilCeia: TIntegerField;
+    CDSRelPastoralMaioContrib: TIntegerField;
+    CDSRelPastoralMaioCeia: TIntegerField;
+    CDSRelPastoralJunhoContrib: TIntegerField;
+    CDSRelPastoralJunhoCeia: TIntegerField;
+    CDSRelPastoralJulhoContrib: TIntegerField;
+    CDSRelPastoralJulhoCeia: TIntegerField;
+    CDSRelPastoralAgostoContrib: TIntegerField;
+    CDSRelPastoralAgostoCeia: TIntegerField;
+    CDSRelPastoralSetembroContrib: TIntegerField;
+    CDSRelPastoralSetembroCeia: TIntegerField;
+    CDSRelPastoralOutubroContrib: TIntegerField;
+    CDSRelPastoralOutubroCeia: TIntegerField;
+    CDSRelPastoralNovembroContrib: TIntegerField;
+    CDSRelPastoralNovembroCeia: TIntegerField;
+    CDSRelPastoralDezembroContrib: TIntegerField;
+    CDSRelPastoralDezembroCeia: TIntegerField;
+    CDSRelPastoralNomeTipoMembro: TStringField;
+    CDSRelPastoralDataNasc: TDateTimeField;
+    CDSRelPastoralEnvelope: TIntegerField;
+    CDSRelPastoralTelefoneMembro: TStringField;
+    QuerySantaCeiaCodFamilia: TLargeintField;
+    QuerySantaCeiacodmembroantigo: TLargeintField;
+    QuerySantaCeiaCodmembro: TLargeintField;
+    QuerySantaCeiaFamilia: TStringField;
+    QuerySantaCeiaMembro: TStringField;
+    QuerySantaCeianometipomembro: TStringField;
+    QuerySantaCeiaDataNasc: TDateField;
+    QuerySantaCeiaenvelope: TLargeintField;
+    QuerySantaCeiaTelefoneMembro: TStringField;
+    QuerySantaCeiaCodmotivosaida: TLargeintField;
+    QuerySantaCeiaano: TLargeintField;
+    QuerySantaCeiaendereco: TStringField;
+    QuerySantaCeiabairro: TStringField;
+    QuerySantaCeiacidade: TStringField;
+    QuerySantaCeiaarea: TStringField;
+    QuerySantaCeiagrupo: TLargeintField;
+    QuerySantaCeiauf: TStringField;
+    QuerySantaCeiacep: TStringField;
+    QuerySantaCeiatelefone: TStringField;
+    QuerySantaCeiaemail: TStringField;
+    QuerySantaCeiadataultvisita: TDateTimeField;
+    QuerySantaCeiajaneiro: TLargeintField;
+    QuerySantaCeiafevereiro: TLargeintField;
+    QuerySantaCeiamarco: TLargeintField;
+    QuerySantaCeiaabril: TLargeintField;
+    QuerySantaCeiamaio: TLargeintField;
+    QuerySantaCeiajunho: TLargeintField;
+    QuerySantaCeiajulho: TLargeintField;
+    QuerySantaCeiaagosto: TLargeintField;
+    QuerySantaCeiasetembro: TLargeintField;
+    QuerySantaCeiaoutubro: TLargeintField;
+    QuerySantaCeianovembro: TLargeintField;
+    QuerySantaCeiadezembro: TLargeintField;
+    CDSRelPastoralAno: TStringField;
+    QueryContribuicoesCodFamilia: TLargeintField;
+    QueryContribuicoesCodMembroAntigo: TLargeintField;
+    QueryContribuicoescodmembro: TLargeintField;
+    QueryContribuicoesFamilia: TStringField;
+    QueryContribuicoesMembro: TStringField;
+    QueryContribuicoesnometipomembro: TStringField;
+    QueryContribuicoesDataNasc: TDateField;
+    QueryContribuicoesenvelope: TLargeintField;
+    QueryContribuicoesTelefoneMembro: TStringField;
+    QueryContribuicoesCodmotivosaida: TLargeintField;
+    QueryContribuicoesano: TStringField;
+    QueryContribuicoesendereco: TStringField;
+    QueryContribuicoesbairro: TStringField;
+    QueryContribuicoescidade: TStringField;
+    QueryContribuicoesarea: TStringField;
+    QueryContribuicoesgrupo: TLargeintField;
+    QueryContribuicoesuf: TStringField;
+    QueryContribuicoescep: TStringField;
+    QueryContribuicoestelefone: TStringField;
+    QueryContribuicoesemail: TStringField;
+    QueryContribuicoesdataultvisita: TDateTimeField;
+    QueryContribuicoesJaneiro: TLargeintField;
+    QueryContribuicoesFevereiro: TLargeintField;
+    QueryContribuicoesMarço: TLargeintField;
+    QueryContribuicoesAbril: TLargeintField;
+    QueryContribuicoesMaio: TLargeintField;
+    QueryContribuicoesJunho: TLargeintField;
+    QueryContribuicoesJulho: TLargeintField;
+    QueryContribuicoesAgosto: TLargeintField;
+    QueryContribuicoesSetembro: TLargeintField;
+    QueryContribuicoesOutubro: TLargeintField;
+    QueryContribuicoesNovembro: TLargeintField;
+    QueryContribuicoesDezembro: TLargeintField;
+    QueryContribuicoesFamiliaCodigo: TStringField;
+    CDSRelPastoralFamiliaCodigo: TStringField;
+    QuerySantaCeiaFamiliaCodigo: TStringField;
+    QuerySantaCeiaVisitante: TStringField;
+    QueryContribuicoesVisitante: TStringField;
+    CDSRelPastoralVisitante: TStringField;
+    QueryMembrosAdicionais: TMyQuery;
+    QueryMembrosAdicionaiscodmembro: TLargeintField;
+    QueryMembrosAdicionaiscodfamilia: TLargeintField;
+    QueryMembrosAdicionaiscodtipomembro: TLargeintField;
+    QueryMembrosAdicionaisNomeTipoMembro: TStringField;
+    QueryMembrosAdicionaisnomemembro: TStringField;
+    QueryMembrosAdicionaisdatanasc: TDateField;
+    QueryMembrosAdicionaissobrenome: TStringField;
+    QueryMembrosAdicionaistelefone: TStringField;
+    QueryMembrosAdicionaiscodmembroantigo: TLargeintField;
+    QueryMembrosAdicionaisendereco: TStringField;
+    QueryMembrosAdicionaisbairro: TStringField;
+    QueryMembrosAdicionaisCidade: TStringField;
+    QueryMembrosAdicionaisArea: TStringField;
+    QueryMembrosAdicionaisgrupo: TLargeintField;
+    QueryMembrosAdicionaisUF: TStringField;
+    QueryMembrosAdicionaisCEP: TStringField;
+    QueryMembrosAdicionaisemail: TStringField;
+    QueryMembrosAdicionaisDataUltVisita: TDateTimeField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DMRelPastoral: TDMRelPastoral;
+
+implementation
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
+uses UDMPrincipal;
+
+{$R *.dfm}
+
+end.

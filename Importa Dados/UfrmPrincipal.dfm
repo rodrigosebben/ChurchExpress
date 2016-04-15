@@ -1,0 +1,401 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  BorderStyle = bsSizeToolWin
+  Caption = 'Importa ADIG'
+  ClientHeight = 575
+  ClientWidth = 718
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Icon.Data = {
+    0000010001001010000001002000680400001600000028000000100000002000
+    000001002000000000004004000000000000000000000000000000000000FFFF
+    FF00BB6A346BBA6530BCBB6631EDBA6630F7BA6630F7BA6630F7BA6530F7BA65
+    2FF7B9652EF70E7B22FE037B1EFFB6642EEFB7622CBDB7622E63FFFFFF00FFFF
+    FF00BC6933DEF8F1EAF2F7ECDFFDF6EBDEFFF6EADEFFF6EADCFFF6EADCFFFAF3
+    EBFFFAF3EBFF158C3AFF43A15FFF32944AFFF8FBF8F0B7602AD5FFFFFF00FFFF
+    FF00BF7138F5F5EBDFFEFDBF68FFFCBD67FFFBBE65FF239751FF1D9149FF178F
+    43FF118B3BFF3A9F5EFF80C196FF46A362FF2E9446FFB4652CF3FFFFFF00FFFF
+    FF00C1783CF7F7EDE3FFFDC26EFFFFD8A0FFFFD79EFF299B5BFF90CAA9FF8DC8
+    A5FF8AC6A1FF88C59EFF6AB685FF82C297FF48A566FF1D7A23FE00791B09FFFF
+    FF00C47C40F7F7F0E6FFF8B455FFF7B456FFF7B554FF319F63FF94CDADFF6FBA
+    8EFF6BB889FF66B685FF61B380FF67B582FF83C298FF3CA05CFF007F25F9FFFF
+    FF00C58042F7F8F1E8FFFEE5D5FFFDE5D3FFFDE5D3FF37A36BFF96CEB0FF94CD
+    ADFF91CBAAFF90CBA8FF74BC90FF8AC7A1FF46A568FF0A8735FF01832D01FFFF
+    FF00C58245F7F8F2EBFFFEE7D6FFFDE7D6FFFDE7D6FF3DA56FFF3AA46FFF36A2
+    69FF329E63FF55AF7CFF91CBAAFF4FAB74FF1B9148FFC47C3FF7FFFFFF00FFFF
+    FF00C68447F7F9F3ECFFFEE8D6FFFEE8D7FFFDE7D6FFFDE7D6FFFDE7D5FFFDE5
+    D3FFFBE4D0FF41A46BFF5AB381FF289857FFFAF2EAFFC68042F7FFFFFF00FFFF
+    FF00C68849F7F9F4EDFFFEE8D8FFFEE8D8FFFEE8D7FFFEE7D6FFFDE5D3FFFCE4
+    D1FFFBE1CCFF46A872FF319F65FFF8DCC2FFFAF4EDFFC68245F7FFFFFF00FFFF
+    FF00C6884AF7F9F4EFFFFEE7D7FFFDE7D6FFFDE7D5FFFDE6D4FFFCE6D2FFFBE1
+    CCFFFADFC7FFF8DCC2FFF6DABDFFF6D8BBFFFAF4EFFFC68346F7FFFFFF00FFFF
+    FF00C6894BF7F9F4F0FFFCE6D3FFFCE6D4FFFDE7D3FFFCE4D1FFFBE3CDFFFAE0
+    C8FFF8DCC2FFF5D6BBFFF3D4B5FFF1D2B3FFF8F4F0FFC48246F7FFFFFF00FFFF
+    FF00C6894BF7F9F5F1FFFCE3CFFFFBE4D0FFFCE4CFFFFCE3CDFFFAE1CAFFF9DD
+    C4FFF6D9BCFFF4E9DFFFF7F2ECFFFBF7F3FFF5EFE9FFC27E45FBFFFFFF00FFFF
+    FF00C6894CF6F9F5F1FFFCE3CDFFFBE3CEFFFBE3CDFFFBE2CBFFF9E0C8FFF8DC
+    C2FFF5D6BAFFFDFBF8FFFCE6CDFFFAE5C9FFE2B684FFBF7942A6FFFFFF00FFFF
+    FF00C5884BEAFAF6F2FCFAE0C7FFFBE1C9FFFBE2C9FFFBE0C8FFF9DFC5FFF8DB
+    C1FFF4D6B8FFFFFBF8FFF6D8B4FFE1B07DFFDB9264F6B46B3E07FFFFFF00FFFF
+    FF00C48549C3F7F2ECECF8F4EEFCF8F4EDFFF8F3EDFFF8F3EDFFF8F3EDFFF8F2
+    ECFFF7F2ECFFF2E6D7FFE2B27DFFDB9465F5B3683B07FFFFFF00FFFFFF00FFFF
+    FF00C17D4460C88B4DBBC88C4FEEC88C4FF6C88C4FF7C88C4FF7C88D4FF7C98C
+    4FF7C78B4FF7C5894BD4C4763B91B3683C06FFFFFF00FFFFFF00FFFFFF000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    000000000000000000000000000000000000000000000000000000000000}
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 718
+    Height = 41
+    Align = alTop
+    Caption = 'Importa ADIG'
+    Color = 5755391
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    object BitBtn6: TBitBtn
+      Left = 20
+      Top = 8
+      Width = 132
+      Height = 25
+      Caption = 'CONECTAR'
+      TabOrder = 0
+      OnClick = BitBtn6Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 272
+    Width = 718
+    Height = 303
+    Align = alBottom
+    TabOrder = 1
+    object Panel7: TPanel
+      Left = 1
+      Top = 1
+      Width = 716
+      Height = 112
+      Align = alTop
+      TabOrder = 0
+      object ToolBar1: TToolBar
+        Left = 1
+        Top = 1
+        Width = 714
+        Height = 29
+        ButtonHeight = 29
+        Caption = 'ToolBar1'
+        TabOrder = 0
+        object BitBtn2: TBitBtn
+          Left = 0
+          Top = 0
+          Width = 150
+          Height = 29
+          Caption = 'Deletar Referencia'
+          TabOrder = 0
+          OnClick = BitBtn2Click
+        end
+        object BitBtn3: TBitBtn
+          Left = 150
+          Top = 0
+          Width = 122
+          Height = 29
+          Caption = 'Iniciar Importa'#231#227'o'
+          TabOrder = 1
+          OnClick = BitBtn3Click
+        end
+        object Sair: TBitBtn
+          Left = 272
+          Top = 0
+          Width = 75
+          Height = 29
+          Caption = 'Sair'
+          TabOrder = 2
+          OnClick = SairClick
+        end
+        object ToolButton1: TToolButton
+          Left = 347
+          Top = 0
+          Width = 22
+          Caption = 'ToolButton1'
+          Style = tbsSeparator
+        end
+        object BitBtn4: TBitBtn
+          Left = 369
+          Top = 0
+          Width = 116
+          Height = 29
+          Caption = 'Executar Consulta'
+          TabOrder = 3
+          OnClick = BitBtn4Click
+        end
+        object Button1: TButton
+          Left = 485
+          Top = 0
+          Width = 176
+          Height = 29
+          Caption = 'Executar Rotinas de Corre'#231#227'o'
+          PopupMenu = PopupMenu2
+          TabOrder = 4
+          OnClick = Button1Click
+        end
+      end
+      object LstBxCruzamento: TListBox
+        Left = 1
+        Top = 30
+        Width = 714
+        Height = 81
+        Align = alClient
+        ItemHeight = 13
+        PopupMenu = PopupMenu1
+        TabOrder = 1
+      end
+    end
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 113
+      Width = 716
+      Height = 189
+      Align = alClient
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+  object Panel3: TPanel
+    Left = 412
+    Top = 41
+    Width = 306
+    Height = 231
+    Align = alClient
+    TabOrder = 2
+    object Panel5: TPanel
+      Left = 1
+      Top = 1
+      Width = 304
+      Height = 52
+      Align = alTop
+      Color = clHighlight
+      ParentBackground = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 8
+        Top = 5
+        Width = 48
+        Height = 16
+        Caption = 'MySQL:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object CbxTabelaMySQL: TComboBox
+        Left = 5
+        Top = 25
+        Width = 268
+        Height = 21
+        Style = csDropDownList
+        TabOrder = 0
+        OnSelect = CbxTabelaMySQLSelect
+        Items.Strings = (
+          'Membro'
+          'Familia'
+          'Tipo de Contribui'#231#227'o'
+          'Visitante'
+          'Contribui'#231#227'o'
+          'Controle'
+          'Data Especial'
+          'Departamento'
+          'Filho'
+          'Membro data Especial'
+          'Membro Departamento'
+          'Mensagem'
+          'Profiss'#227'o'
+          'Visita'
+          'Vota'#231#227'o'
+          'Municipio'
+          'Santa_Ceia_Antigo')
+      end
+    end
+    object LstBxMySql: TListBox
+      Left = 1
+      Top = 53
+      Width = 304
+      Height = 177
+      Align = alClient
+      ItemHeight = 13
+      TabOrder = 1
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 41
+    Width = 305
+    Height = 231
+    Align = alLeft
+    Caption = 'Panel4'
+    TabOrder = 3
+    object Panel6: TPanel
+      Left = 1
+      Top = 1
+      Width = 303
+      Height = 52
+      Align = alTop
+      Color = 10930928
+      ParentBackground = False
+      TabOrder = 0
+      object Label2: TLabel
+        Left = 8
+        Top = 5
+        Width = 54
+        Height = 16
+        Caption = 'ACCESS:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object CbxTabelaAccess: TComboBox
+        Left = 8
+        Top = 25
+        Width = 265
+        Height = 21
+        Style = csDropDownList
+        TabOrder = 0
+        OnSelect = CbxTabelaAccessSelect
+        Items.Strings = (
+          'Membro'
+          'Familia'
+          'Tipo de contribui'#231#227'o'
+          'Visitante'
+          'Contribui'#231#227'o'
+          'Controle'
+          'Data Especial'
+          'Departamento'
+          'Filho'
+          'Membro data Especial'
+          'Membro Departamento'
+          'Mensagem'
+          'Profiss'#227'o'
+          'Visita'
+          'Vota'#231#227'o'
+          'Municipio'
+          'Santa_Ceia')
+      end
+    end
+    object LstBxAccess: TListBox
+      Left = 1
+      Top = 53
+      Width = 303
+      Height = 177
+      Align = alClient
+      ItemHeight = 13
+      MultiSelect = True
+      TabOrder = 1
+    end
+  end
+  object Panel8: TPanel
+    Left = 305
+    Top = 41
+    Width = 107
+    Height = 231
+    Align = alLeft
+    TabOrder = 4
+    object Panel9: TPanel
+      Left = 1
+      Top = 1
+      Width = 105
+      Height = 52
+      Align = alTop
+      TabOrder = 0
+    end
+    object BitBtn1: TBitBtn
+      Left = 1
+      Top = 109
+      Width = 105
+      Height = 56
+      Align = alTop
+      Caption = 'Inclui Sem Espa'#231'o'
+      TabOrder = 1
+      OnClick = BitBtn1Click
+    end
+    object BitBtn5: TBitBtn
+      Left = 1
+      Top = 53
+      Width = 105
+      Height = 56
+      Align = alTop
+      Caption = 'Inclui com Espa'#231'o'
+      TabOrder = 2
+      OnClick = BitBtn5Click
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 652
+    object CarregarReferencias1: TMenuItem
+      Caption = 'Carregar Referencias...'
+      OnClick = CarregarReferencias1Click
+    end
+    object SalvarReferencias1: TMenuItem
+      Caption = 'Salvar Referencias...'
+      OnClick = SalvarReferencias1Click
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    InitialDir = 'c:\'
+    Left = 500
+  end
+  object SaveDialog1: TSaveDialog
+    InitialDir = 'c:\'
+    Left = 568
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 560
+    Top = 144
+    object AjustaMembroDataEspecial1: TMenuItem
+      Caption = 'Ajusta Membro Data Especial'
+      OnClick = AjustaMembroDataEspecial1Click
+    end
+    object AjustaFilhosdoMembro1: TMenuItem
+      Caption = 'Ajusta Filhos do Membro'
+      OnClick = AjustaFilhosdoMembro1Click
+    end
+    object AjustaContribuies1: TMenuItem
+      Caption = 'Ajusta Contribui'#231#245'es'
+      OnClick = AjustaContribuies1Click
+    end
+    object AjustaCidade1: TMenuItem
+      Caption = 'Ajusta Cidade'
+      OnClick = AjustaCidade1Click
+    end
+    object AjustaSantaCeia1: TMenuItem
+      Caption = 'Ajusta Santa Ceia'
+    end
+    object AjustaEndereosdemembros1: TMenuItem
+      Caption = 'Ajusta Endere'#231'os de membros'
+      OnClick = AjustaEndereosdemembros1Click
+    end
+  end
+end
